@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/01/31 15:19:12 by katakagi         ###   ########.fr        #
+#    Updated: 2023/01/31 16:19:03 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS	= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 MLX_DIR	= minilibx-linux
 MLX		= $(MLX_DIR)/libmlx.a
 
-INCLUDE		= -I $(MLX_DIR)
+INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include
 
 CFLAGS		= -Wall -Wextra -Werror $(INCLUDE)
 DFLAGS		= -g -fsanitize=address -Weverything
