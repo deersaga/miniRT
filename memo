@@ -44,5 +44,25 @@ main.c ひとまずmlxの画面が出る。
 パーサを作る
 球体を描画できるようにする(マテリアル構造体、インターセクション、ray関数)
 
+・ray
+	get_ray() スクリーン上のピクセルに向かうレイの作成
+	get_shadow_ray() 交点から光源に向かうレイの作成
+・ray_trace
+
+・shape
+	new,allocが必要
+	shape_list_add()も必要
+
+
+・intersection_point
+	get_intersection_{obj name}
+	
+・material
+
+・light_source
+	new,allocが必要
+
+・lighting
+
 
 
