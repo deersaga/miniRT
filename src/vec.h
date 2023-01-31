@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/01/31 14:36:03 by susami           ###   ########.fr       */
+/*   Updated: 2023/01/31 14:51:40 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 typedef struct s_vec	t_vec;
 typedef struct s_vec	t_point;
 typedef struct s_vec	t_color;
+
+
+t_vec	vec_mul(t_vec a, t_vec b);
+t_vec	vec_scalar_mul(FLOAT t, t_vec v);
+t_vec	vec_scalar_div(t_vec v, FLOAT t);
+
 
 struct s_vec {
 	FLOAT	x;

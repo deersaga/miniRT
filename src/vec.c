@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:37:27 by susami            #+#    #+#             */
-/*   Updated: 2023/01/31 14:38:02 by susami           ###   ########.fr       */
+/*   Updated: 2023/01/31 14:51:14 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ t_vec	vec_new(FLOAT x, FLOAT y, FLOAT z)
 t_point	point_new(FLOAT x, FLOAT y, FLOAT z)
 {
 	return ((t_point){.x = x, .y = y, .z = z});
-}
-
-t_color	color_new(FLOAT x, FLOAT y, FLOAT z)
-{
-	return ((t_color){.x = x, .y = y, .z = z});
 }
 
 t_vec	vec_add(t_vec a, t_vec b)
