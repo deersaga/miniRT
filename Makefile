@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
+#    Updated: 2023/01/31 12:26:13 by katakagi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	= miniRT
 
 CC		= cc
@@ -8,14 +20,17 @@ OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 CFLAGS	= -Wall -Wextra -Werror
 DFLAGS	= -g -fsanitize=address -Weverything
-FRAMEWORK = -framework OpenGL -framework AppKit
+
+MLX_DIR	= minilibx-linux
+FRAMEWORK = -lmlx -lX11 -lXext -framework OpenGL -framework AppKit
+LIBPATH		=	-L$(MLX_DIR) -L/usr/X11R6/lib
 
 $(NAME): $(OBJS)
-	$(CC) $(FRAMEWORK) $(OBJS) -o $(NAME)
+	$(CC) $(LIBPATH) $(FRAMEWORK) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@);
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS)  -c $< -o $@
 
 clean:
 	rm $(OBJS)
@@ -28,6 +43,6 @@ all: $(NAME)
 re: fclean all
 
 norm:
-	norminette $(SRCS)
+	norminette $(SRCS) minirt.h
 
 .PHONY: all clean fcelan re norm
