@@ -6,12 +6,12 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 12:25:23 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:37:00 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "./minilibx-linux/mlx.h"
+#include "mlx.h"
 #include <stdlib.h>
 
 void	*init_img(void	*mlx_ptr, int width, int height)
