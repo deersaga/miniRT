@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 15:14:05 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:27:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 typedef struct s_img	t_img;
 typedef struct s_screen	t_screen;
+typedef struct s_scene	t_scene;
+
+struct s_scene {};
 
 struct s_img {
 	void	*mlx_ptr;
@@ -39,13 +42,11 @@ struct s_screen {
 	t_img	*img;
 };
 
+// parse.c
+int	parse(int argc, char *argv[], t_scene *scene);
 
 //utils.c
 FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);
 FLOAT	map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax);
-
-
-
-//color.c
 
 #endif

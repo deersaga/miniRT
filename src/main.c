@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 16:18:10 by susami           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:27:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,13 @@ int	close_window(t_screen *s)
 	exit(0);
 }
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
 	t_screen	screen;
+	t_scene		scene;
 
+	if (parse(argc, argv, &scene) < 0)
+		exit(1);
 	screen.mlx_ptr = mlx_init();
 	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, "screen");
 	screen.img = init_img(screen.mlx_ptr, WIDTH, HEIGHT);

@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/01/31 16:19:03 by susami           ###   ########.fr        #
+#    Updated: 2023/01/31 16:27:56 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ CC		= cc
 SRCS		=	src/main.c\
 				src/vec.c\
 				src/color.c\
-				src/utils.c
+				src/utils.c\
+				src/parse.c\
+
 
 SRC_DIR	= src
 OBJ_DIR = obj
