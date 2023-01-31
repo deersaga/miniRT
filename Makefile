@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/01/31 16:27:56 by susami           ###   ########.fr        #
+#    Updated: 2023/01/31 16:34:30 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS		=	src/main.c\
 				src/color.c\
 				src/utils.c\
 				src/parse.c\
+				src/error.c\
 
 
 SRC_DIR	= src

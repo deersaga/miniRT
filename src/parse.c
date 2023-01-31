@@ -1,15 +1,18 @@
 #include <fcntl.h>
+#include <errno.h>
 #include "minirt.h"
 
-int	parse(int argc, const char *argv[], t_scene *scene)
+t_scene	parse(int argc, const char *argv[])
 {
+	t_scene	scene;
 	int	fd;
 
-	(void)scene;
+	scene = (t_scene){};
+	errno = 0;
 	if (argc != 2)
-		return (-1);
+		fatal_error("parse", "[Usage]: ./miniRT config_file");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (-1);
-	return (0);
+		fatal_error("parse", NULL);
+	return (scene);
 }

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 16:29:02 by susami           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:42:04 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ struct s_screen {
 	t_img	*img;
 };
 
+// errror.c
+void	fatal_error(const char *loc, const char *msg);
+
 // parse.c
-int	parse(int argc, const char *argv[], t_scene *scene);
+t_scene	parse(int argc, const char *argv[]);
 
 //utils.c
 FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);

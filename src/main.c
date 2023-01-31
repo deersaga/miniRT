@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 16:27:42 by susami           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:39:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*init_img(void	*mlx_ptr, int width, int height)
 
 	img = calloc(1, sizeof(*img));
 	if (img == NULL)
-		exit(1);
+		fatal_error(NULL);
 	img->ptr = mlx_new_image(mlx_ptr, width, height);
 	if (img->ptr == NULL)
 		exit(1);
@@ -62,13 +62,13 @@ int	close_window(t_screen *s)
 	exit(0);
 }
 
-int	main(int argc, char *argv[])
+int	main(int argc, const char *argv[])
 {
 	t_screen	screen;
 	t_scene		scene;
 
-	if (parse(argc, argv, &scene) < 0)
-		exit(1);
+	(void)scene;
+	scene = parse(argc, argv);
 	screen.mlx_ptr = mlx_init();
 	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, "screen");
 	screen.img = init_img(screen.mlx_ptr, WIDTH, HEIGHT);
