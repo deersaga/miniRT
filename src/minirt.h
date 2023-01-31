@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 12:28:05 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:30:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIDTH 800
 # define HEIGHT 512
+# define FLOAT float
 
 typedef struct s_img	t_img;
 typedef struct s_screen	t_screen;
