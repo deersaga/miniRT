@@ -44,25 +44,40 @@ main.c ひとまずmlxの画面が出る。
 パーサを作る
 球体を描画できるようにする(マテリアル構造体、インターセクション、ray関数)
 
-・ray
+# ray_trace()
+	- 
+
+## material
+	- new,allocが必要
+	- scatter()
+## texture
+	- color_value()
+
+# ray
 	get_ray() スクリーン上のピクセルに向かうレイの作成
 	get_shadow_ray() 交点から光源に向かうレイの作成
-・ray_trace
 
-・shape
-	new,allocが必要
+# shape = hittable
+	- (sphre/plane/cylinder)
+	- new,allocが必要
+	- test_intersection() / hit() -> intersection_test_result/hit_record
+	- set_face_normal()
 	shape_list_add()も必要
 
-
-・intersection_point
-	get_intersection_{obj name}
+# intersection_test_result, intersection_point = hit_record
+	- get_intersection_{obj name}
 	
-・material
+# light_source
+	- new,allocが必要
+	- lighting_at() -> lighting
+## lighting
+	- new,allocが必要
 
-・light_source
-	new,allocが必要
+# scene = camera + hittable_list
+	- new/alloc
 
-・lighting
+# parser
+	- parse() -> scene
 
-
-
+### perlin
+### aabb
