@@ -6,11 +6,12 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 12:37:00 by susami           ###   ########.fr       */
+/*   Updated: 2023/01/31 15:15:24 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "vec.h"
 #include "mlx.h"
 #include <stdlib.h>
 

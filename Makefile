@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/01/31 14:51:09 by katakagi         ###   ########.fr        #
+#    Updated: 2023/01/31 15:13:53 by katakagi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME	= miniRT
 CC		= cc
 SRCS		=	src/main.c\
 				src/vec.c\
-				src/color.c
+				src/color.c\
+				src/utils.c
 
 SRC_DIR	= src
 OBJ_DIR = obj

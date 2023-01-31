@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 14:30:13 by susami           ###   ########.fr       */
+/*   Updated: 2023/01/31 15:14:05 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define WIDTH 800
 # define HEIGHT 512
 # define FLOAT float
+
+#include <stdio.h>
+#include "vec.h"
 
 typedef struct s_img	t_img;
 typedef struct s_screen	t_screen;
@@ -35,5 +38,14 @@ struct s_screen {
 	void	*win_ptr;
 	t_img	*img;
 };
+
+
+//utils.c
+FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);
+FLOAT	map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax);
+
+
+
+//color.c
 
 #endif
