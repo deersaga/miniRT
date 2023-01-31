@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/01/31 15:13:53 by katakagi         ###   ########.fr        #
+#    Updated: 2023/01/31 15:19:12 by katakagi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,6 @@ all: $(NAME)
 re: fclean all
 
 norm:
-	norminette $(SRCS) minirt.h | grep -v "TOO_MANY"
+	norminette $(SRCS) minirt.h | grep -E -v "TOO_MANY|TOO_LONG"
 
 .PHONY: all clean fcelan re norm

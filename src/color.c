@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:00:29 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 15:12:41 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:17:06 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ t_color	color_mul(t_color a, t_color b)
 		.z = a.z * b.z});
 }
 
-
 int	get_mlx_color(t_color c)
 {
-	
 	int	p;
 
 	p = 0;
