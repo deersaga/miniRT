@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 16:39:20 by susami           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:49:25 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*init_img(void	*mlx_ptr, int width, int height)
 
 	img = calloc(1, sizeof(*img));
 	if (img == NULL)
-		fatal_error(NULL);
+		fatal_error("init img", NULL);
 	img->ptr = mlx_new_image(mlx_ptr, width, height);
 	if (img->ptr == NULL)
 		exit(1);

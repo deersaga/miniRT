@@ -1,8 +1,15 @@
 #!/bin/bash
 
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+RESET="\033[0m"
+OK=$GREEN"OK"$RESET
+NG=$RED"NG"$RESET
+
 test_invalid() {
 	echo "$1"
-	$1 && echo "Expected Error but got success" || echo "OK"
+	$1 && echo -e $RED"Expected Error but got success"$RESET || echo -e $OK
 }
 
 ## Invalid Test Case
@@ -10,6 +17,8 @@ test_invalid() {
 test_invalid "./miniRT"
 ### Invalid Filename
 test_invalid "./miniRT nosuchfile"
+test_invalid "./miniRT nosuchfile.rt"
+test_invalid "./miniRT memo"
 
 ## Valid Test Case
 
@@ -17,7 +26,7 @@ test_invalid "./miniRT nosuchfile"
 
 test_valid() {
 	echo "$1"
-	$1 && echo "OK" || echo "Expected Success but got Error"
+	$1 && echo -e $OK || echo -e $RED"Expected Success but got Error"$RESET
 }
 
 cat <<EOF >.tmp.rt
