@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 12:07:24 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 12:14:32 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,23 @@
 # define WIDTH 512
 # define HEIGHT (int)(WIDTH / ASPECT_RATIO)
 # define SCREEN_WIDTH 2.0
-#include <stdio.h>
-#include "vec.h"
+# include <stdio.h>
+# include <stdbool.h>
+# include "vec.h"
 
-typedef struct s_img	t_img;
-typedef struct s_screen	t_screen;
-typedef struct s_scene	t_scene;
-typedef struct s_camera	t_camera;
-typedef struct s_sphere	t_sphere;
+typedef struct s_img			t_img;
+typedef struct s_screen			t_screen;
+typedef struct s_scene			t_scene;
+typedef struct s_camera			t_camera;
+typedef struct s_sphere			t_sphere;
 typedef struct s_light_source	t_light_source;
-typedef struct s_ray	t_ray;
-typedef struct s_hit_record	t_hit_record;
+typedef struct s_ray			t_ray;
+typedef struct s_hit_record		t_hit_record;
 
 struct s_camera {
- 	t_vec			eye_position; // x,y,z coordinates of the view point
- 	t_vec			look_at_direction; // 3d normalized orientation vector.
- 	FLOAT			hfov; // Horizontal field of view in degrees in range [0,180]
+	t_vec	eye_position; // x,y,z coordinates of the view point
+	t_vec	look_at_direction; // 3d normalized orientation vector.
+	FLOAT	hfov; // Horizontal field of view in degrees in range [0,180]
 };
 
 struct s_sphere {

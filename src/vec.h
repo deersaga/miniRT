@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 11:28:04 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:14:49 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ typedef struct s_vec	t_vec;
 typedef struct s_vec	t_point;
 typedef struct s_vec	t_color;
 
-
 t_vec	vec_mul(t_vec a, t_vec b);
 t_vec	vec_scalar_mul(FLOAT t, t_vec v);
 t_vec	vec_scalar_div(t_vec v, FLOAT t);
-
 
 struct s_vec {
 	FLOAT	x;
