@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 14:10:59 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:17:27 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_scene			t_scene;
 typedef struct s_camera			t_camera;
 typedef struct s_sphere			t_sphere;
 typedef struct s_light_source	t_light_source;
+typedef struct s_lighting		t_lighting;
 typedef struct s_ray			t_ray;
 typedef struct s_hit_record		t_hit_record;
 
@@ -48,6 +49,12 @@ struct s_light_source {
 	t_vec		position; // x,y,z coordinates of the light point
 	FLOAT		ratio; // brightness ratio
 	t_color		color; // (unused in mandatory part)R,G,B colors in range [0-255]
+};
+
+struct s_lighting {
+	t_vec	direction;
+	t_color	intencity;
+	FLOAT	distance;
 };
 
 struct s_scene {

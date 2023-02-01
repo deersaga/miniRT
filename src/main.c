@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 14:14:37 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:23:33 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,21 @@ t_ray	get_ray(t_camera *camera, int x, int y)
 	return ((t_ray){.origin = camera->eye_position, .direction = ray_dir});
 }
 
+t_lighting	lighting_at(t_vec pos, t_light_source light_source)
+{
+	t_lighting	lighting;
+
+	lighting.direction = vec_sub(light_source.position, pos);
+	lighting.distance = vec_length(lighting.direction);
+	lighting.direction = vec_unit(lighting.direction);
+	lighting.intencity = light_source.color;
+	return (lighting);
+}
+
 t_color	ray_trace(const t_ray *r, t_scene *scene)
 {
-	t_vec	unit_direction;
-	FLOAT	t;
+	t_vec			unit_direction;
+	FLOAT			t;
 	t_hit_record	rec;
 	t_color			ret_color;
 
