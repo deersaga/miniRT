@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 11:55:50 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 11:58:26 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,14 @@ void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 FLOAT	degrees_to_radians(FLOAT degrees)
 {
 	return (degrees * M_PI / 180);
+}
+
+t_point	ray_at(t_ray *r, FLOAT t)
+{
+	t_point	p;
+
+	p = vec_add(r->origin, vec_scalar_mul(t, r->direction));
+	return (p);
 }
 
 t_ray	get_ray(t_camera *camera, int x, int y)
