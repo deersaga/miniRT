@@ -6,21 +6,23 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/01 10:42:11 by susami           ###   ########.fr        #
+#    Updated: 2023/02/01 12:07:35 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 
 CC		= cc
-SRCS		=	src/main.c\
-				src/vec.c\
-				src/color.c\
-				src/utils.c\
-				src/parse.c\
-				src/error.c\
-
 SRC_DIR	= src
+SRCS	=	$(SRC_DIR)/main.c\
+			$(SRC_DIR)/vec.c\
+			$(SRC_DIR)/color.c\
+			$(SRC_DIR)/utils.c\
+			$(SRC_DIR)/parse.c\
+			$(SRC_DIR)/error.c\
+			$(SRC_DIR)/img.c\
+			$(SRC_DIR)/hooks.c\
+
 OBJ_DIR = obj
 OBJS	= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

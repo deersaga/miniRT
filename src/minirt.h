@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 11:55:36 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:07:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,13 @@ FLOAT	map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax);
 //ray
 t_ray	get_ray(t_camera *camera, int x, int y);
 t_color	ray_trace(const t_ray *r, t_scene *scene);
+
+// img.c
+void	*init_img(void	*mlx_ptr, int width, int height);
+void	put_pixel(const t_img *img, int x, int y, int mlx_color);
+
+// hooks.c
+void	mlx_closebutton_hook(void *win_ptr, int (*handler)(), void *param);
+int		close_window(t_screen *s);
 
 #endif
