@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 15:24:53 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:39:52 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ struct s_sphere {
 	t_vec			center;
 	FLOAT			radius;
 	t_color			color;
+	t_color			ambient_factor;
+	t_color			diffuse_factor;
+	t_color			specular_factor;
 	FLOAT			shineness;
 };
 
@@ -50,6 +53,7 @@ struct s_light_source {
 	t_vec		position; // x,y,z coordinates of the light point
 	FLOAT		ratio; // brightness ratio
 	t_color		color; // (unused in mandatory part)R,G,B colors in range [0-255]
+	t_color		intensity; // (unused in mandatory part)R,G,B colors in range [0-255]
 };
 
 struct s_lighting {

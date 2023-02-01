@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 15:25:38 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:43:00 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_lighting	lighting_at(t_vec pos, t_light_source light_source)
 	lighting.direction = vec_sub(light_source.position, pos);
 	lighting.distance = vec_length(lighting.direction);
 	lighting.direction = vec_unit(lighting.direction);
-	lighting.intensity = vec_unit(light_source.color);
+	lighting.intensity = light_source.intensity;
 	return (lighting);
 }
 
@@ -75,7 +75,7 @@ t_color	diffuse_light(t_scene *scene, t_hit_record *rec, t_lighting *lighting)
 
 	nldot = vec_dot(lighting->direction, rec->normal);
 	nldot = clamp(nldot, 0, 1);
-	color = vec_mul(lighting->intensity, vec_unit(scene->sphere.color));
+	color = vec_mul(lighting->intensity, scene->sphere.diffuse_factor);
 	color = vec_mul(color, color_new(nldot, nldot, nldot));
 	return (color);
 }
@@ -99,7 +99,7 @@ t_color	specular_light(t_scene *scene, const t_ray *ray, t_hit_record *rec, t_li
 	if (nldot <= 0 || vrdot <= 0)
 		return (color_new(0, 0, 0));
 	vrdot_pow_alpha = pow(vrdot, scene->sphere.shineness);
-	ki = vec_mul(vec_unit(scene->sphere.color), lighting->intensity);
+	ki = vec_mul(scene->sphere.specular_factor, lighting->intensity);
 	return (vec_mul(ki, color_new(vrdot_pow_alpha, vrdot_pow_alpha, vrdot_pow_alpha)));
 }
 
@@ -113,7 +113,7 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 
 	if (sphere_hit(&scene->sphere, r, 0, INFINITY, &rec))
 	{
-		ret_color = vec_mul(scene->ambient_intensity, vec_unit(scene->sphere.color));
+		ret_color = vec_mul(scene->ambient_intensity, scene->sphere.ambient_factor);
 		lighting = lighting_at(rec.p, scene->light_source);
 		ret_color = vec_add(ret_color, diffuse_light(scene, &rec, &lighting));
 		ret_color = vec_add(ret_color, specular_light(scene, r, &rec, &lighting));
@@ -147,6 +147,16 @@ void	draw_image(t_screen *screen, t_scene *scene)
 	}
 }
 
+void	setup(t_scene *scene)
+{
+	scene->sphere.ambient_factor = vec_scalar_div(scene->sphere.color, 256);
+	scene->sphere.diffuse_factor = vec_scalar_div(scene->sphere.color, 256);
+	scene->sphere.specular_factor = vec_scalar_div(scene->sphere.color, 256);
+	scene->sphere.shineness = 2.0;
+
+	scene->light_source.intensity = vec_scalar_div(scene->light_source.color, 256);
+}
+
 int	main(int argc, const char *argv[])
 {
 	t_screen	screen;
@@ -154,6 +164,7 @@ int	main(int argc, const char *argv[])
 
 	(void)scene;
 	scene = parse(argc, argv);
+	setup(&scene);
 	screen.mlx_ptr = mlx_init();
 	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, "screen");
 	screen.img = init_img(screen.mlx_ptr, WIDTH, HEIGHT);

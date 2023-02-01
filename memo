@@ -53,7 +53,7 @@ main.c ひとまずmlxの画面が出る。
 	- t_hit_record
 	- lighting_at()
 	- diffuse_light()
-	
+	- specular_light()
 # ray_trace()
 	- 
 
