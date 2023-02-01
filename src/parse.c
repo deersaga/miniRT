@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 14:59:45 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:27:13 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ t_scene	parse(int argc, const char *argv[])
 		.center = point_new(0, 0, 20.6),
 		.radius = 12.6,
 		.color = color_new(10, 0, 255),
+		.shineness = 2.0
 	};
 	scene.light_source = (t_light_source){
 		.position = vec_new(-40, 50.0, 20.0),
 		.ratio = 0.6,
 		.color = color_new(255, 255, 255)
 	};
-	scene.ambient_intencity = color_new(0.1, 0.1, 0.1);
+	scene.ambient_intensity = color_new(0.3, 0.3, 0.3);
 	return (scene);
 }

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 14:17:27 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:24:53 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct s_sphere {
 	t_vec			center;
 	FLOAT			radius;
 	t_color			color;
+	FLOAT			shineness;
 };
 
 struct s_light_source {
@@ -53,7 +54,7 @@ struct s_light_source {
 
 struct s_lighting {
 	t_vec	direction;
-	t_color	intencity;
+	t_color	intensity;
 	FLOAT	distance;
 };
 
@@ -61,7 +62,7 @@ struct s_scene {
 	t_sphere		sphere;
 	t_light_source	light_source;
 	t_camera		camera;
-	t_color			ambient_intencity;
+	t_color			ambient_intensity;
 };
 
 struct s_hit_record {
