@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 10:56:04 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 10:59:39 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,21 @@ void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 
 t_ray	get_ray(t_camera *camera, int x, int y);
 t_color	ray_trace(t_ray *r, t_scene *scene);
+
+t_ray	get_ray(t_camera *camera, int x, int y)
+{
+	(void)camera;
+	(void)x;
+	(void)y;
+	return ((t_ray){});
+}
+
+t_color	ray_trace(t_ray *r, t_scene *scene)
+{
+	(void)r;
+	(void)scene;
+	return (color_white());
+}
 
 void	draw_image(t_screen *screen, t_scene *scene)
 {
