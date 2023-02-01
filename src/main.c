@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 14:23:33 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:48:35 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,20 @@ t_lighting	lighting_at(t_vec pos, t_light_source light_source)
 	lighting.direction = vec_sub(light_source.position, pos);
 	lighting.distance = vec_length(lighting.direction);
 	lighting.direction = vec_unit(lighting.direction);
-	lighting.intencity = light_source.color;
+	lighting.intencity = vec_unit(light_source.color);
 	return (lighting);
+}
+
+t_color	diffuse_light(t_scene *scene, t_hit_record *rec, t_lighting *lighting)
+{
+	t_color	color;
+	FLOAT	nldot;
+
+	nldot = fabsf(vec_dot(lighting->direction, rec->normal));
+	color = vec_mul(lighting->intencity, vec_unit(scene->sphere.color));
+	color = vec_mul(color, color_new(nldot, nldot, nldot));
+	printf("diffuse color [%f %f %f]\n", color.x, color.y, color.z);
+	return (color);
 }
 
 t_color	ray_trace(const t_ray *r, t_scene *scene)
@@ -74,10 +86,13 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 	FLOAT			t;
 	t_hit_record	rec;
 	t_color			ret_color;
+	t_lighting		lighting;
 
 	if (sphere_hit(&scene->sphere, r, 0, INFINITY, &rec))
 	{
-		ret_color = vec_mul(scene->ambient_intencity, vec_scalar_div(scene->sphere.color, 256));
+		ret_color = vec_mul(scene->ambient_intencity, vec_unit(scene->sphere.color));
+		lighting = lighting_at(rec.p, scene->light_source);
+		ret_color = vec_add(ret_color, diffuse_light(scene, &rec, &lighting));
 		return (ret_color);
 	}
 	unit_direction = vec_unit(r->direction);
