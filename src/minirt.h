@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 15:39:52 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:52:13 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,33 @@ typedef struct s_light_source	t_light_source;
 typedef struct s_lighting		t_lighting;
 typedef struct s_ray			t_ray;
 typedef struct s_hit_record		t_hit_record;
+typedef enum e_element_type		t_element_type;
+typedef struct s_parse_result	t_parse_result;
+
+enum e_element_type {
+	AMBIENT_LIGHTNING,
+	CAMERA,
+	LIGHT,
+	SPHERE,
+};
+
+struct s_parse_result {
+	t_element_type	element_type;
+	// AMBIENT_LIGHTNING
+	FLOAT			ambient_lightning_ratio;
+	// CAMERA
+	t_vec			view_point;
+	t_vec			orientation_vec;
+	FLOAT			hfov;
+	// LIGHT
+	t_vec			light_point;
+	FLOAT			light_brightness_ratio;
+	// SPHERE
+	t_vec			center;
+	FLOAT			diameter;
+	// AMBIENT_LIGHTNING / LIGHT / SPHERE
+	t_color			color;
+};
 
 struct s_camera {
 	t_vec	eye_position; // x,y,z coordinates of the view point
@@ -103,6 +130,9 @@ void	fatal_error(const char *loc, const char *msg);
 
 // parse.c
 t_scene	parse(int argc, const char *argv[]);
+
+// translate.c
+t_scene	translate(t_parse_result res);
 
 //utils.c
 FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);
