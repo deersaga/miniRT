@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 10:41:46 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 11:28:04 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_vec	vec_zero(void);
 t_vec	vec_new(FLOAT x, FLOAT y, FLOAT z);
 t_point	point_new(FLOAT x, FLOAT y, FLOAT z);
 t_color	color_new(FLOAT x, FLOAT y, FLOAT z);
+t_vec	vec_add(t_vec a, t_vec b);
 t_vec	vec_sub(t_vec a, t_vec b);
 t_vec	vec_mul(t_vec a, t_vec b);
 t_vec	vec_scalar_mul(FLOAT t, t_vec v);

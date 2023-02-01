@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 10:59:39 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 11:52:46 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "vec.h"
 #include "mlx.h"
 #include <stdlib.h>
+#include <math.h>
 #include <X11/X.h>
 
 void	*init_img(void	*mlx_ptr, int width, int height)
@@ -105,12 +106,37 @@ void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 t_ray	get_ray(t_camera *camera, int x, int y);
 t_color	ray_trace(t_ray *r, t_scene *scene);
 
+FLOAT	degrees_to_radians(FLOAT degrees)
+{
+	return (degrees * M_PI / 180);
+}
+
 t_ray	get_ray(t_camera *camera, int x, int y)
 {
-	(void)camera;
-	(void)x;
-	(void)y;
-	return ((t_ray){});
+	t_vec	ey;
+	t_vec	dx;
+	t_vec	dy;
+	t_vec	pm;
+	t_vec	ray_dir;
+	FLOAT	u;
+	FLOAT	v;
+	FLOAT	screen_distance;
+
+	ey = vec_new(0, 1, 0);
+	screen_distance = SCREEN_WIDTH * ASPECT_RATIO / (2 * (FLOAT)tan(degrees_to_radians(camera->hfov) / 2));
+	camera->look_at_direction = vec_unit(camera->look_at_direction);
+	dx = vec_cross(ey, camera->look_at_direction);
+	dy = vec_cross(camera->look_at_direction, dx);
+	u = map(x, 0, WIDTH - 1, -1, 1) * ASPECT_RATIO;
+	v = map(y, 0, HEIGHT - 1, 1, -1);
+	pm = vec_add(camera->eye_position,
+			vec_scalar_mul(screen_distance, camera->look_at_direction));
+	ray_dir = vec_sub(
+				vec_add(pm,
+				vec_add(vec_scalar_mul(u, dx), vec_scalar_mul(v, dy))),
+				camera->eye_position);
+	ray_dir = vec_unit(ray_dir);
+	return ((t_ray){.origin = camera->eye_position, .direction = ray_dir});
 }
 
 t_color	ray_trace(t_ray *r, t_scene *scene)
@@ -120,10 +146,22 @@ t_color	ray_trace(t_ray *r, t_scene *scene)
 	return (color_white());
 }
 
+t_color	ray_color(const t_ray *r)
+{
+	t_vec	unit_direction;
+	FLOAT	t;
+
+	unit_direction = vec_unit(r->direction);
+	t = 0.5 * (unit_direction.y + 1.0);
+	return (vec_add(vec_scalar_mul((1.0 - t), color_new(1.0, 1.0, 1.0)), vec_scalar_mul(t, color_new(0.5, 0.7, 1.0))));
+}
+
 void	draw_image(t_screen *screen, t_scene *scene)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_ray	ray;
+	t_color	color;
 
 	(void)scene;
 	y = 0;
@@ -132,8 +170,9 @@ void	draw_image(t_screen *screen, t_scene *scene)
 		x = 0;
 		while (x < WIDTH)
 		{
-			t_ray ray = get_ray(&scene->camera, x, y);
-			t_color color = ray_trace(&ray, scene);
+			ray = get_ray(&scene->camera, x, y);
+			color = ray_color(&ray);
+			//t_color color = ray_trace(&ray, scene);
 			put_pixel(screen->img, x, y, get_mlx_color(color));
 			x++;
 		}
