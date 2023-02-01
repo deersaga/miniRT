@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 17:46:29 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:13:49 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_element	*parse(int argc, const char *argv[])
 		fatal_error("parse", NULL);
 	close(fd);
 	head.next = NULL;
+	
 	element_add(&head, ambient_element_alloc(0.1, color_new(255, 255, 255)));
 	element_add(&head, camera_element_alloc(vec_new(-50, 0, 20), vec_new(1, 0, 0), 70));
 	element_add(&head, sphere_element_alloc(point_new(0, 0, 20.6), 12.6, color_new(10, 0, 255)));
@@ -116,6 +117,7 @@ void	translate_sphere(t_scene *scene, t_element *elem)
 	scene->sphere.ambient_factor = vec_scalar_div(elem->color, 255);
 	scene->sphere.diffuse_factor = vec_scalar_div(elem->color, 255);
 	scene->sphere.specular_factor = vec_scalar_div(elem->color, 255);
+	scene->sphere.center = elem->center;
 	scene->sphere.radius = elem->diameter;
 	scene->sphere.shineness = 2.0;
 }
@@ -123,6 +125,8 @@ void	translate_sphere(t_scene *scene, t_element *elem)
 void	translate_light(t_scene *scene, t_element *elem)
 {
 	scene->light_source.intensity = vec_scalar_div(elem->color, 255);
+	scene->light_source.position = elem->light_point;
+	scene->light_source.ratio = elem->light_brightness_ratio;
 }
 
 void	translate_camera(t_scene *scene, t_element *elem)

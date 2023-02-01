@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 17:43:20 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:15:03 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,12 +164,8 @@ int	main(int argc, const char *argv[])
 	t_scene		scene;
 	t_element	*parsed_result;
 
-	(void)scene;
 	parsed_result = parse(argc, argv);
 	translate(&scene, parsed_result);
-	print_element(parsed_result);
-	printf("sphere %f\n", scene.sphere.radius);
-
 	screen.mlx_ptr = mlx_init();
 	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, "screen");
 	screen.img = init_img(screen.mlx_ptr, WIDTH, HEIGHT);
