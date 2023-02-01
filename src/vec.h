@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 12:14:49 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 12:37:54 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ t_vec	vec_scalar_mul(FLOAT t, t_vec v);
 t_vec	vec_scalar_div(t_vec v, FLOAT t);
 FLOAT	vec_dot(t_vec a, t_vec b);
 t_vec	vec_cross(t_vec a, t_vec b);
-FLOAT	vec_length_squared(t_vec a);
-FLOAT	vec_length(t_vec a);
-t_vec	vec_unit(t_vec a);
+FLOAT	vec_length_squared(t_vec v);
+FLOAT	vec_length(t_vec v);
+t_vec	vec_unit(t_vec v);
 
 t_color	color_black(void);
 t_color	color_white(void);

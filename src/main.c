@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 12:06:23 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 12:25:15 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ FLOAT	degrees_to_radians(FLOAT degrees)
 	return (degrees * M_PI / 180);
 }
 
-t_point	ray_at(t_ray *r, FLOAT t)
+t_point	ray_at(const t_ray *r, FLOAT t)
 {
 	t_point	p;
 

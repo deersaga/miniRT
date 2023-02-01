@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 12:14:32 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 12:38:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ struct s_scene {
 };
 
 struct s_hit_record {
-	t_point		p;
-	t_vec		normal;
-	t_sphere	*sphere_ptr;
+	FLOAT			t;
+	t_point			p;
+	t_vec			normal;
+	const t_sphere	*sphere_ptr;
+	bool			front_face;
 };
 
 struct s_ray {
@@ -93,7 +95,10 @@ t_scene	parse(int argc, const char *argv[]);
 FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);
 FLOAT	map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax);
 
-//ray
+// ray
+t_point	ray_at(const t_ray *r, FLOAT t);
+
+// ray_trace
 t_ray	get_ray(t_camera *camera, int x, int y);
 t_color	ray_trace(const t_ray *r, t_scene *scene);
 
@@ -104,5 +109,8 @@ void	put_pixel(const t_img *img, int x, int y, int mlx_color);
 // hooks.c
 void	mlx_closebutton_hook(void *win_ptr, int (*handler)(), void *param);
 int		close_window(t_screen *s);
+
+// sphere.c
+bool	sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
 
 #endif

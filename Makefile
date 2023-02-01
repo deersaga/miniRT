@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/01 12:11:49 by susami           ###   ########.fr        #
+#    Updated: 2023/02/01 12:16:10 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/error.c\
 			$(SRC_DIR)/img.c\
 			$(SRC_DIR)/hooks.c\
+			$(SRC_DIR)/sphere.c\
 
 OBJ_DIR = obj
 OBJS	= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

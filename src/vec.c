@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:37:27 by susami            #+#    #+#             */
-/*   Updated: 2023/01/31 14:51:14 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:37:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_vec	vec_cross(t_vec a, t_vec b)
 		.z = a.x * b.y - a.y * b.x});
 }
 
-FLOAT	vec_length_squvred(t_vec v)
+FLOAT	vec_length_squared(t_vec v)
 {
 	return (v.x * v.x + v.y * v.y + v.z * v.z);
 }
