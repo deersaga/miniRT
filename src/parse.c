@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 12:44:43 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 14:14:27 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ t_scene	parse(int argc, const char *argv[])
 	scene.light_source = (t_light_source){
 		.position = vec_new(-40, 50.0, 0.0),
 		.ratio = 0.6,
-		.color = color_new(10, 0, 255)
+		.color = color_new(255, 255, 255)
 	};
+	scene.ambient_intencity = color_new(0.5, 0.5, 0.5);
 	return (scene);
 }

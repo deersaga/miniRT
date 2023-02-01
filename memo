@@ -51,7 +51,7 @@ main.c ひとまずmlxの画面が出る。
 	- ray_at()
 	- sphere.hit()
 	- t_hit_record
-
+	- lighting_at()
 # ray_trace()
 	- 
 
