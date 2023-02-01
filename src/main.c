@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 14:48:35 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:05:55 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ t_color	diffuse_light(t_scene *scene, t_hit_record *rec, t_lighting *lighting)
 	t_color	color;
 	FLOAT	nldot;
 
-	nldot = fabsf(vec_dot(lighting->direction, rec->normal));
+	nldot = vec_dot(lighting->direction, rec->normal);
+	nldot = clamp(nldot, 0, 1);
 	color = vec_mul(lighting->intencity, vec_unit(scene->sphere.color));
 	color = vec_mul(color, color_new(nldot, nldot, nldot));
-	printf("diffuse color [%f %f %f]\n", color.x, color.y, color.z);
 	return (color);
 }
 
