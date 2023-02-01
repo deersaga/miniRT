@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 10:51:14 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 10:56:04 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 	}
 }
 
+t_ray	get_ray(t_camera *camera, int x, int y);
+t_color	ray_trace(t_ray *r, t_scene *scene);
+
 void	draw_image(t_screen *screen, t_scene *scene)
 {
 	int	x;
@@ -114,7 +117,9 @@ void	draw_image(t_screen *screen, t_scene *scene)
 		x = 0;
 		while (x < WIDTH)
 		{
-			put_pixel(screen->img, x, y, get_mlx_color(color_white()));
+			t_ray ray = get_ray(&scene->camera, x, y);
+			t_color color = ray_trace(&ray, scene);
+			put_pixel(screen->img, x, y, get_mlx_color(color));
 			x++;
 		}
 		y++;
