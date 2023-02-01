@@ -6,14 +6,14 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/01/31 15:13:29 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 10:41:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC_H
 # define VEC_H
 
-# include "minirt.h"
+# define FLOAT float
 
 typedef struct s_vec	t_vec;
 typedef struct s_vec	t_point;

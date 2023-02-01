@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/01 10:32:56 by susami           ###   ########.fr        #
+#    Updated: 2023/02/01 10:42:11 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,6 @@ SRCS		=	src/main.c\
 				src/utils.c\
 				src/parse.c\
 				src/error.c\
-				src/get_next_line.c\
-				src/get_next_line_utils.c\
-
 
 SRC_DIR	= src
 OBJ_DIR = obj
@@ -30,7 +27,7 @@ OBJS	= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 MLX_DIR	= minilibx-linux
 MLX		= $(MLX_DIR)/libmlx.a
 
-INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include
+INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include -I $(SRC_DIR)
 
 CFLAGS		= -Wall -Wextra -Werror $(INCLUDE)
 DFLAGS		= -g -fsanitize=address -Weverything

@@ -45,6 +45,13 @@ main.c ひとまずmlxの画面が出る。
 - Testを書く
 球体を描画できるようにする(マテリアル構造体、インターセクション、ray関数)
 
+- ray_trace()
+	- t_ray
+	- get_ray()
+	- ray_at()
+	- sphere.hit()
+	- t_hit_record
+
 # ray_trace()
 	- 
 

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 10:29:02 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 10:41:51 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define WIDTH 800
 # define HEIGHT 512
-# define FLOAT float
 
 #include <stdio.h>
 #include "vec.h"
@@ -26,21 +25,8 @@ typedef struct s_scene	t_scene;
 typedef struct s_camera	t_camera;
 typedef struct s_sphere	t_sphere;
 typedef struct s_light_source	t_light_source;
-
-typedef struct s_proto	t_prot;
-
-// struct s_proto {
-// 	char			*idetifier;
-// 	FLOAT			ambient_ratio;
-// 	t_vec			eye_position;
-// 	t_vec			look_at;
-// 	FLOAT			HFOV;
-// 	t_vec			light_pos;
-// 	FLOAT			light_intencity_ratio;
-// 	t_vec			center;
-// 	FLOAT			radius;
-// 	t_color			color;
-// };
+typedef struct s_ray	t_ray;
+typedef struct s_hit_record	t_hit_record;
 
 struct s_camera {
  	t_vec			eye_position; // x,y,z coordinates of the view point
@@ -66,6 +52,17 @@ struct s_scene {
 	t_sphere		sphere;
 	t_light_source	light_source;
 	t_camera		camera;
+};
+
+struct s_hit_record {
+	t_point		p;
+	t_vec		normal;
+	t_sphere	*sphere_ptr;
+};
+
+struct s_ray {
+	t_point	origin;
+	t_vec	direction;
 };
 
 struct s_img {
