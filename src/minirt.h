@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 15:52:13 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:33:09 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define HEIGHT (int)(WIDTH / ASPECT_RATIO)
 # define SCREEN_WIDTH 2.0
 # include <stdio.h>
+# include <stdlib.h>
 # include <stdbool.h>
 # include "vec.h"
 
@@ -31,7 +32,7 @@ typedef struct s_lighting		t_lighting;
 typedef struct s_ray			t_ray;
 typedef struct s_hit_record		t_hit_record;
 typedef enum e_element_type		t_element_type;
-typedef struct s_parse_result	t_parse_result;
+typedef struct s_element	t_element;
 
 enum e_element_type {
 	AMBIENT_LIGHTNING,
@@ -40,7 +41,7 @@ enum e_element_type {
 	SPHERE,
 };
 
-struct s_parse_result {
+struct s_element {
 	t_element_type	element_type;
 	// AMBIENT_LIGHTNING
 	FLOAT			ambient_lightning_ratio;
@@ -56,6 +57,7 @@ struct s_parse_result {
 	FLOAT			diameter;
 	// AMBIENT_LIGHTNING / LIGHT / SPHERE
 	t_color			color;
+	t_element		*next;
 };
 
 struct s_camera {
@@ -68,7 +70,6 @@ struct s_sphere {
 	//sphere
 	t_vec			center;
 	FLOAT			radius;
-	t_color			color;
 	t_color			ambient_factor;
 	t_color			diffuse_factor;
 	t_color			specular_factor;
@@ -79,7 +80,6 @@ struct s_light_source {
 	//point light
 	t_vec		position; // x,y,z coordinates of the light point
 	FLOAT		ratio; // brightness ratio
-	t_color		color; // (unused in mandatory part)R,G,B colors in range [0-255]
 	t_color		intensity; // (unused in mandatory part)R,G,B colors in range [0-255]
 };
 
@@ -129,10 +129,10 @@ struct s_screen {
 void	fatal_error(const char *loc, const char *msg);
 
 // parse.c
-t_scene	parse(int argc, const char *argv[]);
+t_element	*parse(int argc, const char *argv[]);
 
 // translate.c
-t_scene	translate(t_parse_result res);
+void	translate(t_scene *scene, t_element *res);
 
 //utils.c
 FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);

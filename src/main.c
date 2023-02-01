@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 15:43:00 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:43:20 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,24 +147,29 @@ void	draw_image(t_screen *screen, t_scene *scene)
 	}
 }
 
-void	setup(t_scene *scene)
-{
-	scene->sphere.ambient_factor = vec_scalar_div(scene->sphere.color, 256);
-	scene->sphere.diffuse_factor = vec_scalar_div(scene->sphere.color, 256);
-	scene->sphere.specular_factor = vec_scalar_div(scene->sphere.color, 256);
-	scene->sphere.shineness = 2.0;
 
-	scene->light_source.intensity = vec_scalar_div(scene->light_source.color, 256);
+
+void	print_element(t_element *head)
+{
+	while (head)
+	{
+		printf("type %d color [%f %f %f]\n", head->element_type, head->color.x, head->color.y, head->color.z);
+		head = head->next;
+	}
 }
 
 int	main(int argc, const char *argv[])
 {
 	t_screen	screen;
 	t_scene		scene;
+	t_element	*parsed_result;
 
 	(void)scene;
-	scene = parse(argc, argv);
-	setup(&scene);
+	parsed_result = parse(argc, argv);
+	translate(&scene, parsed_result);
+	print_element(parsed_result);
+	printf("sphere %f\n", scene.sphere.radius);
+
 	screen.mlx_ptr = mlx_init();
 	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, "screen");
 	screen.img = init_img(screen.mlx_ptr, WIDTH, HEIGHT);
