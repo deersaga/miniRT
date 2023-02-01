@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 11:51:31 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 11:55:36 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,9 @@ t_scene	parse(int argc, const char *argv[]);
 //utils.c
 FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);
 FLOAT	map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax);
+
+//ray
+t_ray	get_ray(t_camera *camera, int x, int y);
+t_color	ray_trace(const t_ray *r, t_scene *scene);
 
 #endif

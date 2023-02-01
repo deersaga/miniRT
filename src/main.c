@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 11:52:46 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 11:55:50 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ void	put_pixel(const t_img *img, int x, int y, int mlx_color)
 	}
 }
 
-t_ray	get_ray(t_camera *camera, int x, int y);
-t_color	ray_trace(t_ray *r, t_scene *scene);
-
 FLOAT	degrees_to_radians(FLOAT degrees)
 {
 	return (degrees * M_PI / 180);
@@ -139,18 +136,12 @@ t_ray	get_ray(t_camera *camera, int x, int y)
 	return ((t_ray){.origin = camera->eye_position, .direction = ray_dir});
 }
 
-t_color	ray_trace(t_ray *r, t_scene *scene)
-{
-	(void)r;
-	(void)scene;
-	return (color_white());
-}
-
-t_color	ray_color(const t_ray *r)
+t_color	ray_trace(const t_ray *r, t_scene *scene)
 {
 	t_vec	unit_direction;
 	FLOAT	t;
 
+	(void)scene;
 	unit_direction = vec_unit(r->direction);
 	t = 0.5 * (unit_direction.y + 1.0);
 	return (vec_add(vec_scalar_mul((1.0 - t), color_new(1.0, 1.0, 1.0)), vec_scalar_mul(t, color_new(0.5, 0.7, 1.0))));
@@ -171,8 +162,7 @@ void	draw_image(t_screen *screen, t_scene *scene)
 		while (x < WIDTH)
 		{
 			ray = get_ray(&scene->camera, x, y);
-			color = ray_color(&ray);
-			//t_color color = ray_trace(&ray, scene);
+			color = ray_trace(&ray, scene);
 			put_pixel(screen->img, x, y, get_mlx_color(color));
 			x++;
 		}
