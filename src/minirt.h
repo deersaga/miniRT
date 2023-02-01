@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 17:43:25 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/01 10:29:02 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,12 @@
 
 typedef struct s_img	t_img;
 typedef struct s_screen	t_screen;
-typedef struct s_material	t_material;
 typedef struct s_scene	t_scene;
-typedef struct s_shape	t_shape;
+typedef struct s_camera	t_camera;
+typedef struct s_sphere	t_sphere;
 typedef struct s_light_source	t_light_source;
-typedef enum e_shape_kind t_shape_kind;
-typedef enum e_light_kind t_light_kind;
 
 typedef struct s_proto	t_prot;
-
-struct s_material {};
 
 // struct s_proto {
 // 	char			*idetifier;
@@ -46,53 +42,30 @@ struct s_material {};
 // 	t_color			color;
 // };
 
-struct s_scene {
-	t_shape			shapes;
-	t_light_source	light_sources;
-	t_color			ambient_intesity;
-	FLOAT			air_refraction;
-	t_vec			eye_position;
-	t_vec			look_at;
-	FLOAT			screen_distance;
-	FLOAT			HFOV;
+struct s_camera {
+ 	t_vec			eye_position; // x,y,z coordinates of the view point
+ 	t_vec			look_at_direction; // 3d normalized orientation vector.
+ 	FLOAT			hfov; // Horizontal field of view in degrees in range [0,180]
 };
 
-enum e_shape_kind {
-	SPHERE,
-	PLANE,
-	CYLINDER,
-};
-
-struct s_shape {
-	t_shape_kind	kind;
-	t_material		*material;
-	t_shape			*next;
-
-	//sphere, cylinder
+struct s_sphere {
+	//sphere
 	t_vec			center;
 	FLOAT			radius;
-	// //cylinder
-	// FLOAT			height;
-	// t_vec			orientation; // (0, 1, 0)
-	// //plane
-	// t_vec			normal;
-	// t_vec			position;
-};
-
-enum e_light_kind {
-	POINT,
-	DIRECTIONAL,
+	t_color			color;
 };
 
 struct s_light_source {
-	t_light_kind	kind;
-	t_fcolor		intencity;
-	t_light_source	*next;
-
 	//point light
-	t_vec			position;
-	//directional light
-	t_vec			direction;
+	t_vec		position; // x,y,z coordinates of the light point
+	FLOAT		ratio; // brightness ratio
+	t_color		color; // (unused in mandatory part)R,G,B colors in range [0-255]
+};
+
+struct s_scene {
+	t_sphere		sphere;
+	t_light_source	light_source;
+	t_camera		camera;
 };
 
 struct s_img {

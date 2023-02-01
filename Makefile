@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/01/31 17:01:59 by katakagi         ###   ########.fr        #
+#    Updated: 2023/02/01 10:32:56 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,9 @@ all: $(NAME)
 re: fclean all
 
 norm:
-	norminette $(SRCS) minirt.h | grep -E -v "TOO_MANY|TOO_LONG"
+	norminette $(SRCS) minirt.h | grep -E -v "TOO_MANY|TOO_LONG|WRONG_SCOPE_COMMENT"
 
-.PHONY: all clean fcelan re norm
+test: norm
+	./test.sh
+
+.PHONY: all clean fcelan re norm test
