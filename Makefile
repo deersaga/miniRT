@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/01 12:16:10 by susami           ###   ########.fr        #
+#    Updated: 2023/02/01 12:45:59 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,13 @@ DFLAGS		= -g -fsanitize=address -Weverything
 FRAMEWORK	= -framework OpenGL -framework AppKit
 LIBPATH		=-lmlx -lX11 -lXext	-L$(MLX_DIR) -L/usr/X11R6/lib
 
+all: $(NAME)
+
 $(NAME): $(OBJS) $(MLX)
-	echo $(OBJS)
 	$(CC) $(LIBPATH) $(FRAMEWORK) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@);
-	echo hello
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(MLX):
@@ -63,7 +63,7 @@ re: fclean all
 norm:
 	norminette $(SRC_DIR) | grep -E -v "TOO_MANY|TOO_LONG|WRONG_SCOPE_COMMENT"
 
-test: norm
+test: all norm
 	./test.sh
 
 .PHONY: all clean fcelan re norm test

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 12:25:15 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 12:45:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,12 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 {
 	t_vec	unit_direction;
 	FLOAT	t;
+	t_hit_record	rec;
 
-	(void)scene;
+	if (sphere_hit(&scene->sphere, r, 0, INFINITY, &rec))
+	{
+		return (scene->sphere.color);
+	}
 	unit_direction = vec_unit(r->direction);
 	t = 0.5 * (unit_direction.y + 1.0);
 	return (vec_add(vec_scalar_mul((1.0 - t), color_new(1.0, 1.0, 1.0)), vec_scalar_mul(t, color_new(0.5, 0.7, 1.0))));

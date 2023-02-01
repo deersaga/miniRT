@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 10:32:46 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/01 12:44:43 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_scene	parse(int argc, const char *argv[])
 	close(fd);
 	scene.camera = (t_camera){
 		.eye_position = vec_new(-50, 0, 20),
-		.look_at_direction = vec_new(0, 0, 1),
+		.look_at_direction = vec_new(1, 0, 0),
 		.hfov = 70};
 	scene.sphere = (t_sphere){
 		.center = point_new(0, 0, 20.6),
