@@ -54,8 +54,10 @@ main.c ひとまずmlxの画面が出る。
 	- lighting_at()
 	- diffuse_light()
 	- specular_light()
-# ray_trace()
-	- 
+# Multiple Spheres
+	- sphere.next
+	- translate
+	- hit -> return the nearest hit
 
 ## material
 	- new,allocが必要
