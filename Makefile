@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/01 12:45:59 by susami           ###   ########.fr        #
+#    Updated: 2023/02/02 10:32:15 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/img.c\
 			$(SRC_DIR)/hooks.c\
 			$(SRC_DIR)/sphere.c\
+
+DEBUG_SRCS	= $(SRC_DIR)/destructor.c
+DEBUG_OBJS	= $(DEBUG_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 OBJ_DIR = obj
 OBJS	= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -47,6 +50,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@);
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(DEBUG_OBJS): $(DEBUG_SRCS)
+	@mkdir -p $(dir $@);
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
 
@@ -63,7 +70,8 @@ re: fclean all
 norm:
 	norminette $(SRC_DIR) | grep -E -v "TOO_MANY|TOO_LONG|WRONG_SCOPE_COMMENT"
 
-test: all norm
+test: SRCS += $(DEBUG_SRCS)
+test: fclean $(DEBUG_OBJS) all $(OBJS)
 	./test.sh
 
 .PHONY: all clean fcelan re norm test

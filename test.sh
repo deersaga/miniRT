@@ -7,8 +7,12 @@ RESET="\033[0m"
 OK=$GREEN"OK"$RESET
 NG=$RED"NG"$RESET
 
+print_yellow() {
+	echo -e $YELLOW"$1"$RESET
+}
+
 test_invalid() {
-	echo "$1"
+	print_yellow "$1"
 	$1 && echo -e $RED"Expected Error but got success"$RESET || echo -e $OK
 }
 
@@ -25,7 +29,7 @@ test_invalid "./miniRT memo"
 ### 1. Ambient & Camera & Sphere
 
 test_valid() {
-	echo "$1"
+	print_yellow "$1"
 	$1 && echo -e $OK || echo -e $RED"Expected Success but got Error"$RESET
 }
 
