@@ -35,5 +35,3 @@ test_valid() {
 
 ## Valid
 test_valid "./miniRT rt_files/ok_1.rt"
-
-rm .tmp.rt

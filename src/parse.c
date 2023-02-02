@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 11:55:36 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:21:46 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_element	*parse(int argc, const char *argv[])
 	close(fd);
 	head.next = NULL;
 	element_add(&head, ambient_element_alloc(0.1, color_new(255, 255, 255)));
-	element_add(&head, camera_element_alloc(vec_new(-50, 0, 20), vec_new(1, 0, 0), 70));
+	element_add(&head, camera_element_alloc(vec_new(-50, 10, 20), vec_new(1, 0, 0), 70));
 	element_add(&head, sphere_element_alloc(point_new(0, 12.6, 20.6), 12.6, color_new(10, 0, 255)));
 	element_add(&head, sphere_element_alloc(point_new(0, -500, 20), 500, color_new(255, 0, 255)));
 	element_add(&head, light_element_alloc(point_new(-40, 50.0, 20.0), 0.6, color_new(255, 255, 255)));

@@ -6,12 +6,14 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:43:37 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 12:08:46 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 12:24:09 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <math.h>
+
+#define C_EPSILON 0.0001
 
 t_color	diffuse_light(t_hit_record *rec, t_lighting *lighting)
 {
@@ -59,6 +61,15 @@ t_lighting	lighting_at(const t_light_source *self, t_vec pos)
 	return (lighting);
 }
 
+bool	is_shadow(const t_hit_record *rec, const t_lighting *l, const t_scene *scene)
+{
+	t_ray			shadow_ray;
+	t_hit_record	temp_rec;
+
+	shadow_ray = (t_ray){.direction = l->direction, .origin = rec->p};
+	return (hit(&scene->list, &shadow_ray, C_EPSILON, l->distance, &temp_rec));
+}
+
 t_color	ray_trace(const t_ray *r, t_scene *scene)
 {
 	t_vec			unit_direction;
@@ -71,6 +82,8 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 	{
 		ret_color = vec_mul(scene->ambient_intensity, rec.hittable_ptr->ambient_factor);
 		lighting = lighting_at(&scene->light_source, rec.p);
+		if (is_shadow(&rec, &lighting, scene))
+			return (ret_color);
 		ret_color = vec_add(ret_color, diffuse_light(&rec, &lighting));
 		ret_color = vec_add(ret_color, specular_light(r, &rec, &lighting));
 		return (ret_color);
