@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   translate.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
+/*   Updated: 2023/02/02 11:38:31 by katakagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	translate_ambient(t_scene *scene, t_element *elem)
@@ -7,10 +19,13 @@ void	translate_ambient(t_scene *scene, t_element *elem)
 
 void	translate_sphere(t_scene *scene, t_element *elem)
 {
-	t_sphere *head = &scene->sphere;
+	t_sphere	*head;
 
+	head = &scene->sphere;
 	while (head->next)
+	{
 		head = head->next;
+	}
 	head->next = calloc(1, sizeof(*head));
 	head = head->next;
 	head->ambient_factor = vec_scalar_div(elem->color, 255);

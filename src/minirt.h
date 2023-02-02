@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 10:58:27 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:19:58 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,5 +156,6 @@ int			close_window(t_screen *s);
 
 // sphere.c
 bool		sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+bool		multiple_hit(const t_sphere *head, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
 
 #endif

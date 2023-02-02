@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/02 10:50:37 by susami           ###   ########.fr        #
+#    Updated: 2023/02/02 11:37:00 by katakagi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include -I $(SRC_DIR)
 
 CFLAGS		= -Wall -Wextra -Werror $(INCLUDE)
 DFLAGS		= -g -fsanitize=address -Weverything
-
 FRAMEWORK	= -framework OpenGL -framework AppKit
 LIBPATH		=-lmlx -lX11 -lXext	-L$(MLX_DIR) -L/usr/X11R6/lib
 

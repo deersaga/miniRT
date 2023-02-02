@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:43:37 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 11:07:39 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:19:29 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 	t_color			ret_color;
 	t_lighting		lighting;
 
-	if (sphere_hit(scene->sphere.next, r, 0, INFINITY, &rec))
+	if (multiple_hit(&scene->sphere, r, 0, INFINITY, &rec))
 	{
-		ret_color = vec_mul(scene->ambient_intensity, scene->sphere.next->ambient_factor);
+		ret_color = vec_mul(scene->ambient_intensity, rec.sphere_ptr->ambient_factor);
 		lighting = lighting_at(&scene->light_source, rec.p);
 		ret_color = vec_add(ret_color, diffuse_light(&rec, &lighting));
 		ret_color = vec_add(ret_color, specular_light(r, &rec, &lighting));

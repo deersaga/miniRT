@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:11:58 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 12:45:26 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 11:20:05 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,28 @@ static void	sphere_set_hit_record(const t_sphere *self, t_hit_record *rec, FLOAT
 			self->radius
 			)
 		);
+}
+
+bool	multiple_hit(const t_sphere *head, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec)
+{
+	bool			hit_any;
+	FLOAT			closest_t;
+	t_hit_record	temp_rec;
+
+	hit_any = false;
+	closest_t = t_max;
+	head = head->next;
+	while (head)
+	{
+		if (sphere_hit(head, r, t_min, closest_t, &temp_rec))
+		{
+			hit_any = true;
+			closest_t = temp_rec.t;
+			*rec = temp_rec;
+		}
+		head = head->next;
+	}
+	return (hit_any);
 }
 
 bool	sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec)

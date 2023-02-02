@@ -6,14 +6,14 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 12:37:54 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 11:31:37 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC_H
 # define VEC_H
 
-# define FLOAT float
+# define FLOAT double
 
 typedef struct s_vec	t_vec;
 typedef struct s_vec	t_point;
