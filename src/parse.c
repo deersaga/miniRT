@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 14:59:49 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 16:16:54 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_element	*parse(int argc, const char *argv[])
 	t_element	head;
 	int			fd;
 	char		*tail;
-	char		buff[1000];
+	char		buf[1000];
 	int			rc;
 
 	errno = 0;
@@ -97,8 +97,8 @@ t_element	*parse(int argc, const char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		fatal_error("parse", NULL);
-	rc = read(fd, buff, 999);
-	buff[rc] = '\0';
+	rc = read(fd, buf, 999);
+	buf[rc] = '\0';
 	close(fd);
 	head.next = NULL;
 	element_add(&head, ambient_element_alloc(0.1, color_new(255, 255, 255)));
@@ -106,5 +106,6 @@ t_element	*parse(int argc, const char *argv[])
 	element_add(&head, sphere_element_alloc(point_new(0, 12.6, 20.6), 12.6, color_new(10, 0, 255)));
 	element_add(&head, sphere_element_alloc(point_new(0, -500, 20), 500, color_new(255, 0, 255)));
 	element_add(&head, light_element_alloc(point_new(-40, 50.0, 20.0), 0.6, color_new(255, 255, 255)));
+	(void)buf;
 	return (head.next);
 }

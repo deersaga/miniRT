@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-t_token	*new_token(t_token_type type)
+t_token	*token_alloc(t_token_type type)
 {
 	t_token	*tok;
 
@@ -44,8 +44,31 @@ bool	is_identifier(const char *s)
 
 t_token	*identifier(const char **rest, const char *buf)
 {
+	t_token				*tok;
+
+	tok = token_alloc(TK_ID);
+	if (!memcmp(buf, "A", 1))
+	{
+		tok->id = E_AMBIENT_LIGHTNING;
+		buf++;
+	}
+	else if (!memcmp(buf, "C", 1))
+	{
+		tok->id = E_CAMERA;
+		buf++;
+	}
+	else if (!memcmp(buf, "L", 1))
+	{
+		tok->id = E_LIGHT;
+		buf++;
+	}
+	else if (!memcmp(buf, "sp", 2))
+	{
+		tok->id = E_SPHERE;
+		buf += 2;
+	}
 	*rest = buf;
-	return (NULL);
+	return (tok);
 }
 
 // Number
@@ -89,10 +112,10 @@ t_token	*number(const char **rest, const char *s)
 	const char	*start = s;
 	t_token	*tok;
 
-	tok = new_token(TK_NUM);
+	tok = token_alloc(TK_NUM);
 	while (*s && (isdigit(*s) || *s == '.'))
 		s++;
-	tok->word = strndup(start, s - start);
+	tok->num1 = atof(start);
 	*rest = s;
 	return (tok);
 }
