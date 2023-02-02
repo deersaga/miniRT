@@ -38,6 +38,7 @@ bool	is_identifier(const char *s)
 	{
 		if (!memcmp(s, identifiers[i], strlen(identifiers[i])))
 			return (true);
+		i++;
 	}
 	return (false);
 }
@@ -78,6 +79,8 @@ bool	consume_number(const char **rest, const char *s)
 {
 	bool	seen_dot;
 
+	if (*s == '+' || *s == '-')
+		s++;
 	if (isdigit(*s) || (*s == '.' && isdigit(s[1])))
 	{
 		seen_dot = false;
@@ -102,21 +105,17 @@ bool	is_number(const char *s)
 {
 	if (!consume_number(&s, s))
 		return (false);
-	if (*s == ' ' || *s == '\0')
+	if (*s == ' ' || *s == '\0' || *s == '\n')
 		return (true);
 	return (false);
 }
 
 t_token	*number(const char **rest, const char *s)
 {
-	const char	*start = s;
 	t_token	*tok;
 
 	tok = token_alloc(TK_NUM);
-	while (*s && (isdigit(*s) || *s == '.'))
-		s++;
-	tok->num1 = atof(start);
-	*rest = s;
+	tok->num1 = strtof(s, (char **)rest);
 	return (tok);
 }
 
@@ -146,16 +145,46 @@ bool	is_vector(const char *s)
 		return (false);
 	if (!consume_number(&s, s))
 		return (false);
-	if (*s != ' ' && *s != '\0')
+	if (*s != ' ' && *s != '\0' && *s != '\n')
 		return (false);
 	return (true);
 }
 
 t_token	*vector(const char **rest, const char *buf)
 {
+	t_token				*tok;
+
+	tok = token_alloc(TK_VEC);
+	tok->num1 = strtof(buf, (char **)&buf);
+	buf++;
+	tok->num2 = strtof(buf, (char **)&buf);
+	buf++;
+	tok->num3 = strtof(buf, (char **)&buf);
+	buf++;
 	*rest = buf;
-	return (NULL);
+	return (tok);
 }
+
+bool	consume_newline(const char **rest, const char *buf)
+{
+	if (*buf != '\n')
+		return (false);
+	*rest = buf + 1;
+	return (true);
+}
+
+void	print_tokens(t_token *head)
+{
+	t_token	*cur;
+
+	cur = head;
+	while (cur)
+	{
+		printf("token type: %d, id: %d, [%f %f %f]\n", cur->type, cur->id, cur->num1, cur->num2, cur->num3);
+		cur = cur->next;
+	}
+}
+
 
 t_token	*tokenize(const char *buf)
 {
@@ -174,8 +203,11 @@ t_token	*tokenize(const char *buf)
 			cur = cur->next = number(&buf, buf);
 		else if (is_vector(buf))
 			cur = cur->next = vector(&buf, buf);
+		else if (consume_newline(&buf, buf))
+			cur = cur->next = token_alloc(TK_NL);
 		else
 			fatal_error("tokenize", "Unexpected character while tokenizing");
 	}
+	print_tokens(head.next);
 	return (head.next);
 }

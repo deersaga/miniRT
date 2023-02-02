@@ -8,6 +8,7 @@ enum e_token_type {
 	TK_NUM,
 	TK_ID,
 	TK_VEC,
+	TK_NL,
 };
 typedef enum e_token_type	t_token_type;
 

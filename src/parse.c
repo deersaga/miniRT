@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 16:16:54 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:25:35 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "minirt.h"
+#include "tokenize.h"
 
 t_element	*sphere_element_alloc(t_vec center, FLOAT diameter, t_color color)
 {
@@ -101,6 +102,7 @@ t_element	*parse(int argc, const char *argv[])
 	buf[rc] = '\0';
 	close(fd);
 	head.next = NULL;
+	tokenize(buf);
 	element_add(&head, ambient_element_alloc(0.1, color_new(255, 255, 255)));
 	element_add(&head, camera_element_alloc(vec_new(-50, 10, 20), vec_new(1, 0, 0), 70));
 	element_add(&head, sphere_element_alloc(point_new(0, 12.6, 20.6), 12.6, color_new(10, 0, 255)));
