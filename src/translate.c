@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 11:59:59 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:53:35 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	translate_sphere(t_scene *scene, t_element *elem)
 	cur->ambient_factor = vec_scalar_div(elem->color, 255);
 	cur->diffuse_factor = vec_scalar_div(elem->color, 255);
 	cur->specular_factor = vec_scalar_div(elem->color, 255);
-	cur->center = elem->center;
-	cur->radius = elem->diameter;
+	cur->center = elem->sp_center;
+	cur->radius = elem->sp_diameter;
 	cur->shineness = 2.0;
 }
 
@@ -44,7 +44,7 @@ void	translate_light(t_scene *scene, t_element *elem)
 void	translate_camera(t_scene *scene, t_element *elem)
 {
 	scene->camera.eye_position = elem->view_point;
-	scene->camera.look_at_direction = elem->orientation_vec;
+	scene->camera.look_at_direction = elem->orientation;
 	scene->camera.hfov = elem->hfov;
 }
 

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 17:37:59 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 17:58:34 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,36 @@
 #include "minirt.h"
 #include "tokenize.h"
 
+t_element	*cylinder_element_alloc(t_point center, t_vec orientation, FLOAT diameter, FLOAT height, t_color color)
+{
+	t_element	*self;
+
+	self = calloc(1, sizeof(*self));
+	if (self == NULL)
+		fatal_error("parse", NULL);
+	self->element_type = E_CYLINDER;
+	self->cy_center = center;
+	self->cy_orientation = orientation;
+	self->cy_diameter= diameter;
+	self->cy_height = height;
+	self->color = color;
+	return (self);
+}
+
+t_element	*plane_element_alloc(t_point point, t_vec normal, t_color color)
+{
+	t_element	*self;
+
+	self = calloc(1, sizeof(*self));
+	if (self == NULL)
+		fatal_error("parse", NULL);
+	self->element_type = E_PLANE;
+	self->pl_point = point;
+	self->pl_normal = normal;
+	self->color = color;
+	return (self);
+}
+
 t_element	*sphere_element_alloc(t_vec center, FLOAT diameter, t_color color)
 {
 	t_element	*self;
@@ -25,8 +55,8 @@ t_element	*sphere_element_alloc(t_vec center, FLOAT diameter, t_color color)
 	if (self == NULL)
 		fatal_error("parse", NULL);
 	self->element_type = E_SPHERE;
-	self->center = center;
-	self->diameter = diameter;
+	self->sp_center = center;
+	self->sp_diameter = diameter;
 	self->color = color;
 	return (self);
 }
@@ -54,7 +84,7 @@ t_element	*camera_element_alloc(t_vec p, t_vec dir, FLOAT hfov)
 		fatal_error("parse", NULL);
 	self->element_type = E_CAMERA;
 	self->view_point = p;
-	self->orientation_vec = dir;
+	self->orientation = dir;
 	self->hfov = hfov;
 	return (self);
 }
@@ -177,20 +207,37 @@ t_element	*sphere(const t_token **rest, const t_token *tok)
 	return (elem);
 }
 
-// t_element	*plane(const t_token **rest, const t_token *tok)
-// {
-// 	t_element	*elem;
+t_element	*plane(const t_token **rest, const t_token *tok)
+{
+	t_element	*elem;
 
-// 	expect_id_tok(&tok, tok, E_LIGHT);
-// 	elem = plane_element_alloc(
-// 			expect_vec_tok(&tok, tok),
-// 			expect_vec_tok(&tok, tok),
-// 			expect_vec_tok(&tok, tok)
-// 			);
-// 	expect_newline_or_eof(&tok, tok);
-// 	*rest = tok;
-// 	return (elem);
-// }
+	expect_id_tok(&tok, tok, E_PLANE);
+	elem = plane_element_alloc(
+			expect_vec_tok(&tok, tok),
+			expect_vec_tok(&tok, tok),
+			expect_vec_tok(&tok, tok)
+			);
+	expect_newline_or_eof(&tok, tok);
+	*rest = tok;
+	return (elem);
+}
+
+t_element	*cylinder(const t_token **rest, const t_token *tok)
+{
+	t_element	*elem;
+
+	expect_id_tok(&tok, tok, E_CYLINDER);
+	elem = cylinder_element_alloc(
+			expect_vec_tok(&tok, tok),
+			expect_vec_tok(&tok, tok),
+			expect_num_tok(&tok, tok),
+			expect_num_tok(&tok, tok),
+			expect_vec_tok(&tok, tok)
+			);
+	expect_newline_or_eof(&tok, tok);
+	*rest = tok;
+	return (elem);
+}
 
 t_element	*internal_parse(t_token *tok)
 {
@@ -209,8 +256,10 @@ t_element	*internal_parse(t_token *tok)
 			cur = cur->next = light((const t_token **)&tok, tok);
 		else if (is_element(tok, E_SPHERE))
 			cur = cur->next = sphere((const t_token **)&tok, tok);
-		// else if (is_element(tok, E_PLANE))
-		// 	cur = cur->next = plane((const t_token **)&tok, tok);
+		else if (is_element(tok, E_PLANE))
+		 	cur = cur->next = plane((const t_token **)&tok, tok);
+		else if (is_element(tok, E_CYLINDER))
+		 	cur = cur->next = cylinder((const t_token **)&tok, tok);
 		else
 			fatal_error("parse", "Unexpected token");
 	}

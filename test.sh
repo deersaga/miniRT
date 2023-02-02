@@ -37,3 +37,4 @@ test_valid() {
 test_valid "./miniRT rt_files/ok_01_simple.rt"
 test_valid "./miniRT rt_files/ok_02_two_sphere.rt"
 test_valid "./miniRT rt_files/ok_03_plane.rt"
+test_valid "./miniRT rt_files/ok_04_cylinder.rt"

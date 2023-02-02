@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 17:32:10 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:01:03 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,22 @@ struct s_element {
 	FLOAT			ambient_lightning_ratio;
 	// CAMERA
 	t_vec			view_point;
-	t_vec			orientation_vec;
+	t_vec			orientation;
 	FLOAT			hfov;
 	// LIGHT
 	t_vec			light_point;
 	FLOAT			light_brightness_ratio;
 	// SPHERE
-	t_vec			center;
-	FLOAT			diameter;
+	t_vec			sp_center;
+	FLOAT			sp_diameter;
+	//PLANE
+	t_point			pl_point;
+	t_vec			pl_normal;
+	//CYLINDER
+	t_point			cy_center;
+	t_vec			cy_orientation;
+	FLOAT			cy_diameter;
+	FLOAT			cy_height;
 	// AMBIENT_LIGHTNING / LIGHT / SPHERE
 	t_color			color;
 	t_element		*next;
