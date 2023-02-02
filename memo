@@ -59,6 +59,7 @@ main.c ひとまずmlxの画面が出る。
 	- translate
 	- hit -> return the nearest hit
 # Shadow
+# Parse
 # Multiple hittable types(PLANE)
 # Multiple hittable types(CYLINDER)
 
