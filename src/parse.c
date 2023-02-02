@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 18:13:49 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 10:49:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,12 @@ t_element	*parse(int argc, const char *argv[])
 		fatal_error("parse", NULL);
 	close(fd);
 	head.next = NULL;
-	
 	element_add(&head, ambient_element_alloc(0.1, color_new(255, 255, 255)));
 	element_add(&head, camera_element_alloc(vec_new(-50, 0, 20), vec_new(1, 0, 0), 70));
 	element_add(&head, sphere_element_alloc(point_new(0, 0, 20.6), 12.6, color_new(10, 0, 255)));
-	element_add(&head, light_element_alloc(point_new(-40, 50.0, 20.0), 0.6 ,color_new(255, 255, 255)));
-
+	element_add(&head, light_element_alloc(point_new(-40, 50.0, 20.0), 0.6, color_new(255, 255, 255)));
 	return (head.next);
 }
-
 
 void	translate_ambiet(t_scene *scene, t_element *elem)
 {

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/01 18:02:21 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 10:48:12 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_lighting		t_lighting;
 typedef struct s_ray			t_ray;
 typedef struct s_hit_record		t_hit_record;
 typedef enum e_element_type		t_element_type;
-typedef struct s_element	t_element;
+typedef struct s_element		t_element;
 
 enum e_element_type {
 	AMBIENT_LIGHTNING,
@@ -126,34 +126,34 @@ struct s_screen {
 };
 
 // errror.c
-void	fatal_error(const char *loc, const char *msg);
+void		fatal_error(const char *loc, const char *msg);
 
 // parse.c
 t_element	*parse(int argc, const char *argv[]);
 
 // translate.c
-void	translate(t_scene *scene, t_element *res);
+void		translate(t_scene *scene, t_element *res);
 
 //utils.c
-FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);
-FLOAT	map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax);
+FLOAT		clamp(FLOAT v, FLOAT vmin, FLOAT vmax);
+FLOAT		map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax);
 
 // ray
-t_point	ray_at(const t_ray *r, FLOAT t);
+t_point		ray_at(const t_ray *r, FLOAT t);
 
 // ray_trace
-t_ray	get_ray(t_camera *camera, int x, int y);
-t_color	ray_trace(const t_ray *r, t_scene *scene);
+t_ray		get_ray(t_camera *camera, int x, int y);
+t_color		ray_trace(const t_ray *r, t_scene *scene);
 
 // img.c
-void	*init_img(void	*mlx_ptr, int width, int height);
-void	put_pixel(const t_img *img, int x, int y, int mlx_color);
+void		*init_img(void	*mlx_ptr, int width, int height);
+void		put_pixel(const t_img *img, int x, int y, int mlx_color);
 
 // hooks.c
-void	mlx_closebutton_hook(void *win_ptr, int (*handler)(), void *param);
-int		close_window(t_screen *s);
+void		mlx_closebutton_hook(void *win_ptr, int (*handler)(), void *param);
+int			close_window(t_screen *s);
 
 // sphere.c
-bool	sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+bool		sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
 
 #endif
