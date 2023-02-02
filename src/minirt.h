@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 11:19:58 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 12:09:40 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,22 @@ typedef struct s_img			t_img;
 typedef struct s_screen			t_screen;
 typedef struct s_scene			t_scene;
 typedef struct s_camera			t_camera;
-typedef struct s_sphere			t_sphere;
+typedef struct s_hittable		t_hittable;
+typedef struct s_hittable		t_sphere;
+typedef struct s_hittable		t_hittable_list;
 typedef struct s_light_source	t_light_source;
 typedef struct s_lighting		t_lighting;
 typedef struct s_ray			t_ray;
 typedef struct s_hit_record		t_hit_record;
 typedef enum e_element_type		t_element_type;
+typedef enum e_hittable_type	t_hittable_type;
 typedef struct s_element		t_element;
 
 enum e_element_type {
-	AMBIENT_LIGHTNING,
-	CAMERA,
-	LIGHT,
-	SPHERE,
+	E_AMBIENT_LIGHTNING,
+	E_CAMERA,
+	E_LIGHT,
+	E_SPHERE,
 };
 
 struct s_element {
@@ -66,15 +69,22 @@ struct s_camera {
 	FLOAT	hfov; // Horizontal field of view in degrees in range [0,180]
 };
 
-struct s_sphere {
-	//sphere
+enum e_hittable_type {
+	H_SPHERE,
+	H_LIST,
+};
+
+struct s_hittable {
+	// ALL
+	t_hittable_type	type;
+	t_hittable		*next;
+	// H_SPHERE
 	t_vec			center;
 	FLOAT			radius;
 	t_color			ambient_factor;
 	t_color			diffuse_factor;
 	t_color			specular_factor;
 	FLOAT			shineness;
-	t_sphere		*next;
 };
 
 struct s_light_source {
@@ -91,18 +101,18 @@ struct s_lighting {
 };
 
 struct s_scene {
-	t_sphere		sphere;
+	t_hittable		list;
 	t_light_source	light_source;
 	t_camera		camera;
 	t_color			ambient_intensity;
 };
 
 struct s_hit_record {
-	FLOAT			t;
-	t_point			p;
-	t_vec			normal;
-	const t_sphere	*sphere_ptr;
-	bool			front_face;
+	FLOAT				t;
+	t_point				p;
+	t_vec				normal;
+	const t_hittable	*hittable_ptr;
+	bool				front_face;
 };
 
 struct s_ray {
@@ -127,7 +137,7 @@ struct s_screen {
 };
 
 // errror.c
-void		fatal_error(const char *loc, const char *msg);
+void		fatal_error(const char *loc, const char *msg) __attribute__((noreturn));
 
 // parse.c
 t_element	*parse(int argc, const char *argv[]);
@@ -154,8 +164,13 @@ void		put_pixel(const t_img *img, int x, int y, int mlx_color);
 void		mlx_closebutton_hook(void *win_ptr, int (*handler)(), void *param);
 int			close_window(t_screen *s);
 
+// hittable.c
+bool	hit(const t_hittable *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+
+// hittable_list.c
+bool	hittable_list_hit(const t_hittable *head, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+
 // sphere.c
 bool		sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
-bool		multiple_hit(const t_sphere *head, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 11:38:31 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:59:59 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,19 @@ void	translate_ambient(t_scene *scene, t_element *elem)
 
 void	translate_sphere(t_scene *scene, t_element *elem)
 {
-	t_sphere	*head;
+	t_hittable	*cur;
 
-	head = &scene->sphere;
-	while (head->next)
-	{
-		head = head->next;
-	}
-	head->next = calloc(1, sizeof(*head));
-	head = head->next;
-	head->ambient_factor = vec_scalar_div(elem->color, 255);
-	head->diffuse_factor = vec_scalar_div(elem->color, 255);
-	head->specular_factor = vec_scalar_div(elem->color, 255);
-	head->center = elem->center;
-	head->radius = elem->diameter;
-	head->shineness = 2.0;
+	cur = &scene->list;
+	while (cur->next)
+		cur = cur->next;
+	cur->next = calloc(1, sizeof(*cur));
+	cur = cur->next;
+	cur->ambient_factor = vec_scalar_div(elem->color, 255);
+	cur->diffuse_factor = vec_scalar_div(elem->color, 255);
+	cur->specular_factor = vec_scalar_div(elem->color, 255);
+	cur->center = elem->center;
+	cur->radius = elem->diameter;
+	cur->shineness = 2.0;
 }
 
 void	translate_light(t_scene *scene, t_element *elem)
@@ -52,15 +50,16 @@ void	translate_camera(t_scene *scene, t_element *elem)
 
 void	translate(t_scene *scene, t_element *head)
 {
+	scene->list = (t_hittable){.type = H_LIST};
 	while (head)
 	{
-		if (head->element_type == AMBIENT_LIGHTNING)
+		if (head->element_type == E_AMBIENT_LIGHTNING)
 			translate_ambient(scene, head);
-		else if (head->element_type == LIGHT)
+		else if (head->element_type == E_LIGHT)
 			translate_light(scene, head);
-		else if (head->element_type == CAMERA)
+		else if (head->element_type == E_CAMERA)
 			translate_camera(scene, head);
-		else if (head->element_type == SPHERE)
+		else if (head->element_type == E_SPHERE)
 			translate_sphere(scene, head);
 		head = head->next;
 	}

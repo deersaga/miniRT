@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/02 11:37:00 by katakagi         ###   ########.fr        #
+#    Updated: 2023/02/02 12:08:34 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/sphere.c\
 			$(SRC_DIR)/ray_trace.c\
 			$(SRC_DIR)/translate.c\
+			$(SRC_DIR)/hittable.c\
+			$(SRC_DIR)/hittable_list.c\
 
 DEBUG_SRCS	= $(SRC_DIR)/destructor.c
 DEBUG_OBJS	= $(DEBUG_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

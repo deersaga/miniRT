@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 11:35:19 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:59:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	main(int argc, const char *argv[])
 	t_element	*parsed_result;
 
 	parsed_result = parse(argc, argv);
-	scene.sphere.next = NULL;
 	translate(&scene, parsed_result);
 	screen.mlx_ptr = mlx_init();
 	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, "screen");

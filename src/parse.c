@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 11:24:43 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:55:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_element	*sphere_element_alloc(t_vec center, FLOAT diameter, t_color color)
 	self = calloc(1, sizeof(*self));
 	if (self == NULL)
 		fatal_error("parse", NULL);
-	self->element_type = SPHERE;
+	self->element_type = E_SPHERE;
 	self->center = center;
 	self->diameter = diameter;
 	self->color = color;
@@ -37,7 +37,7 @@ t_element	*light_element_alloc(t_vec p, FLOAT ratio, t_color color)
 	self = calloc(1, sizeof(*self));
 	if (self == NULL)
 		fatal_error("parse", NULL);
-	self->element_type = LIGHT;
+	self->element_type = E_LIGHT;
 	self->light_point = p;
 	self->light_brightness_ratio = ratio;
 	self->color = color;
@@ -51,7 +51,7 @@ t_element	*camera_element_alloc(t_vec p, t_vec dir, FLOAT hfov)
 	self = calloc(1, sizeof(*self));
 	if (self == NULL)
 		fatal_error("parse", NULL);
-	self->element_type = CAMERA;
+	self->element_type = E_CAMERA;
 	self->view_point = p;
 	self->orientation_vec = dir;
 	self->hfov = hfov;
@@ -65,7 +65,7 @@ t_element	*ambient_element_alloc(FLOAT ratio, t_color color)
 	self = calloc(1, sizeof(*self));
 	if (self == NULL)
 		fatal_error("parse", NULL);
-	self->element_type = AMBIENT_LIGHTNING;
+	self->element_type = E_AMBIENT_LIGHTNING;
 	self->ambient_lightning_ratio = ratio;
 	self->color = color;
 	return (self);
