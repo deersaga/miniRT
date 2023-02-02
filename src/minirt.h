@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 10:48:12 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 10:58:27 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ struct s_sphere {
 	t_color			diffuse_factor;
 	t_color			specular_factor;
 	FLOAT			shineness;
+	t_sphere		*next;
 };
 
 struct s_light_source {

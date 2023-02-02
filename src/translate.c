@@ -7,12 +7,18 @@ void	translate_ambient(t_scene *scene, t_element *elem)
 
 void	translate_sphere(t_scene *scene, t_element *elem)
 {
-	scene->sphere.ambient_factor = vec_scalar_div(elem->color, 255);
-	scene->sphere.diffuse_factor = vec_scalar_div(elem->color, 255);
-	scene->sphere.specular_factor = vec_scalar_div(elem->color, 255);
-	scene->sphere.center = elem->center;
-	scene->sphere.radius = elem->diameter;
-	scene->sphere.shineness = 2.0;
+	t_sphere *head = &scene->sphere;
+
+	while (head->next)
+		head = head->next;
+	head->next = calloc(1, sizeof(*head));
+	head = head->next;
+	head->ambient_factor = vec_scalar_div(elem->color, 255);
+	head->diffuse_factor = vec_scalar_div(elem->color, 255);
+	head->specular_factor = vec_scalar_div(elem->color, 255);
+	head->center = elem->center;
+	head->radius = elem->diameter;
+	head->shineness = 2.0;
 }
 
 void	translate_light(t_scene *scene, t_element *elem)

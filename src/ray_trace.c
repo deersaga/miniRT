@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ray_trace.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:43:37 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 10:45:31 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 11:07:39 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <math.h>
 
-t_color	diffuse_light(t_scene *scene, t_hit_record *rec, t_lighting *lighting)
+t_color	diffuse_light(t_hit_record *rec, t_lighting *lighting)
 {
 	t_color	color;
 	FLOAT	nldot;
 
 	nldot = vec_dot(lighting->direction, rec->normal);
 	nldot = clamp(nldot, 0, 1);
-	color = vec_mul(lighting->intensity, scene->sphere.diffuse_factor);
+	color = vec_mul(lighting->intensity, rec->sphere_ptr->diffuse_factor);
 	color = vec_mul(color, color_new(nldot, nldot, nldot));
 	return (color);
 }
 
-t_color	specular_light(t_scene *scene, const t_ray *ray, t_hit_record *rec, t_lighting *lighting)
+t_color	specular_light(const t_ray *ray, t_hit_record *rec, t_lighting *lighting)
 {
 	FLOAT		nldot;
 	FLOAT		vrdot;
@@ -43,8 +43,8 @@ t_color	specular_light(t_scene *scene, const t_ray *ray, t_hit_record *rec, t_li
 	vrdot = vec_dot(view, reflec);
 	if (nldot <= 0 || vrdot <= 0)
 		return (color_new(0, 0, 0));
-	vrdot_pow_alpha = pow(vrdot, scene->sphere.shineness);
-	ki = vec_mul(scene->sphere.specular_factor, lighting->intensity);
+	vrdot_pow_alpha = pow(vrdot, rec->sphere_ptr->shineness);
+	ki = vec_mul(rec->sphere_ptr->specular_factor, lighting->intensity);
 	return (vec_mul(ki, color_new(vrdot_pow_alpha, vrdot_pow_alpha, vrdot_pow_alpha)));
 }
 
@@ -67,12 +67,12 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 	t_color			ret_color;
 	t_lighting		lighting;
 
-	if (sphere_hit(&scene->sphere, r, 0, INFINITY, &rec))
+	if (sphere_hit(scene->sphere.next, r, 0, INFINITY, &rec))
 	{
-		ret_color = vec_mul(scene->ambient_intensity, scene->sphere.ambient_factor);
+		ret_color = vec_mul(scene->ambient_intensity, scene->sphere.next->ambient_factor);
 		lighting = lighting_at(&scene->light_source, rec.p);
-		ret_color = vec_add(ret_color, diffuse_light(scene, &rec, &lighting));
-		ret_color = vec_add(ret_color, specular_light(scene, r, &rec, &lighting));
+		ret_color = vec_add(ret_color, diffuse_light(&rec, &lighting));
+		ret_color = vec_add(ret_color, specular_light(r, &rec, &lighting));
 		return (ret_color);
 	}
 	unit_direction = vec_unit(r->direction);
