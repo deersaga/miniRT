@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 12:23:35 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:32:10 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ enum e_element_type {
 	E_CAMERA,
 	E_LIGHT,
 	E_SPHERE,
+	E_PLANE,
+	E_CYLINDER,
 };
 
 struct s_element {

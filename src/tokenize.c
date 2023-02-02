@@ -42,7 +42,7 @@ bool	consume_blank(const char **rest, const char *buff)
 // Identifier
 bool	is_identifier(const char *s)
 {
-	static const char	*identifiers[] = {"A", "C", "L", "sp"};
+	static const char	*identifiers[] = {"A", "C", "L", "sp", "pl", "cy"};
 	size_t				i;
 
 	i = 0;
@@ -78,6 +78,16 @@ t_token	*identifier(const char **rest, const char *buf)
 	else if (!memcmp(buf, "sp", 2))
 	{
 		tok->id = E_SPHERE;
+		buf += 2;
+	}
+	else if (!memcmp(buf, "pl", 2))
+	{
+		tok->id = E_PLANE;
+		buf += 2;
+	}
+	else if (!memcmp(buf, "cy", 2))
+	{
+		tok->id = E_CYLINDER;
 		buf += 2;
 	}
 	*rest = buf;

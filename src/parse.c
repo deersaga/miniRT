@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 17:29:25 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:37:59 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ bool	is_element(const t_token *tok, t_element_type id)
 
 void	expect_id_tok(const t_token **rest, const t_token *tok, t_element_type id)
 {
-	if (tok->type != TK_ID && tok->id != id)
+	if (tok->type != TK_ID || tok->id != id)
 		fatal_error("expect_id_tok", "Unexpected token");
 	*rest = tok->next;
 }
@@ -161,11 +161,12 @@ t_element	*light(const t_token **rest, const t_token *tok)
 	*rest = tok;
 	return (elem);
 }
+
 t_element	*sphere(const t_token **rest, const t_token *tok)
 {
 	t_element	*elem;
 
-	expect_id_tok(&tok, tok, E_LIGHT);
+	expect_id_tok(&tok, tok, E_SPHERE);
 	elem = sphere_element_alloc(
 			expect_vec_tok(&tok, tok),
 			expect_num_tok(&tok, tok),
@@ -175,6 +176,21 @@ t_element	*sphere(const t_token **rest, const t_token *tok)
 	*rest = tok;
 	return (elem);
 }
+
+// t_element	*plane(const t_token **rest, const t_token *tok)
+// {
+// 	t_element	*elem;
+
+// 	expect_id_tok(&tok, tok, E_LIGHT);
+// 	elem = plane_element_alloc(
+// 			expect_vec_tok(&tok, tok),
+// 			expect_vec_tok(&tok, tok),
+// 			expect_vec_tok(&tok, tok)
+// 			);
+// 	expect_newline_or_eof(&tok, tok);
+// 	*rest = tok;
+// 	return (elem);
+// }
 
 t_element	*internal_parse(t_token *tok)
 {
@@ -193,6 +209,8 @@ t_element	*internal_parse(t_token *tok)
 			cur = cur->next = light((const t_token **)&tok, tok);
 		else if (is_element(tok, E_SPHERE))
 			cur = cur->next = sphere((const t_token **)&tok, tok);
+		// else if (is_element(tok, E_PLANE))
+		// 	cur = cur->next = plane((const t_token **)&tok, tok);
 		else
 			fatal_error("parse", "Unexpected token");
 	}
