@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 16:25:35 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/02 17:14:17 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,33 +81,101 @@ void	element_add(t_element *head, t_element *elem)
 	head->next = elem;
 }
 
+bool	is_ambient_light(const t_token *tok)
+{
+	if (tok->type == TK_ID && tok->id == E_AMBIENT_LIGHTNING)
+		return (true);
+	return (false);
+}
+
+void	expect_id_tok(const t_token **rest, const t_token *tok, t_element_type id)
+{
+	if (tok->type != TK_ID && tok->id != id)
+		fatal_error("expect_id_tok", "Unexpected token");
+	*rest = tok->next;
+}
+
+FLOAT	expect_num_tok(const t_token **rest, const t_token *tok)
+{
+	if (tok->type != TK_NUM)
+		fatal_error("expect_num_tok", "Unexpected token");
+	*rest = tok->next;
+	return (tok->num1);
+}
+
+t_vec	expect_vec_tok(const t_token **rest, const t_token *tok)
+{
+	if (tok->type != TK_VEC)
+		fatal_error("expect_vec_tok", "Unexpected token");
+	*rest = tok->next;
+	return (vec_new(tok->num1, tok->num2, tok->num3));
+}
+
+void	expect_newline_or_eof(const t_token **rest, const t_token *tok)
+{
+	if (tok->type != TK_NL && tok->type != TK_EOF)
+		fatal_error("expect_newline_or_eof", "Unexpected token");
+	*rest = tok->next;
+}
+
+t_element	*ambient_light(const t_token **rest, const t_token *tok)
+{
+	t_element	*elem;
+
+	expect_id_tok(&tok, tok, E_AMBIENT_LIGHTNING);
+	elem = ambient_element_alloc(
+			expect_num_tok(&tok, tok),
+			expect_vec_tok(&tok, tok)
+			);
+	printf("hello\n");
+	expect_newline_or_eof(&tok, tok);
+	printf("hello2\n");
+	*rest = tok;
+	return (elem);
+}
+
 t_element	*parse(int argc, const char *argv[])
 {
-	t_element	head;
-	int			fd;
-	char		*tail;
-	char		buf[1000];
-	int			rc;
+	t_element		head;
+	t_element		*cur;
+	int				fd;
+	char			*tail;
+	char			buf[1000];
+	int				rc;
+	t_token			*tok;
 
-	errno = 0;
-	if (argc != 2)
-		fatal_error("parse", "[Usage]: ./miniRT config_file");
-	tail = strrchr(argv[1], '.');
-	if (tail == NULL || strcmp(tail, ".rt"))
-		fatal_error("parse", "extension must be .rt");
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		fatal_error("parse", NULL);
-	rc = read(fd, buf, 999);
-	buf[rc] = '\0';
-	close(fd);
+	{
+		errno = 0;
+		if (argc != 2)
+			fatal_error("parse", "[Usage]: ./miniRT config_file");
+		tail = strrchr(argv[1], '.');
+		if (tail == NULL || strcmp(tail, ".rt"))
+			fatal_error("parse", "extension must be .rt");
+		fd = open(argv[1], O_RDONLY);
+		if (fd < 0)
+			fatal_error("parse", NULL);
+		rc = read(fd, buf, 999);
+		buf[rc] = '\0';
+		close(fd);
+	}
+	tok = tokenize(buf);
 	head.next = NULL;
-	tokenize(buf);
+	cur = &head;
+	while (tok && tok->type != TK_EOF)
+	{
+		if (is_ambient_light(tok))
+			cur = cur->next = ambient_light((const t_token **)&tok, tok);
+		else
+			fatal_error("parse", "Unexpected token");
+	}
+
+	/*
 	element_add(&head, ambient_element_alloc(0.1, color_new(255, 255, 255)));
 	element_add(&head, camera_element_alloc(vec_new(-50, 10, 20), vec_new(1, 0, 0), 70));
 	element_add(&head, sphere_element_alloc(point_new(0, 12.6, 20.6), 12.6, color_new(10, 0, 255)));
 	element_add(&head, sphere_element_alloc(point_new(0, -500, 20), 500, color_new(255, 0, 255)));
 	element_add(&head, light_element_alloc(point_new(-40, 50.0, 20.0), 0.6, color_new(255, 255, 255)));
+	*/
 	(void)buf;
 	return (head.next);
 }

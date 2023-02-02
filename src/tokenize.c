@@ -160,7 +160,6 @@ t_token	*vector(const char **rest, const char *buf)
 	tok->num2 = strtof(buf, (char **)&buf);
 	buf++;
 	tok->num3 = strtof(buf, (char **)&buf);
-	buf++;
 	*rest = buf;
 	return (tok);
 }
@@ -208,6 +207,7 @@ t_token	*tokenize(const char *buf)
 		else
 			fatal_error("tokenize", "Unexpected character while tokenizing");
 	}
-	print_tokens(head.next);
+	cur = cur->next = token_alloc(TK_EOF);
+	//print_tokens(head.next);
 	return (head.next);
 }
