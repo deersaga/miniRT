@@ -33,13 +33,7 @@ test_valid() {
 	$1 && echo -e $OK || echo -e $RED"Expected Success but got Error"$RESET
 }
 
-cat <<EOF >.tmp.rt
-A 0.2 255,255,255
-C  -50.0,0,20 0,0,1 70
-sp 0.0,0.0,20.6 12.6 10,0,255
-EOF
-
 ## Valid
-test_valid "./miniRT .tmp.rt"
+test_valid "./miniRT rt_files/ok_1.rt"
 
 rm .tmp.rt
