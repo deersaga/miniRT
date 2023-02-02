@@ -3,6 +3,18 @@
 #include <string.h>
 #include <ctype.h>
 
+void	free_tok(t_token *tok)
+{
+	t_token	*next;
+
+	while (tok)
+	{
+		next = tok->next;
+		free(tok);
+		tok = next;
+	}
+}
+
 t_token	*token_alloc(t_token_type type)
 {
 	t_token	*tok;

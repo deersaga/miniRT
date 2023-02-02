@@ -22,5 +22,6 @@ struct s_token {
 	t_token			*next;
 };
 
+void	free_tok(t_token *tok);
 t_token	*tokenize(const char *buf);
 #endif

@@ -35,3 +35,4 @@ test_valid() {
 
 ## Valid
 test_valid "./miniRT rt_files/ok_01_simple.rt"
+test_valid "./miniRT rt_files/ok_02_two_sphere.rt"

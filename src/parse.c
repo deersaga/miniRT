@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 17:14:17 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:29:25 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void	element_add(t_element *head, t_element *elem)
 	head->next = elem;
 }
 
-bool	is_ambient_light(const t_token *tok)
+bool	is_element(const t_token *tok, t_element_type id)
 {
-	if (tok->type == TK_ID && tok->id == E_AMBIENT_LIGHTNING)
+	if (tok->type == TK_ID && tok->id == id)
 		return (true);
 	return (false);
 }
@@ -127,22 +127,86 @@ t_element	*ambient_light(const t_token **rest, const t_token *tok)
 			expect_num_tok(&tok, tok),
 			expect_vec_tok(&tok, tok)
 			);
-	printf("hello\n");
 	expect_newline_or_eof(&tok, tok);
-	printf("hello2\n");
 	*rest = tok;
 	return (elem);
 }
 
-t_element	*parse(int argc, const char *argv[])
+t_element	*camera(const t_token **rest, const t_token *tok)
+{
+	t_element	*elem;
+
+	expect_id_tok(&tok, tok, E_CAMERA);
+	elem = camera_element_alloc(
+			expect_vec_tok(&tok, tok),
+			expect_vec_tok(&tok, tok),
+			expect_num_tok(&tok, tok)
+			);
+	expect_newline_or_eof(&tok, tok);
+	*rest = tok;
+	return (elem);
+}
+
+t_element	*light(const t_token **rest, const t_token *tok)
+{
+	t_element	*elem;
+
+	expect_id_tok(&tok, tok, E_LIGHT);
+	elem = light_element_alloc(
+			expect_vec_tok(&tok, tok),
+			expect_num_tok(&tok, tok),
+			expect_vec_tok(&tok, tok)
+			);
+	expect_newline_or_eof(&tok, tok);
+	*rest = tok;
+	return (elem);
+}
+t_element	*sphere(const t_token **rest, const t_token *tok)
+{
+	t_element	*elem;
+
+	expect_id_tok(&tok, tok, E_LIGHT);
+	elem = sphere_element_alloc(
+			expect_vec_tok(&tok, tok),
+			expect_num_tok(&tok, tok),
+			expect_vec_tok(&tok, tok)
+			);
+	expect_newline_or_eof(&tok, tok);
+	*rest = tok;
+	return (elem);
+}
+
+t_element	*internal_parse(t_token *tok)
 {
 	t_element		head;
 	t_element		*cur;
+
+	head.next = NULL;
+	cur = &head;
+	while (tok && tok->type != TK_EOF)
+	{
+		if (is_element(tok, E_AMBIENT_LIGHTNING))
+			cur = cur->next = ambient_light((const t_token **)&tok, tok);
+		else if (is_element(tok, E_CAMERA))
+			cur = cur->next = camera((const t_token **)&tok, tok);
+		else if (is_element(tok, E_LIGHT))
+			cur = cur->next = light((const t_token **)&tok, tok);
+		else if (is_element(tok, E_SPHERE))
+			cur = cur->next = sphere((const t_token **)&tok, tok);
+		else
+			fatal_error("parse", "Unexpected token");
+	}
+	return (head.next);
+}
+
+t_element	*parse(int argc, const char *argv[])
+{
 	int				fd;
 	char			*tail;
 	char			buf[1000];
 	int				rc;
 	t_token			*tok;
+	t_element		*elements;
 
 	{
 		errno = 0;
@@ -159,23 +223,7 @@ t_element	*parse(int argc, const char *argv[])
 		close(fd);
 	}
 	tok = tokenize(buf);
-	head.next = NULL;
-	cur = &head;
-	while (tok && tok->type != TK_EOF)
-	{
-		if (is_ambient_light(tok))
-			cur = cur->next = ambient_light((const t_token **)&tok, tok);
-		else
-			fatal_error("parse", "Unexpected token");
-	}
-
-	/*
-	element_add(&head, ambient_element_alloc(0.1, color_new(255, 255, 255)));
-	element_add(&head, camera_element_alloc(vec_new(-50, 10, 20), vec_new(1, 0, 0), 70));
-	element_add(&head, sphere_element_alloc(point_new(0, 12.6, 20.6), 12.6, color_new(10, 0, 255)));
-	element_add(&head, sphere_element_alloc(point_new(0, -500, 20), 500, color_new(255, 0, 255)));
-	element_add(&head, light_element_alloc(point_new(-40, 50.0, 20.0), 0.6, color_new(255, 255, 255)));
-	*/
-	(void)buf;
-	return (head.next);
+	elements = internal_parse(tok);
+	free_tok(tok);
+	return (elements);
 }
