@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/03 11:46:51 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:59:40 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ struct s_hittable {
 	//H_PLANE
 	t_point			position;
 	t_vec			normal;
+	//CYLINDER
+	FLOAT			height;
+	t_vec			orientation;
 	//COMON
 	t_color			ambient_factor;
 	t_color			diffuse_factor;

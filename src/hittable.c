@@ -6,11 +6,13 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:23:48 by susami            #+#    #+#             */
-/*   Updated: 2023/02/03 11:46:12 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:49:22 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+
 
 void	set_face_normal(t_hit_record *self, const t_ray *r, t_vec outward_normal)
 {

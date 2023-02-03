@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/03 11:13:38 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/03 12:00:29 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	translate_plane(t_scene *scene, t_element *elem)
 {
 	t_hittable	*cur;
 
-	printf("plane in\n");
 	cur = &scene->list;
 	while (cur->next)
 		cur = cur->next;
@@ -65,7 +64,25 @@ void	translate_plane(t_scene *scene, t_element *elem)
 	cur->specular_factor = vec_scalar_div(elem->color, 255);
 	cur->position = elem->pl_point;
 	cur->normal = elem->pl_normal;
-	printf("plane out\n");
+}
+
+void	translate_cylinder(t_scene *scene, t_element *elem)
+{
+	t_hittable	*cur;
+
+	cur = &scene->list;
+	while (cur->next)
+		cur = cur->next;
+	cur->next = calloc(1, sizeof(*cur));
+	cur = cur->next;
+	cur->type = H_CYLINDER;
+	cur->ambient_factor = vec_scalar_div(elem->color, 255);
+	cur->diffuse_factor = vec_scalar_div(elem->color, 255);
+	cur->specular_factor = vec_scalar_div(elem->color, 255);
+	cur->center = elem->cy_center;
+	cur->orientation = elem->cy_orientation;
+	cur->radius = elem->cy_diameter;
+	cur->height = elem->cy_height;
 }
 
 void	translate(t_scene *scene, t_element *head)
@@ -83,6 +100,8 @@ void	translate(t_scene *scene, t_element *head)
 			translate_sphere(scene, head);
 		else if (head->element_type == E_PLANE)
 			translate_plane(scene, head);
+		else if (head->element_type == E_CYLINDER)
+			translate_cylinder(scene, head);
 		head = head->next;
 	}
 }
