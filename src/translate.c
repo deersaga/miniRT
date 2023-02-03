@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 17:53:35 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:13:38 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	translate_sphere(t_scene *scene, t_element *elem)
 		cur = cur->next;
 	cur->next = calloc(1, sizeof(*cur));
 	cur = cur->next;
+	cur->type = H_SPHERE;
 	cur->ambient_factor = vec_scalar_div(elem->color, 255);
 	cur->diffuse_factor = vec_scalar_div(elem->color, 255);
 	cur->specular_factor = vec_scalar_div(elem->color, 255);
@@ -48,6 +49,25 @@ void	translate_camera(t_scene *scene, t_element *elem)
 	scene->camera.hfov = elem->hfov;
 }
 
+void	translate_plane(t_scene *scene, t_element *elem)
+{
+	t_hittable	*cur;
+
+	printf("plane in\n");
+	cur = &scene->list;
+	while (cur->next)
+		cur = cur->next;
+	cur->next = calloc(1, sizeof(*cur));
+	cur = cur->next;
+	cur->type = H_PLANE;
+	cur->ambient_factor = vec_scalar_div(elem->color, 255);
+	cur->diffuse_factor = vec_scalar_div(elem->color, 255);
+	cur->specular_factor = vec_scalar_div(elem->color, 255);
+	cur->position = elem->pl_point;
+	cur->normal = elem->pl_normal;
+	printf("plane out\n");
+}
+
 void	translate(t_scene *scene, t_element *head)
 {
 	scene->list = (t_hittable){.type = H_LIST};
@@ -61,6 +81,8 @@ void	translate(t_scene *scene, t_element *head)
 			translate_camera(scene, head);
 		else if (head->element_type == E_SPHERE)
 			translate_sphere(scene, head);
+		else if (head->element_type == E_PLANE)
+			translate_plane(scene, head);
 		head = head->next;
 	}
 }

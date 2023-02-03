@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 17:58:34 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:43:02 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_element	*cylinder_element_alloc(t_point center, t_vec orientation, FLOAT diame
 	self->element_type = E_CYLINDER;
 	self->cy_center = center;
 	self->cy_orientation = orientation;
-	self->cy_diameter= diameter;
+	self->cy_diameter = diameter;
 	self->cy_height = height;
 	self->color = color;
 	return (self);
@@ -249,19 +249,20 @@ t_element	*internal_parse(t_token *tok)
 	while (tok && tok->type != TK_EOF)
 	{
 		if (is_element(tok, E_AMBIENT_LIGHTNING))
-			cur = cur->next = ambient_light((const t_token **)&tok, tok);
+			cur->next = ambient_light((const t_token **)&tok, tok);
 		else if (is_element(tok, E_CAMERA))
-			cur = cur->next = camera((const t_token **)&tok, tok);
+			cur->next = camera((const t_token **)&tok, tok);
 		else if (is_element(tok, E_LIGHT))
-			cur = cur->next = light((const t_token **)&tok, tok);
+			cur->next = light((const t_token **)&tok, tok);
 		else if (is_element(tok, E_SPHERE))
-			cur = cur->next = sphere((const t_token **)&tok, tok);
+			cur->next = sphere((const t_token **)&tok, tok);
 		else if (is_element(tok, E_PLANE))
-		 	cur = cur->next = plane((const t_token **)&tok, tok);
+			cur->next = plane((const t_token **)&tok, tok);
 		else if (is_element(tok, E_CYLINDER))
-		 	cur = cur->next = cylinder((const t_token **)&tok, tok);
+			cur->next = cylinder((const t_token **)&tok, tok);
 		else
 			fatal_error("parse", "Unexpected token");
+		cur = cur->next;
 	}
 	return (head.next);
 }

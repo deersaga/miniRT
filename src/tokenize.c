@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/03 11:39:04 by katakagi          #+#    #+#             */
+/*   Updated: 2023/02/03 11:43:25 by katakagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 #include "tokenize.h"
 #include <string.h>
@@ -206,7 +218,6 @@ void	print_tokens(t_token *head)
 	}
 }
 
-
 t_token	*tokenize(const char *buf)
 {
 	t_token	head;
@@ -219,17 +230,18 @@ t_token	*tokenize(const char *buf)
 		if (consume_blank(&buf, buf))
 			continue ;
 		else if (is_identifier(buf))
-			cur = cur->next = identifier(&buf, buf);
+			cur->next = identifier(&buf, buf);
 		else if (is_number(buf))
-			cur = cur->next = number(&buf, buf);
+			cur->next = number(&buf, buf);
 		else if (is_vector(buf))
-			cur = cur->next = vector(&buf, buf);
+			cur->next = vector(&buf, buf);
 		else if (consume_newline(&buf, buf))
-			cur = cur->next = token_alloc(TK_NL);
+			cur->next = token_alloc(TK_NL);
 		else
 			fatal_error("tokenize", "Unexpected character while tokenizing");
+		cur = cur->next;
 	}
-	cur = cur->next = token_alloc(TK_EOF);
+	cur->next = token_alloc(TK_EOF);
 	//print_tokens(head.next);
 	return (head.next);
 }

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/02 18:01:03 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:46:51 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_scene			t_scene;
 typedef struct s_camera			t_camera;
 typedef struct s_hittable		t_hittable;
 typedef struct s_hittable		t_sphere;
+typedef struct s_hittable		t_plane;
 typedef struct s_hittable		t_hittable_list;
 typedef struct s_light_source	t_light_source;
 typedef struct s_lighting		t_lighting;
@@ -80,8 +81,10 @@ struct s_camera {
 };
 
 enum e_hittable_type {
-	H_SPHERE,
 	H_LIST,
+	H_SPHERE,
+	H_PLANE,
+	H_CYLINDER,
 };
 
 struct s_hittable {
@@ -91,10 +94,14 @@ struct s_hittable {
 	// H_SPHERE
 	t_vec			center;
 	FLOAT			radius;
+	FLOAT			shineness;
+	//H_PLANE
+	t_point			position;
+	t_vec			normal;
+	//COMON
 	t_color			ambient_factor;
 	t_color			diffuse_factor;
 	t_color			specular_factor;
-	FLOAT			shineness;
 };
 
 struct s_light_source {
@@ -179,8 +186,12 @@ bool		hit(const t_hittable *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hi
 
 // hittable_list.c
 bool		hittable_list_hit(const t_hittable *head, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+void		set_face_normal(t_hit_record *self, const t_ray *r, t_vec outward_normal);
 
 // sphere.c
 bool		sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+
+//plane.c
+bool		plane_hit(const t_plane *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
 
 #endif

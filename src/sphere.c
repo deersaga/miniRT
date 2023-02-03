@@ -6,21 +6,12 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:11:58 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 12:07:52 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/03 11:46:14 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <math.h>
-
-static void	set_face_normal(t_hit_record *self, const t_ray *r, t_vec outward_normal)
-{
-	self->front_face = vec_dot(r->direction, outward_normal) < 0;
-	if (self->front_face)
-		self->normal = outward_normal;
-	else
-		self->normal = vec_scalar_mul(-1.0, outward_normal);
-}
 
 static void	sphere_set_hit_record(const t_sphere *self, t_hit_record *rec, FLOAT t, const t_ray *r)
 {
