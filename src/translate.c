@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/03 12:00:29 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:57:34 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	translate_plane(t_scene *scene, t_element *elem)
 	cur->specular_factor = vec_scalar_div(elem->color, 255);
 	cur->position = elem->pl_point;
 	cur->normal = elem->pl_normal;
+	cur->shineness = 2.0;
 }
 
 void	translate_cylinder(t_scene *scene, t_element *elem)
@@ -83,6 +84,7 @@ void	translate_cylinder(t_scene *scene, t_element *elem)
 	cur->orientation = elem->cy_orientation;
 	cur->radius = elem->cy_diameter;
 	cur->height = elem->cy_height;
+	cur->shineness = 2.0;
 }
 
 void	translate(t_scene *scene, t_element *head)
