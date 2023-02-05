@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/03 11:50:36 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:15:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,61 @@ t_element	*cylinder(const t_token **rest, const t_token *tok)
 	return (elem);
 }
 
+void	expect_normalized(t_vec *v)
+{
+	// TODO: Validate
+	*v = vec_unit(*v);
+}
+
+void	expect_ratio(FLOAT val)
+{
+	if (val < 0 || val > 1.0)
+		fatal_error("expect_ratio", "ratio must be in range [0.0, 1.0]");
+}
+
+void	expect_fov(FLOAT val)
+{
+	if (val < 0 || val > 180.0)
+		fatal_error("expect_fov", "FOV must be in range [0.0, 180.0]");
+}
+
+void	expect_color(t_color *c)
+{
+	if (c->x < 0 || c->x > 255)
+		fatal_error("expect_color", "color must be in range [0, 255]");
+	if (c->y < 0 || c->y > 255)
+		fatal_error("expect_color", "color must be in range [0, 255]");
+	if (c->z < 0 || c->z > 255)
+		fatal_error("expect_color", "color must be in range [0, 255]");
+}
+
+// Validate orientation vector: must be normalized
+// Validate FOV: must be in range [0, 180]
+// Validate color: must be in range [0, 255]
+// Validate light ratio: must be in range [0, 255]
+void	validate_element(t_element *elem)
+{
+	if (elem->element_type == E_AMBIENT_LIGHTNING
+		|| elem->element_type == E_LIGHT
+		|| elem->element_type == E_SPHERE
+		|| elem->element_type == E_PLANE
+		|| elem->element_type == E_CYLINDER)
+		expect_color(&elem->color);
+	if (elem->element_type == E_AMBIENT_LIGHTNING)
+		expect_ratio(elem->ambient_lightning_ratio);
+	if (elem->element_type == E_CAMERA)
+	{
+		expect_normalized(&elem->orientation);
+		expect_fov(elem->hfov);
+	}
+	if (elem->element_type == E_LIGHT)
+		expect_ratio(elem->light_brightness_ratio);
+	if (elem->element_type == E_PLANE)
+		expect_normalized(&elem->pl_normal);
+	if (elem->element_type == E_CYLINDER)
+		expect_normalized(&elem->cy_orientation);
+}
+
 t_element	*internal_parse(t_token *tok)
 {
 	t_element		head;
@@ -262,6 +317,7 @@ t_element	*internal_parse(t_token *tok)
 			cur->next = cylinder((const t_token **)&tok, tok);
 		else
 			fatal_error("parse", "Unexpected token");
+		validate_element(cur->next);
 		cur = cur->next;
 	}
 	return (head.next);
