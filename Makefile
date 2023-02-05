@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/03 11:45:53 by katakagi         ###   ########.fr        #
+#    Updated: 2023/02/05 11:25:10 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/hittable_list.c\
 			$(SRC_DIR)/tokenize.c\
 
-DEBUG_SRCS	= $(SRC_DIR)/destructor.c
+DEBUG_SRCS	= $(SRC_DIR)/destructor.c\
+			  $(SRC_DIR)/debug.c
 DEBUG_OBJS	= $(DEBUG_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 OBJ_DIR = obj
