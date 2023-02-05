@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:43:37 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 12:24:09 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/05 11:24:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_color	diffuse_light(t_hit_record *rec, t_lighting *lighting)
 	FLOAT	nldot;
 
 	nldot = vec_dot(lighting->direction, rec->normal);
-	nldot = clamp(nldot, 0, 1);
+	if (nldot <= 0)
+		return (color_new(0, 0, 0));
 	color = vec_mul(lighting->intensity, rec->hittable_ptr->diffuse_factor);
 	color = vec_mul(color, color_new(nldot, nldot, nldot));
 	return (color);
@@ -78,7 +79,7 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 	t_color			ret_color;
 	t_lighting		lighting;
 
-	if (hit(&scene->list, r, 0, INFINITY, &rec))
+	if (hit(&scene->list, r, C_EPSILON, INFINITY, &rec))
 	{
 		ret_color = vec_mul(scene->ambient_intensity, rec.hittable_ptr->ambient_factor);
 		lighting = lighting_at(&scene->light_source, rec.p);
