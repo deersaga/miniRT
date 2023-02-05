@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/03 12:22:24 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/03 22:11:04 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,5 +199,5 @@ bool		sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max,
 bool		plane_hit(const t_plane *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
 
 // cylinder.c
-bool		cylinder_hit(const t_plane *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+bool		cylinder_hit(const t_cylinder *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
 #endif

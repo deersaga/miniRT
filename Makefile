@@ -24,6 +24,7 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/hooks.c\
 			$(SRC_DIR)/sphere.c\
 			$(SRC_DIR)/plane.c\
+			$(SRC_DIR)/cylinder.c\
 			$(SRC_DIR)/ray_trace.c\
 			$(SRC_DIR)/translate.c\
 			$(SRC_DIR)/hittable.c\

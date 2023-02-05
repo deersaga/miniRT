@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:23:48 by susami            #+#    #+#             */
-/*   Updated: 2023/02/03 11:49:22 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:10:09 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ bool	hit(const t_hittable *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit
 		return (hittable_list_hit(self, r, t_min, t_max, rec));
 	else if (self->type == H_PLANE)
 		return (plane_hit(self, r, t_min, t_max, rec));
+	else if (self->type == H_CYLINDER)
+		return (cylinder_hit(self, r, t_min, t_max, rec));
 	else
 		fatal_error("hit", "Unexpected hittable type");
 }
