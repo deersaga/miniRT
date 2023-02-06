@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:08:08 by susami            #+#    #+#             */
-/*   Updated: 2023/02/06 11:58:10 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/06 12:00:58 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	close_window(t_screen *s)
 	exit(0);
 }
 
+// TODO: Linux, x86 macos, macs in school
 #define ESCAPE 65307
 
 int	key_handler(int keycode, t_screen *screen)
