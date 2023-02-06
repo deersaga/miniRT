@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/06 11:14:16 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:38:21 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,10 @@ void	expect_color(t_color *c)
 // Validate light ratio: must be in range [0, 255]
 void	validate_element(t_element *elem)
 {
+	static bool	exist_A;
+	static bool	exist_L;
+	static bool	exist_C;
+
 	if (elem->element_type == E_AMBIENT_LIGHTNING
 		|| elem->element_type == E_LIGHT
 		|| elem->element_type == E_SPHERE
@@ -290,14 +294,27 @@ void	validate_element(t_element *elem)
 		|| elem->element_type == E_CYLINDER)
 		expect_color(&elem->color);
 	if (elem->element_type == E_AMBIENT_LIGHTNING)
+	{
+		if (exist_A == true)
+			fatal_error("validation", "multiple Ambient light is forbidden!");
+		exist_A = true;
 		expect_ratio(elem->ambient_lightning_ratio);
+	}
 	if (elem->element_type == E_CAMERA)
 	{
+		if (exist_C == true)
+			fatal_error("validation", "multiple Ambient light is forbidden!");
+		exist_C = true;
 		expect_normalized(&elem->orientation);
 		expect_fov(elem->hfov);
 	}
 	if (elem->element_type == E_LIGHT)
+	{
+		if (exist_L == true)
+			fatal_error("validation", "multiple Ambient light is forbidden!");
+		exist_L = true;
 		expect_ratio(elem->light_brightness_ratio);
+	}
 	if (elem->element_type == E_PLANE)
 		expect_normalized(&elem->pl_normal);
 	if (elem->element_type == E_CYLINDER)

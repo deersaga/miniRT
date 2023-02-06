@@ -65,16 +65,16 @@ main.c ひとまずmlxの画面が出る。
 
 # Add valid rt_files
 - Multiple newlines #done
-- Multiple spaces
+- Multiple spaces #done
 - Extreme Integer
 - Extreme Float
 - Any order
 
 # Add invalid rt_files
-- Multiple A, C, L
-- Color range
-- Ratio range
-- FOV range
+- Multiple A, C, L #done
+- Color range #done
+- Ratio range #done 
+- FOV range #done
 - Unknown Identifier
 - whitespace in vector
 - Extreme Integer
