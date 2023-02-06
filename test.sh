@@ -38,6 +38,7 @@ test_invalid "./miniRT rt_files/invalid_10_negative_cy_diameter.rt"
 test_invalid "./miniRT rt_files/invalid_11_negative_cy_height.rt"
 test_invalid "./miniRT rt_files/invalid_12_unknown_identifier.rt"
 test_invalid "./miniRT rt_files/invalid_13_whitespace_in_vec.rt"
+test_invalid "./miniRT rt_files/invalid_14_invalid_properies_order.rt"
 
 ## Valid Test Case
 
@@ -56,3 +57,4 @@ test_valid "./miniRT rt_files/ok_04_cylinder.rt"
 test_valid "./miniRT rt_files/ok_05_multi_kind_objs.rt"
 test_valid "./miniRT rt_files/ok_06_multiple_newline.rt"
 test_valid "./miniRT rt_files/ok_07_multiple_spaces.rt"
+test_valid "./miniRT rt_files/ok_08_simple_different_order.rt"

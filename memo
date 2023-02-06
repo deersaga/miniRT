@@ -65,23 +65,23 @@ main.c ひとまずmlxの画面が出る。
 
 # Add valid rt_files
 - Multiple newlines #done
-- Multiple spaces #done
+- Multiple spaces   #done
+- Any order         #done
 - Extreme Integer
 - Extreme Float
-- Any order
 
 # Add invalid rt_files
-- Multiple A, C, L      #done
-- Color range           #done
-- Ratio range           #done 
-- FOV range             #done
-- Unknown Identifier    #done
-- whitespace in vector  #done
+- Multiple A, C, L         #done
+- Color range              #done
+- Ratio range              #done 
+- FOV range                #done
+- Unknown Identifier       #done
+- whitespace in vector     #done
+- Invalid properties order #done
+- Negative diameter/height #done
+- Invalid Numbers          #done
 - Extreme Integer
 - Extreme Float
-- Invalid Numbers
-- Invalid properties order
-- Negative diameter/height #done
 
 ## material
 	- new,allocが必要
