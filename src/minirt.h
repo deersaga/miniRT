@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/03 22:11:04 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:55:58 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,10 @@ void		*init_img(void	*mlx_ptr, int width, int height);
 void		put_pixel(const t_img *img, int x, int y, int mlx_color);
 
 // hooks.c
+void		mlx_keydown_hook(void *win_ptr, int (*handler)(), void *param);
 void		mlx_closebutton_hook(void *win_ptr, int (*handler)(), void *param);
 int			close_window(t_screen *s);
+int			key_handler(int keycode, t_screen *screen);
 
 // hittable.c
 bool		hit(const t_hittable *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);

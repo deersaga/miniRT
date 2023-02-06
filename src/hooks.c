@@ -6,7 +6,7 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:08:08 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 12:08:08 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:58:10 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,15 @@ int	close_window(t_screen *s)
 	mlx_destroy_display(s->mlx_ptr);
 	free(s->img);
 	exit(0);
+}
+
+#define ESCAPE 65307
+
+int	key_handler(int keycode, t_screen *screen)
+{
+	(void)screen;
+	printf("key pressed: %d\n", keycode);
+	if (keycode == ESCAPE)
+		close_window(screen);
+	return (0);
 }
