@@ -64,7 +64,7 @@ main.c ひとまずmlxの画面が出る。
 # Multiple hittable types(CYLINDER)
 
 # Add valid rt_files
-- Multiple newlines
+- Multiple newlines #done
 - Multiple spaces
 - Extreme Integer
 - Extreme Float

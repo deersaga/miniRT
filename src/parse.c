@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/06 10:45:35 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:14:16 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,22 @@ void	validate_element(t_element *elem)
 		expect_normalized(&elem->cy_orientation);
 }
 
-t_element	*internal_parse(t_token *tok)
+bool	consume_newline_token(const t_token **rest, const t_token *tok)
+{
+	bool	consumed;
+
+	consumed = false;
+	while (tok->type == TK_NL)
+	{
+		tok = tok->next;
+		consumed = true;
+	}
+	*rest = tok;
+	return (consumed);
+}
+
+
+t_element	*internal_parse(const t_token *tok)
 {
 	t_element		head;
 	t_element		*cur;
@@ -313,7 +328,9 @@ t_element	*internal_parse(t_token *tok)
 	cur = &head;
 	while (tok && tok->type != TK_EOF)
 	{
-		if (is_element(tok, E_AMBIENT_LIGHTNING))
+		if (consume_newline_token(&tok, tok))
+			continue ;
+		else if (is_element(tok, E_AMBIENT_LIGHTNING))
 			cur->next = ambient_light((const t_token **)&tok, tok);
 		else if (is_element(tok, E_CAMERA))
 			cur->next = camera((const t_token **)&tok, tok);
