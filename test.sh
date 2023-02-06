@@ -33,6 +33,9 @@ test_invalid "./miniRT rt_files/invalid_05_outrange_fov.rt"
 test_invalid "./miniRT rt_files/invalid_06_multiple_A.rt"
 test_invalid "./miniRT rt_files/invalid_07_multiple_C.rt"
 test_invalid "./miniRT rt_files/invalid_08_multiple_L.rt"
+test_invalid "./miniRT rt_files/invalid_09_negative_sp_diameter.rt"
+test_invalid "./miniRT rt_files/invalid_10_negative_cy_diameter.rt"
+test_invalid "./miniRT rt_files/invalid_11_negative_cy_height.rt"
 
 ## Valid Test Case
 

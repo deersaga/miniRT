@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/06 11:38:21 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:16:10 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,12 @@ void	expect_fov(FLOAT val)
 		fatal_error("expect_fov", "FOV must be in range [0.0, 180.0]");
 }
 
+void	expect_non_negative(FLOAT val)
+{
+	if (val < 0)
+		fatal_error("expect_non_negative", "must be non-negative value.");
+}
+
 void	expect_color(t_color *c)
 {
 	if (c->x < 0 || c->x > 255)
@@ -315,10 +321,16 @@ void	validate_element(t_element *elem)
 		exist_L = true;
 		expect_ratio(elem->light_brightness_ratio);
 	}
+	if (elem->element_type == E_SPHERE)
+		expect_non_negative(elem->sp_diameter);
 	if (elem->element_type == E_PLANE)
 		expect_normalized(&elem->pl_normal);
 	if (elem->element_type == E_CYLINDER)
+	{
 		expect_normalized(&elem->cy_orientation);
+		expect_non_negative(elem->cy_diameter);
+		expect_non_negative(elem->cy_height);
+	}
 }
 
 bool	consume_newline_token(const t_token **rest, const t_token *tok)
