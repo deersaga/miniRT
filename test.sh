@@ -36,6 +36,8 @@ test_invalid "./miniRT rt_files/invalid_08_multiple_L.rt"
 test_invalid "./miniRT rt_files/invalid_09_negative_sp_diameter.rt"
 test_invalid "./miniRT rt_files/invalid_10_negative_cy_diameter.rt"
 test_invalid "./miniRT rt_files/invalid_11_negative_cy_height.rt"
+test_invalid "./miniRT rt_files/invalid_12_unknown_identifier.rt"
+test_invalid "./miniRT rt_files/invalid_13_whitespace_in_vec.rt"
 
 ## Valid Test Case
 
