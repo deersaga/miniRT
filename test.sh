@@ -24,6 +24,9 @@ test_invalid "./miniRT nosuchfile"
 test_invalid "./miniRT nosuchfile.rt"
 test_invalid "./miniRT memo"
 
+### Invalid Parameter
+test_invalid "./miniRT rt_files/invalid_04_cylinder.rt"
+
 ## Valid Test Case
 
 ### 1. Ambient & Camera & Sphere

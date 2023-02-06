@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/05 12:15:42 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/06 10:45:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
+#include <math.h>
+#include <float.h> // FLT_EPSILON
 #include "minirt.h"
 #include "tokenize.h"
 
@@ -241,7 +243,15 @@ t_element	*cylinder(const t_token **rest, const t_token *tok)
 
 void	expect_normalized(t_vec *v)
 {
-	// TODO: Validate
+	if (fabs(vec_length_squared(*v) - 1) > FLT_EPSILON)
+	{
+		t_vec	n = vec_unit(*v);
+		dprintf(STDERR_FILENO, "sqrt : %.20f, epsilon: %.20f\n", sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON)
+;
+		dprintf(STDERR_FILENO, "normalized [%.10f,%.10f,%.10f]\n", n.x, n.y, n.z);
+		//fatal_error("expect_normalized", "Vector must be normalized.");
+		dprintf(STDERR_FILENO, "expect_normalized\n");
+	}
 	*v = vec_unit(*v);
 }
 
