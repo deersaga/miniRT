@@ -69,6 +69,7 @@ main.c ひとまずmlxの画面が出る。
 - Any order         #done
 - Extreme Integer
 - Extreme Float
+- testcases of TDU
 
 # Add invalid rt_files
 - Multiple A, C, L         #done
@@ -83,6 +84,12 @@ main.c ひとまずmlxの画面が出る。
 - Extreme Integer
 - Extreme Float
 
+- norm対応
+- strtof
+- standard libraryをlibftに変える
+- screen name
+- window resize and resolution
+- window minimize and redisplay
 ## material
 	- new,allocが必要
 	- scatter()

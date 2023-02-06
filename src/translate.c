@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/06 14:08:04 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:16:12 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_material_info(t_hittable *obj, t_color color)
 	obj->ambient_factor = vec_scalar_mul(0.01 / 255, color);
 	obj->diffuse_factor = vec_scalar_mul(0.69 / 255, color);
 	obj->specular_factor = vec_scalar_mul(0.3 / 255, color);
-	obj->shineness = 2.0;
+	obj->shineness = 8.0;
 }
 
 void	translate_ambient(t_scene *scene, t_element *elem)
