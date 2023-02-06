@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/06 11:55:58 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/06 14:08:08 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ struct s_hittable {
 struct s_light_source {
 	//point light
 	t_vec		position; // x,y,z coordinates of the light point
-	FLOAT		ratio; // brightness ratio
 	t_color		intensity; // (unused in mandatory part)R,G,B colors in range [0-255]
 };
 

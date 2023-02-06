@@ -6,11 +6,19 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/05 12:57:34 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/06 14:08:04 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	set_material_info(t_hittable *obj, t_color color)
+{
+	obj->ambient_factor = vec_scalar_mul(0.01 / 255, color);
+	obj->diffuse_factor = vec_scalar_mul(0.69 / 255, color);
+	obj->specular_factor = vec_scalar_mul(0.3 / 255, color);
+	obj->shineness = 2.0;
+}
 
 void	translate_ambient(t_scene *scene, t_element *elem)
 {
@@ -27,19 +35,15 @@ void	translate_sphere(t_scene *scene, t_element *elem)
 	cur->next = calloc(1, sizeof(*cur));
 	cur = cur->next;
 	cur->type = H_SPHERE;
-	cur->ambient_factor = vec_scalar_div(elem->color, 255);
-	cur->diffuse_factor = vec_scalar_div(elem->color, 255);
-	cur->specular_factor = vec_scalar_div(elem->color, 255);
 	cur->center = elem->sp_center;
 	cur->radius = elem->sp_diameter;
-	cur->shineness = 2.0;
+	set_material_info(cur, elem->color);
 }
 
 void	translate_light(t_scene *scene, t_element *elem)
 {
-	scene->light_source.intensity = vec_scalar_div(elem->color, 255);
+	scene->light_source.intensity = vec_scalar_mul(elem->light_brightness_ratio / 255, elem->color);
 	scene->light_source.position = elem->light_point;
-	scene->light_source.ratio = elem->light_brightness_ratio;
 }
 
 void	translate_camera(t_scene *scene, t_element *elem)
@@ -59,12 +63,9 @@ void	translate_plane(t_scene *scene, t_element *elem)
 	cur->next = calloc(1, sizeof(*cur));
 	cur = cur->next;
 	cur->type = H_PLANE;
-	cur->ambient_factor = vec_scalar_div(elem->color, 255);
-	cur->diffuse_factor = vec_scalar_div(elem->color, 255);
-	cur->specular_factor = vec_scalar_div(elem->color, 255);
 	cur->position = elem->pl_point;
 	cur->normal = elem->pl_normal;
-	cur->shineness = 2.0;
+	set_material_info(cur, elem->color);
 }
 
 void	translate_cylinder(t_scene *scene, t_element *elem)
@@ -77,14 +78,11 @@ void	translate_cylinder(t_scene *scene, t_element *elem)
 	cur->next = calloc(1, sizeof(*cur));
 	cur = cur->next;
 	cur->type = H_CYLINDER;
-	cur->ambient_factor = vec_scalar_div(elem->color, 255);
-	cur->diffuse_factor = vec_scalar_div(elem->color, 255);
-	cur->specular_factor = vec_scalar_div(elem->color, 255);
 	cur->center = elem->cy_center;
 	cur->orientation = elem->cy_orientation;
 	cur->radius = elem->cy_diameter;
 	cur->height = elem->cy_height;
-	cur->shineness = 2.0;
+	set_material_info(cur, elem->color);
 }
 
 void	translate(t_scene *scene, t_element *head)
