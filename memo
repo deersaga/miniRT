@@ -63,6 +63,25 @@ main.c ひとまずmlxの画面が出る。
 # Multiple hittable types(PLANE)
 # Multiple hittable types(CYLINDER)
 
+# Add valid rt_files
+- Multiple newlines
+- Multiple spaces
+- Extreme Integer
+- Extreme Float
+- Any order
+
+# Add invalid rt_files
+- Multiple A, C, L
+- Color range
+- Ratio range
+- FOV range
+- Unknown Identifier
+- whitespace in vector
+- Extreme Integer
+- Extreme Float
+- Invalid Numbers
+- Invalid properties order
+
 ## material
 	- new,allocが必要
 	- scatter()
