@@ -6,13 +6,14 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:23:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 12:24:01 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:02:39 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool	hittable_list_hit(const t_hittable *head, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec)
+bool	hittable_list_hit(const t_hittable *head, const t_ray *r, FLOAT t_min,
+		FLOAT t_max, t_hit_record *rec)
 {
 	bool			hit_any;
 	FLOAT			closest_t;

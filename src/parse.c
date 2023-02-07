@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/07 10:50:30 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:06:03 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 #include "minirt.h"
 #include "tokenize.h"
 
-t_element	*cylinder_element_alloc(t_point center, t_vec orientation, FLOAT diameter, FLOAT height, t_color color)
+t_element	*cylinder_element_alloc(t_point center, t_vec orientation,
+		FLOAT diameter, FLOAT height, t_color color)
 {
 	t_element	*self;
 
@@ -120,7 +121,8 @@ bool	is_element(const t_token *tok, t_element_type id)
 	return (false);
 }
 
-void	expect_id_tok(const t_token **rest, const t_token *tok, t_element_type id)
+void	expect_id_tok(const t_token **rest, const t_token *tok,
+		t_element_type id)
 {
 	if (tok->type != TK_ID || tok->id != id)
 		fatal_error("expect_id_tok", "Unexpected token");
@@ -248,8 +250,10 @@ void	expect_normalized(t_vec *v)
 	if (fabs(vec_length_squared(*v) - 1) > FLT_EPSILON)
 	{
 		n = vec_unit(*v);
-		dprintf(STDERR_FILENO, "sqrt : %.20f, epsilon: %.20f\n", sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON);
-		dprintf(STDERR_FILENO, "normalized [%.10f,%.10f,%.10f]\n", n.x, n.y, n.z);
+		dprintf(STDERR_FILENO, "sqrt : %.20f, epsilon: %.20f\n",
+				sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON);
+		dprintf(STDERR_FILENO, "normalized [%.10f,%.10f,%.10f]\n", n.x, n.y,
+				n.z);
 		//fatal_error("expect_normalized", "Vector must be normalized.");
 		dprintf(STDERR_FILENO, "expect_normalized\n");
 	}

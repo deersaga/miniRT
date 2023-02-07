@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/06 14:08:08 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:19:20 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ struct s_hittable {
 struct s_light_source {
 	//point light
 	t_vec		position; // x,y,z coordinates of the light point
-	t_color		intensity; // (unused in mandatory part)R,G,B colors in range [0-255]
+	t_color		intensity; // R,G,B colors in range [0-255]
 };
 
 struct s_lighting {
@@ -157,7 +157,8 @@ struct s_screen {
 };
 
 // errror.c
-void		fatal_error(const char *loc, const char *msg) __attribute__((noreturn));
+void		fatal_error(const char *loc, const char *msg)
+			__attribute__((noreturn));
 
 // parse.c
 t_element	*parse(int argc, const char *argv[]);
@@ -187,18 +188,24 @@ int			close_window(t_screen *s);
 int			key_handler(int keycode, t_screen *screen);
 
 // hittable.c
-bool		hit(const t_hittable *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+bool		hit(const t_hittable *self, const t_ray *r, FLOAT t_min,
+				FLOAT t_max, t_hit_record *rec);
 
 // hittable_list.c
-bool		hittable_list_hit(const t_hittable *head, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
-void		set_face_normal(t_hit_record *self, const t_ray *r, t_vec outward_normal);
+bool		hittable_list_hit(const t_hittable *head, const t_ray *r,
+				FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+void		set_face_normal(t_hit_record *self, const t_ray *r,
+				t_vec outward_normal);
 
 // sphere.c
-bool		sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+bool		sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min,
+				FLOAT t_max, t_hit_record *rec);
 
 //plane.c
-bool		plane_hit(const t_plane *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+bool		plane_hit(const t_plane *self, const t_ray *r, FLOAT t_min,
+				FLOAT t_max, t_hit_record *rec);
 
 // cylinder.c
-bool		cylinder_hit(const t_cylinder *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec);
+bool		cylinder_hit(const t_cylinder *self, const t_ray *r, FLOAT t_min,
+				FLOAT t_max, t_hit_record *rec);
 #endif

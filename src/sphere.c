@@ -6,14 +6,15 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:11:58 by susami            #+#    #+#             */
-/*   Updated: 2023/02/03 11:46:14 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:06:36 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <math.h>
 
-static void	sphere_set_hit_record(const t_sphere *self, t_hit_record *rec, FLOAT t, const t_ray *r)
+static void	sphere_set_hit_record(const t_sphere *self, t_hit_record *rec,
+		FLOAT t, const t_ray *r)
 {
 	rec->hittable_ptr = self;
 	rec->t = t;
@@ -28,7 +29,8 @@ static void	sphere_set_hit_record(const t_sphere *self, t_hit_record *rec, FLOAT
 		);
 }
 
-bool	sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec)
+bool	sphere_hit(const t_sphere *self, const t_ray *r, FLOAT t_min,
+		FLOAT t_max, t_hit_record *rec)
 {
 	const t_vec	oc = vec_sub(r->origin, self->center);
 	const FLOAT	a = vec_length_squared(r->direction);

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:59:15 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 15:19:27 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:14:35 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax)
 		return (v);
 }
 
-// map(𝑣,𝑣𝑚𝑖𝑛,𝑣𝑚𝑎𝑥,𝑡𝑚𝑖𝑛,𝑡𝑚𝑎𝑥) = 𝑡𝑚𝑖𝑛 + (𝑡𝑚𝑎𝑥–𝑡𝑚𝑖𝑛) × constrain(𝑣,𝑣𝑚𝑖𝑛,𝑣𝑚𝑎𝑥) / 𝑣𝑚𝑎𝑥−𝑣𝑚𝑖𝑛
+// map(v, vmin, vmax, tmin, tmax)
+// = tmin + (tmax - tmin) x clamp(v, vmin, vmax) / (vmax - vmin)
 FLOAT	map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax)
 {
 	return (tmin + (tmax - tmin) * clamp(v, vmin, vmax) / (vmax - vmin));

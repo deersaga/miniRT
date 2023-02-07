@@ -6,13 +6,14 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:44:50 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/03 11:45:38 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:07:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool	plane_hit(const t_plane *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec)
+bool	plane_hit(const t_plane *self, const t_ray *r, FLOAT t_min,
+		FLOAT t_max, t_hit_record *rec)
 {
 	t_vec	d;
 	t_vec	s;

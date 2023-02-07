@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:43:37 by susami            #+#    #+#             */
-/*   Updated: 2023/02/06 14:08:19 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:16:24 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_color	diffuse_light(t_hit_record *rec, t_lighting *lighting)
 	return (color);
 }
 
-t_color	specular_light(const t_ray *ray, t_hit_record *rec, t_lighting *lighting)
+t_color	specular_light(const t_ray *ray, t_hit_record *rec,
+		t_lighting *lighting)
 {
 	FLOAT		nldot;
 	FLOAT		vrdot;
@@ -48,7 +49,9 @@ t_color	specular_light(const t_ray *ray, t_hit_record *rec, t_lighting *lighting
 		return (color_new(0, 0, 0));
 	vrdot_pow_alpha = pow(vrdot, rec->hittable_ptr->shineness);
 	ki = vec_mul(rec->hittable_ptr->specular_factor, lighting->intensity);
-	return (vec_mul(ki, color_new(vrdot_pow_alpha, vrdot_pow_alpha, vrdot_pow_alpha)));
+	return (vec_mul(
+			ki,
+			color_new(vrdot_pow_alpha, vrdot_pow_alpha, vrdot_pow_alpha)));
 }
 
 t_lighting	lighting_at(const t_light_source *self, t_vec pos)
@@ -62,7 +65,8 @@ t_lighting	lighting_at(const t_light_source *self, t_vec pos)
 	return (lighting);
 }
 
-bool	is_shadow(const t_hit_record *rec, const t_lighting *l, const t_scene *scene)
+bool	is_shadow(const t_hit_record *rec, const t_lighting *l,
+		const t_scene *scene)
 {
 	t_ray			shadow_ray;
 	t_hit_record	temp_rec;
@@ -81,7 +85,8 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 
 	if (hit(&scene->list, r, C_EPSILON, INFINITY, &rec))
 	{
-		ret_color = vec_mul(scene->ambient_intensity, rec.hittable_ptr->ambient_factor);
+		ret_color = vec_mul(scene->ambient_intensity,
+				rec.hittable_ptr->ambient_factor);
 		lighting = lighting_at(&scene->light_source, rec.p);
 		if (is_shadow(&rec, &lighting, scene))
 			return (ret_color);
@@ -91,5 +96,7 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 	}
 	unit_direction = vec_unit(r->direction);
 	t = 0.5 * (unit_direction.y + 1.0);
-	return (vec_add(vec_scalar_mul((1.0 - t), color_new(1.0, 1.0, 1.0)), vec_scalar_mul(t, color_new(0.5, 0.7, 1.0))));
+	return (vec_add(
+			vec_scalar_mul((1.0 - t), color_new(1.0, 1.0, 1.0)),
+			vec_scalar_mul(t, color_new(0.5, 0.7, 1.0))));
 }

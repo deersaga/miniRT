@@ -6,14 +6,15 @@
 /*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 12:11:30 by susami            #+#    #+#             */
-/*   Updated: 2023/02/07 10:59:44 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:11:08 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <math.h>
 
-static bool	cylinder_hit_internal(const t_cylinder *self, t_hit_record *rec, FLOAT t, const t_ray *r)
+static bool	cylinder_hit_internal(const t_cylinder *self, t_hit_record *rec,
+		FLOAT t, const t_ray *r)
 {
 	const t_vec	h = self->orientation;
 	t_vec		intersection;
@@ -41,7 +42,8 @@ static bool	cylinder_hit_internal(const t_cylinder *self, t_hit_record *rec, FLO
 	return (true);
 }
 
-bool	cylinder_hit(const t_cylinder *self, const t_ray *r, FLOAT t_min, FLOAT t_max, t_hit_record *rec)
+bool	cylinder_hit(const t_cylinder *self, const t_ray *r, FLOAT t_min,
+		FLOAT t_max, t_hit_record *rec)
 {
 	const t_vec	v = r->direction;
 	const t_vec	w = vec_sub(r->origin, self->center);
@@ -50,7 +52,8 @@ bool	cylinder_hit(const t_cylinder *self, const t_ray *r, FLOAT t_min, FLOAT t_m
 	const FLOAT	whdot = vec_dot(w, h);
 	const FLOAT	a = vec_length_squared(v) - vhdot * vhdot;
 	const FLOAT	half_b = vec_dot(v, w) - vhdot * whdot;
-	const FLOAT	c = vec_length_squared(w) - whdot * whdot - self->radius * self->radius;
+	const FLOAT	c = vec_length_squared(w) - whdot * whdot
+		- self->radius * self->radius;
 	const FLOAT	discriminant = half_b * half_b - a * c;
 	FLOAT		root;
 	FLOAT		temp;

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/06 14:16:12 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:08:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	set_material_info(t_hittable *obj, t_color color)
 
 void	translate_ambient(t_scene *scene, t_element *elem)
 {
-	scene->ambient_intensity = vec_scalar_mul(elem->ambient_lightning_ratio / 255, elem->color);
+	scene->ambient_intensity = vec_scalar_mul(
+			elem->ambient_lightning_ratio / 255, elem->color);
 }
 
 void	translate_sphere(t_scene *scene, t_element *elem)
@@ -42,7 +43,9 @@ void	translate_sphere(t_scene *scene, t_element *elem)
 
 void	translate_light(t_scene *scene, t_element *elem)
 {
-	scene->light_source.intensity = vec_scalar_mul(elem->light_brightness_ratio / 255, elem->color);
+	scene->light_source.intensity = vec_scalar_mul(
+			elem->light_brightness_ratio / 255,
+			elem->color);
 	scene->light_source.position = elem->light_point;
 }
 
