@@ -6,16 +6,15 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/07 11:19:20 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:30:19 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define ASPECT_RATIO 1.6
+# define HEIGHT 320
 # define WIDTH 512
-# define HEIGHT (int)(WIDTH / ASPECT_RATIO)
 # define SCREEN_WIDTH 2.0
 # include <stdio.h>
 # include <stdlib.h>

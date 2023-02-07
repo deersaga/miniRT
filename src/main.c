@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/07 11:24:17 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:33:12 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,23 @@ t_point	ray_at(const t_ray *r, FLOAT t)
 
 t_ray	get_ray(t_camera *camera, int x, int y)
 {
-	t_vec	ey;
-	t_vec	dx;
-	t_vec	dy;
-	t_vec	pm;
-	t_vec	ray_dir;
-	FLOAT	u;
-	FLOAT	v;
-	FLOAT	screen_distance;
+	const FLOAT	aspect_ratio = (FLOAT)WIDTH / (FLOAT)HEIGHT;
+	t_vec		ey;
+	t_vec		dx;
+	t_vec		dy;
+	t_vec		pm;
+	t_vec		ray_dir;
+	FLOAT		u;
+	FLOAT		v;
+	FLOAT		screen_distance;
 
 	ey = vec_new(0, 1, 0);
-	screen_distance = SCREEN_WIDTH * ASPECT_RATIO
+	screen_distance = SCREEN_WIDTH * aspect_ratio
 		/ (2 * (FLOAT)tan(degrees_to_radians(camera->hfov) / 2));
 	camera->look_at_direction = vec_unit(camera->look_at_direction);
 	dx = vec_cross(ey, camera->look_at_direction);
 	dy = vec_cross(camera->look_at_direction, dx);
-	u = map(x, 0, WIDTH - 1, -1, 1) * ASPECT_RATIO;
+	u = map(x, 0, WIDTH - 1, -1, 1) * aspect_ratio;
 	v = map(y, 0, HEIGHT - 1, 1, -1);
 	pm = vec_add(camera->eye_position,
 			vec_scalar_mul(screen_distance, camera->look_at_direction));
