@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/07 12:07:37 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:41:37 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,12 @@ int	main(int argc, const char *argv[])
 	t_scene		scene;
 	t_element	*parsed_result;
 
+	if (argc != 2)
+		fatal_error("arguments", "invalid number of arguments");
 	parsed_result = parse(argc, argv);
 	translate(&scene, parsed_result);
 	screen.mlx_ptr = mlx_init();
-	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, "screen");
+	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, (char *)argv[1]);
 	screen.img = init_img(screen.mlx_ptr, WIDTH, HEIGHT);
 	draw_image(&screen, &scene);
 	mlx_put_image_to_window(screen.mlx_ptr, screen.win_ptr,
