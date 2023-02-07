@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:08:08 by susami            #+#    #+#             */
-/*   Updated: 2023/02/07 12:06:29 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:21:59 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ int	key_handler(int keycode, t_screen *screen)
 int	expose_handler(t_screen *screen)
 {
 	mlx_put_image_to_window(screen->mlx_ptr, screen->win_ptr,
-	screen->img->ptr, 0, 0);
+		screen->img->ptr, 0, 0);
 	return (0);
 }
