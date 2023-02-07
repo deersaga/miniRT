@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/06 14:08:09 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/07 10:50:30 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,11 +243,12 @@ t_element	*cylinder(const t_token **rest, const t_token *tok)
 
 void	expect_normalized(t_vec *v)
 {
+	t_vec	n;
+
 	if (fabs(vec_length_squared(*v) - 1) > FLT_EPSILON)
 	{
-		t_vec	n = vec_unit(*v);
-		dprintf(STDERR_FILENO, "sqrt : %.20f, epsilon: %.20f\n", sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON)
-;
+		n = vec_unit(*v);
+		dprintf(STDERR_FILENO, "sqrt : %.20f, epsilon: %.20f\n", sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON);
 		dprintf(STDERR_FILENO, "normalized [%.10f,%.10f,%.10f]\n", n.x, n.y, n.z);
 		//fatal_error("expect_normalized", "Vector must be normalized.");
 		dprintf(STDERR_FILENO, "expect_normalized\n");
@@ -283,44 +284,59 @@ void	expect_color(t_color *c)
 		fatal_error("expect_color", "color must be in range [0, 255]");
 }
 
+void	expect_once(t_element_type type)
+{
+	static bool	has_seen_ambient = false;
+	static bool	has_seen_light = false;
+	static bool	has_seen_camera = false;
+
+	if (type == E_AMBIENT_LIGHTNING)
+	{
+		if (has_seen_ambient)
+			fatal_error("expect_once", "A can only be declared once.");
+		has_seen_ambient = true;
+	}
+	else if (type == E_LIGHT)
+	{
+		if (has_seen_light)
+			fatal_error("expect_once", "L can only be declared once.");
+		has_seen_light = true;
+	}
+	else if (type == E_CAMERA)
+	{
+		if (has_seen_camera)
+			fatal_error("expect_once", "C can only be declared once.");
+		has_seen_camera = true;
+	}
+	else
+		fatal_error("expect_once", "Unexpected type");
+}
+
 // Validate orientation vector: must be normalized
 // Validate FOV: must be in range [0, 180]
 // Validate color: must be in range [0, 255]
 // Validate light ratio: must be in range [0, 255]
 void	validate_element(t_element *elem)
 {
-	static bool	exist_A;
-	static bool	exist_L;
-	static bool	exist_C;
-
 	if (elem->element_type == E_AMBIENT_LIGHTNING
 		|| elem->element_type == E_LIGHT
 		|| elem->element_type == E_SPHERE
 		|| elem->element_type == E_PLANE
 		|| elem->element_type == E_CYLINDER)
 		expect_color(&elem->color);
+	if (elem->element_type == E_AMBIENT_LIGHTNING
+		|| elem->element_type == E_LIGHT
+		|| elem->element_type == E_CAMERA)
+		expect_once(elem->element_type);
 	if (elem->element_type == E_AMBIENT_LIGHTNING)
-	{
-		if (exist_A == true)
-			fatal_error("validation", "multiple Ambient light is forbidden!");
-		exist_A = true;
 		expect_ratio(elem->ambient_lightning_ratio);
-	}
 	if (elem->element_type == E_CAMERA)
 	{
-		if (exist_C == true)
-			fatal_error("validation", "multiple Ambient light is forbidden!");
-		exist_C = true;
 		expect_normalized(&elem->orientation);
 		expect_fov(elem->hfov);
 	}
 	if (elem->element_type == E_LIGHT)
-	{
-		if (exist_L == true)
-			fatal_error("validation", "multiple Ambient light is forbidden!");
-		exist_L = true;
 		expect_ratio(elem->light_brightness_ratio);
-	}
 	if (elem->element_type == E_SPHERE)
 		expect_non_negative(elem->sp_diameter);
 	if (elem->element_type == E_PLANE)
@@ -346,7 +362,6 @@ bool	consume_newline_token(const t_token **rest, const t_token *tok)
 	*rest = tok;
 	return (consumed);
 }
-
 
 t_element	*internal_parse(const t_token *tok)
 {
