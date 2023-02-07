@@ -17,8 +17,10 @@ test_invalid() {
 }
 
 ## Invalid Test Case
-### No argument
+### Invalid argument
 test_invalid "./miniRT"
+test_invalid "./miniRT invalid_01_outrange_color.rt invalid_01_outrange_color.rt"
+
 ### Invalid Filename
 test_invalid "./miniRT nosuchfile"
 test_invalid "./miniRT nosuchfile.rt"
@@ -39,6 +41,7 @@ test_invalid "./miniRT rt_files/invalid_11_negative_cy_height.rt"
 test_invalid "./miniRT rt_files/invalid_12_unknown_identifier.rt"
 test_invalid "./miniRT rt_files/invalid_13_whitespace_in_vec.rt"
 test_invalid "./miniRT rt_files/invalid_14_invalid_properies_order.rt"
+test_invalid "./miniRT rt_files/invalid_16_more_than_3_arg.rt"
 
 ## Valid Test Case
 
