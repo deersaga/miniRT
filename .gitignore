@@ -60,3 +60,4 @@ test
 test.c
 tmp
 test.rt 
+.DS_Store

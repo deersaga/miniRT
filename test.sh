@@ -48,8 +48,6 @@ test_invalid "./miniRT rt_files/invalid_18_A_extra_param.rt"
 test_invalid "./miniRT rt_files/invalid_19_C_extra_param.rt"
 test_invalid "./miniRT rt_files/invalid_20_L_extra_param.rt"
 test_invalid "./miniRT rt_files/invalid_21_plane_extra_param.rt"
-
-
 ## Valid Test Case
 
 ### 1. Ambient & Camera & Sphere
@@ -60,14 +58,15 @@ test_valid() {
 }
 
 ## Valid
-# test_valid "./miniRT rt_files/ok_01_simple.rt"
-# test_valid "./miniRT rt_files/ok_02_two_sphere.rt"
-# test_valid "./miniRT rt_files/ok_03_plane.rt"
-# test_valid "./miniRT rt_files/ok_04_cylinder.rt"
-# test_valid "./miniRT rt_files/ok_05_multi_kind_objs.rt"
-# test_valid "./miniRT rt_files/ok_06_multiple_newline.rt"
-# test_valid "./miniRT rt_files/ok_07_multiple_spaces.rt"
-# test_valid "./miniRT rt_files/ok_08_simple_different_order.rt"
-# test_valid "./miniRT rt_files/ok_09_tdu1.rt"
-# test_valid "./miniRT rt_files/ok_10_tdu2.rt"
-# test_valid "./miniRT rt_files/ok_11_tdu3.rt"
+test_valid "./miniRT rt_files/ok_01_simple.rt"
+test_valid "./miniRT rt_files/ok_02_two_sphere.rt"
+test_valid "./miniRT rt_files/ok_03_plane.rt"
+test_valid "./miniRT rt_files/ok_04_cylinder.rt"
+test_valid "./miniRT rt_files/ok_05_multi_kind_objs.rt"
+test_valid "./miniRT rt_files/ok_06_multiple_newline.rt"
+test_valid "./miniRT rt_files/ok_07_multiple_spaces.rt"
+test_valid "./miniRT rt_files/ok_08_simple_different_order.rt"
+test_valid "./miniRT rt_files/ok_09_tdu1.rt"
+test_valid "./miniRT rt_files/ok_10_tdu2.rt"
+test_valid "./miniRT rt_files/ok_11_tdu3.rt"
+test_valid "./miniRT rt_files/ok_12_prefix_and_sufixspaces.rt"
