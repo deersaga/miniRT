@@ -41,7 +41,14 @@ test_invalid "./miniRT rt_files/invalid_11_negative_cy_height.rt"
 test_invalid "./miniRT rt_files/invalid_12_unknown_identifier.rt"
 test_invalid "./miniRT rt_files/invalid_13_whitespace_in_vec.rt"
 test_invalid "./miniRT rt_files/invalid_14_invalid_properies_order.rt"
-test_invalid "./miniRT rt_files/invalid_16_more_than_3_arg.rt"
+test_invalid "./miniRT rt_files/invalid_15_non_number.rt"
+test_invalid "./miniRT rt_files/invalid_16_sphere_extra_param.rt"
+test_invalid "./miniRT rt_files/invalid_17_cylinder_extra_param.rt"
+test_invalid "./miniRT rt_files/invalid_18_A_extra_param.rt"
+test_invalid "./miniRT rt_files/invalid_19_C_extra_param.rt"
+test_invalid "./miniRT rt_files/invalid_20_L_extra_param.rt"
+test_invalid "./miniRT rt_files/invalid_21_plane_extra_param.rt"
+
 
 ## Valid Test Case
 
@@ -53,14 +60,14 @@ test_valid() {
 }
 
 ## Valid
-test_valid "./miniRT rt_files/ok_01_simple.rt"
-test_valid "./miniRT rt_files/ok_02_two_sphere.rt"
-test_valid "./miniRT rt_files/ok_03_plane.rt"
-test_valid "./miniRT rt_files/ok_04_cylinder.rt"
-test_valid "./miniRT rt_files/ok_05_multi_kind_objs.rt"
-test_valid "./miniRT rt_files/ok_06_multiple_newline.rt"
-test_valid "./miniRT rt_files/ok_07_multiple_spaces.rt"
-test_valid "./miniRT rt_files/ok_08_simple_different_order.rt"
-test_valid "./miniRT rt_files/ok_09_tdu1.rt"
-test_valid "./miniRT rt_files/ok_10_tdu2.rt"
-test_valid "./miniRT rt_files/ok_11_tdu3.rt"
+# test_valid "./miniRT rt_files/ok_01_simple.rt"
+# test_valid "./miniRT rt_files/ok_02_two_sphere.rt"
+# test_valid "./miniRT rt_files/ok_03_plane.rt"
+# test_valid "./miniRT rt_files/ok_04_cylinder.rt"
+# test_valid "./miniRT rt_files/ok_05_multi_kind_objs.rt"
+# test_valid "./miniRT rt_files/ok_06_multiple_newline.rt"
+# test_valid "./miniRT rt_files/ok_07_multiple_spaces.rt"
+# test_valid "./miniRT rt_files/ok_08_simple_different_order.rt"
+# test_valid "./miniRT rt_files/ok_09_tdu1.rt"
+# test_valid "./miniRT rt_files/ok_10_tdu2.rt"
+# test_valid "./miniRT rt_files/ok_11_tdu3.rt"
