@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/07 11:12:00 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:24:17 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ t_ray	get_ray(t_camera *camera, int x, int y)
 	pm = vec_add(camera->eye_position,
 			vec_scalar_mul(screen_distance, camera->look_at_direction));
 	ray_dir = vec_sub(
-				vec_add(pm,
+			vec_add(
+				pm,
 				vec_add(vec_scalar_mul(u, dx), vec_scalar_mul(v, dy))),
-				camera->eye_position);
+			camera->eye_position);
 	ray_dir = vec_unit(ray_dir);
 	return ((t_ray){.origin = camera->eye_position, .direction = ray_dir});
 }
@@ -86,7 +87,7 @@ void	print_element(t_element *head)
 	while (head)
 	{
 		printf("type %d color [%f %f %f]\n", head->element_type,
-				head->color.x, head->color.y, head->color.z);
+			head->color.x, head->color.y, head->color.z);
 		head = head->next;
 	}
 }

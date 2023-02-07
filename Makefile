@@ -6,7 +6,7 @@
 #    By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 12:25:57 by katakagi          #+#    #+#              #
-#    Updated: 2023/02/07 11:02:15 by susami           ###   ########.fr        #
+#    Updated: 2023/02/07 11:24:43 by susami           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ all: $(NAME)
 re: fclean all
 
 norm:
-	norminette $(SRC_DIR) | grep -E -v "TOO_MANY|WRONG_SCOPE_COMMENT"
+	norminette $(SRC_DIR) | grep -E -v "WRONG_SCOPE_COMMENT|TOO_MANY_FUNCS|TOO_MANY_LINES|TOO_MANY_VARS_FUNC|TOO_MANY_ARGS"
 
 test: SRCS += $(DEBUG_SRCS)
 test: fclean $(DEBUG_OBJS) all $(OBJS)

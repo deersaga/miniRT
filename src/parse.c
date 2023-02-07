@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/07 11:06:03 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:23:04 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,9 +251,9 @@ void	expect_normalized(t_vec *v)
 	{
 		n = vec_unit(*v);
 		dprintf(STDERR_FILENO, "sqrt : %.20f, epsilon: %.20f\n",
-				sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON);
+			sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON);
 		dprintf(STDERR_FILENO, "normalized [%.10f,%.10f,%.10f]\n", n.x, n.y,
-				n.z);
+			n.z);
 		//fatal_error("expect_normalized", "Vector must be normalized.");
 		dprintf(STDERR_FILENO, "expect_normalized\n");
 	}

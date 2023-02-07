@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:39:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/07 11:03:18 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:23:16 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ void	print_tokens(t_token *head)
 	while (cur)
 	{
 		printf("token type: %d, id: %d, [%f %f %f]\n", cur->type, cur->id,
-				cur->num1, cur->num2, cur->num3);
+			cur->num1, cur->num2, cur->num3);
 		cur = cur->next;
 	}
 }
