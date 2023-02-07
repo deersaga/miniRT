@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/07 11:33:12 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 12:07:37 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	main(int argc, const char *argv[])
 	draw_image(&screen, &scene);
 	mlx_put_image_to_window(screen.mlx_ptr, screen.win_ptr,
 		screen.img->ptr, 0, 0);
+	mlx_expose_hook(screen.win_ptr, expose_handler, &screen);
 	mlx_closebutton_hook(screen.win_ptr, close_window, &screen);
 	mlx_keydown_hook(screen.win_ptr, key_handler, &screen);
 	mlx_loop(screen.mlx_ptr);

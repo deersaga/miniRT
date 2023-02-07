@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:08:08 by susami            #+#    #+#             */
-/*   Updated: 2023/02/06 12:00:58 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/07 12:06:29 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,12 @@ int	key_handler(int keycode, t_screen *screen)
 	printf("key pressed: %d\n", keycode);
 	if (keycode == ESCAPE)
 		close_window(screen);
+	return (0);
+}
+
+int	expose_handler(t_screen *screen)
+{
+	mlx_put_image_to_window(screen->mlx_ptr, screen->win_ptr,
+	screen->img->ptr, 0, 0);
 	return (0);
 }
