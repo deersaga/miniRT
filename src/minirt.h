@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/07 12:07:12 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:15:05 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,4 +208,9 @@ bool		plane_hit(const t_plane *self, const t_ray *r, FLOAT t_min,
 // cylinder.c
 bool		cylinder_hit(const t_cylinder *self, const t_ray *r, FLOAT t_min,
 				FLOAT t_max, t_hit_record *rec);
+
+//testcode.c
+void		farland_test(t_scene *scene, t_screen *screen);
+void		draw_image(t_screen *screen, t_scene *scene);
+
 #endif

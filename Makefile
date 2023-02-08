@@ -18,6 +18,7 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/hittable.c\
 			$(SRC_DIR)/hittable_list.c\
 			$(SRC_DIR)/tokenize.c\
+			$(SRC_DIR)/testcode.c\
 
 DEBUG_SRCS	= $(SRC_DIR)/destructor.c\
 			  $(SRC_DIR)/debug.c
