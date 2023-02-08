@@ -48,6 +48,10 @@ test_invalid "./miniRT rt_files/invalid_18_A_extra_param.rt"
 test_invalid "./miniRT rt_files/invalid_19_C_extra_param.rt"
 test_invalid "./miniRT rt_files/invalid_20_L_extra_param.rt"
 test_invalid "./miniRT rt_files/invalid_21_plane_extra_param.rt"
+test_invalid "./miniRT rt_files/invalid_22_contami_sphere_diameter.rt"
+test_invalid "./miniRT rt_files/invalid_23_contami_sphere_center.rt"
+test_invalid "./miniRT rt_files/invalid_24_inf.rt"
+test_invalid "./miniRT rt_files/invalid_25_minus_inf.rt"
 ## Valid Test Case
 
 ### 1. Ambient & Camera & Sphere
