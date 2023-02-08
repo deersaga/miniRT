@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:05:27 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 16:16:50 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:14:11 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <math.h>
 #include "mlx.h"
-
 
 void	increment_abs_pos(t_scene *s, size_t step)
 {

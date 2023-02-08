@@ -4,6 +4,8 @@ CC		= cc
 SRC_DIR	= src
 SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/vec.c\
+			$(SRC_DIR)/vec_arith.c\
+			$(SRC_DIR)/vec_utils.c\
 			$(SRC_DIR)/color.c\
 			$(SRC_DIR)/utils.c\
 			$(SRC_DIR)/parse.c\

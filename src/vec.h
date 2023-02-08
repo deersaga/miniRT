@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 11:31:37 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:11:57 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ struct s_vec {
 	FLOAT	z;
 };
 
-t_vec	vec_zero(void);
 t_vec	vec_new(FLOAT x, FLOAT y, FLOAT z);
 t_point	point_new(FLOAT x, FLOAT y, FLOAT z);
 t_color	color_new(FLOAT x, FLOAT y, FLOAT z);
