@@ -6,21 +6,11 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:00:29 by katakagi          #+#    #+#             */
-/*   Updated: 2023/01/31 15:17:06 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:31:54 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec.h"
-
-t_color	color_black(void)
-{
-	return ((t_color){.x = 0, .y = 0, .z = 0});
-}
-
-t_color	color_white(void)
-{
-	return ((t_color){.x = 1, .y = 1, .z = 1});
-}
 
 t_color	color_new(FLOAT x, FLOAT y, FLOAT z)
 {
@@ -56,8 +46,8 @@ int	get_mlx_color(t_color c)
 	int	p;
 
 	p = 0;
-	p += (int)(clamp(c.x, 0, 1) * 255.9999) << 16;
-	p += (int)(clamp(c.y, 0, 1) * 255.9999) << 8;
-	p += (int)(clamp(c.z, 0, 1) * 255.9999);
+	p += (int)(clamp(c.x, range_new(0, 1)) * 255.9999) << 16;
+	p += (int)(clamp(c.y, range_new(0, 1)) * 255.9999) << 8;
+	p += (int)(clamp(c.z, range_new(0, 1)) * 255.9999);
 	return (p);
 }

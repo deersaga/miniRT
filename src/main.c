@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 19:13:37 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:22:00 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ t_ray	get_ray(t_camera *camera, int x, int y)
 	camera->look_at_direction = vec_unit(camera->look_at_direction);
 	dx = vec_cross(ey, camera->look_at_direction);
 	dy = vec_cross(camera->look_at_direction, dx);
-	u = map(x, 0, WIDTH - 1, -1, 1) * aspect_ratio;
-	v = map(y, 0, HEIGHT - 1, 1, -1);
+	u = map(x, range_new(0, WIDTH - 1), range_new(-1, 1)) * aspect_ratio;
+	v = map(y, range_new(0, HEIGHT - 1), range_new(1, -1));
 	pm = vec_add(camera->eye_position,
 			vec_scalar_mul(screen_distance, camera->look_at_direction));
 	ray_dir = vec_sub(
