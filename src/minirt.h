@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 19:36:05 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:38:10 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ enum e_element_type {
 	E_SPHERE,
 	E_PLANE,
 	E_CYLINDER,
+	E_END,
 };
 
 struct s_element {
@@ -190,7 +191,8 @@ int			key_handler(int keycode, t_screen *screen);
 int			expose_handler(t_screen *screen);
 
 // hittable.c
-bool		hit(const t_hittable *self, const t_ray *r, t_range tr, t_hit_record *rec);
+bool		hit(const t_hittable *self,
+				const t_ray *r, t_range tr, t_hit_record *rec);
 
 // hittable_list.c
 bool		hittable_list_hit(const t_hittable *head, const t_ray *r,
@@ -199,13 +201,16 @@ void		set_face_normal(t_hit_record *self, const t_ray *r,
 				t_vec outward_normal);
 
 // sphere.c
-bool		sphere_hit(const t_sphere *self, const t_ray *r, t_range tr, t_hit_record *rec);
+bool		sphere_hit(const t_sphere *self,
+				const t_ray *r, t_range tr, t_hit_record *rec);
 
 //plane.c
-bool		plane_hit(const t_plane *self, const t_ray *r, t_range tr, t_hit_record *rec);
+bool		plane_hit(const t_plane *self,
+				const t_ray *r, t_range tr, t_hit_record *rec);
 
 // cylinder.c
-bool		cylinder_hit(const t_cylinder *self, const t_ray *r, t_range tr, t_hit_record *rec);
+bool		cylinder_hit(const t_cylinder *self,
+				const t_ray *r, t_range tr, t_hit_record *rec);
 
 //testcode.c
 void		farland_test(t_scene *scene, t_screen *screen);

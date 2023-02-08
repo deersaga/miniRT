@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:59:15 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 19:27:17 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/08 23:48:48 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_range	range_new(FLOAT min, FLOAT max)
 	self.max = max;
 	return (self);
 }
-
 
 FLOAT	clamp(FLOAT v, t_range vr)
 {

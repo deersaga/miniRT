@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 12:23:48 by susami            #+#    #+#             */
-/*   Updated: 2023/02/08 19:35:02 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/08 23:48:35 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	set_face_normal(t_hit_record *self, const t_ray *r,
 		self->normal = vec_scalar_mul(-1.0, outward_normal);
 }
 
-bool	hit(const t_hittable *self, const t_ray *r, t_range tr, t_hit_record *rec)
+bool	hit(const t_hittable *self,
+			const t_ray *r, t_range tr, t_hit_record *rec)
 {
 	if (self->type == H_SPHERE)
 		return (sphere_hit(self, r, tr, rec));

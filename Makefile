@@ -6,9 +6,16 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/vec.c\
 			$(SRC_DIR)/vec_arith.c\
 			$(SRC_DIR)/vec_utils.c\
+			$(SRC_DIR)/element.c\
+			$(SRC_DIR)/element_alloc_ACL.c\
+			$(SRC_DIR)/element_alloc_other.c\
+			$(SRC_DIR)/element_new_ACL.c\
+			$(SRC_DIR)/element_new_other.c\
 			$(SRC_DIR)/color.c\
 			$(SRC_DIR)/utils.c\
 			$(SRC_DIR)/parse.c\
+			$(SRC_DIR)/parse_expect.c\
+			$(SRC_DIR)/parse_validate_utils.c\
 			$(SRC_DIR)/error.c\
 			$(SRC_DIR)/img.c\
 			$(SRC_DIR)/hooks.c\
@@ -16,10 +23,13 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/plane.c\
 			$(SRC_DIR)/cylinder.c\
 			$(SRC_DIR)/ray_trace.c\
-			$(SRC_DIR)/translate.c\
+			$(SRC_DIR)/translate1.c\
+			$(SRC_DIR)/translate2.c\
 			$(SRC_DIR)/hittable.c\
 			$(SRC_DIR)/hittable_list.c\
 			$(SRC_DIR)/tokenize.c\
+			$(SRC_DIR)/tokenize_is.c\
+			$(SRC_DIR)/tokenize_consume.c\
 			$(SRC_DIR)/testcode.c\
 
 DEBUG_SRCS	= $(SRC_DIR)/destructor.c\
