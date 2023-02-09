@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   element.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/10 03:07:51 by katakagi          #+#    #+#             */
+/*   Updated: 2023/02/10 03:10:01 by katakagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ELEMENT_H
 # define ELEMENT_H
 # define BORDER 1000000000
@@ -19,27 +31,27 @@ enum e_element_type {
 
 struct s_element {
 	t_element_type	element_type;
-	// AMBIENT_LIGHTNING
+
 	FLOAT			ambient_lightning_ratio;
-	// CAMERA
+
 	t_vec			view_point;
 	t_vec			orientation;
 	FLOAT			hfov;
-	// LIGHT
+
 	t_vec			light_point;
 	FLOAT			light_brightness_ratio;
-	// SPHERE
+
 	t_vec			sp_center;
 	FLOAT			sp_diameter;
-	//PLANE
+
 	t_point			pl_point;
 	t_vec			pl_normal;
-	//CYLINDER
+
 	t_point			cy_center;
 	t_vec			cy_orientation;
 	FLOAT			cy_diameter;
 	FLOAT			cy_height;
-	// AMBIENT_LIGHTNING / LIGHT / SPHERE
+
 	t_color			color;
 	t_element		*next;
 };

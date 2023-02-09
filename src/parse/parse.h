@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 23:49:19 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/10 02:39:22 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 03:08:11 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,5 @@ t_element	*parse_light(const t_token **rest, const t_token *tok);
 t_element	*parse_sphere(const t_token **rest, const t_token *tok);
 t_element	*parse_plane(const t_token **rest, const t_token *tok);
 t_element	*parse_cylinder(const t_token **rest, const t_token *tok);
-
-
 
 #endif
