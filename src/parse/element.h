@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 03:07:51 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/10 03:10:01 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 03:29:55 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		expect_non_negative(FLOAT val);
 void		expect_color(t_color *c);
 void		expect_normalized(t_vec *v);
 void		expect_not_too_big(FLOAT val);
-void		expect_not_too_big_or_small_vec(t_vec *v);
+void		expect_not_too_large_vec(t_vec *v);
 void		expect_once(t_element_type type);
 
 t_element	*elementize(const t_token *tok);

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:52:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/10 02:50:03 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 03:29:55 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	validate_acl(t_element *elem)
 		expect_ratio(elem->ambient_lightning_ratio);
 	if (type == E_CAMERA)
 	{
-		expect_not_too_big_or_small_vec(&elem->view_point);
-		expect_not_too_big_or_small_vec(&elem->orientation);
+		expect_not_too_large_vec(&elem->view_point);
+		expect_not_too_large_vec(&elem->orientation);
 		expect_normalized(&elem->orientation);
 		expect_fov(elem->hfov);
 	}
 	if (type == E_LIGHT)
 	{
-		expect_not_too_big_or_small_vec(&elem->light_point);
+		expect_not_too_large_vec(&elem->light_point);
 		expect_ratio(elem->light_brightness_ratio);
 	}
 	if (type != E_CAMERA)
@@ -37,7 +37,7 @@ void	validate_acl(t_element *elem)
 
 void	validate_sphere(t_element *elem)
 {
-	expect_not_too_big_or_small_vec(&elem->sp_center);
+	expect_not_too_large_vec(&elem->sp_center);
 	expect_non_negative(elem->sp_diameter);
 	expect_not_too_big(elem->sp_diameter);
 	expect_color(&elem->color);
@@ -45,16 +45,16 @@ void	validate_sphere(t_element *elem)
 
 void	validate_plane(t_element *elem)
 {
-	expect_not_too_big_or_small_vec(&elem->pl_point);
-	expect_not_too_big_or_small_vec(&elem->pl_normal);
+	expect_not_too_large_vec(&elem->pl_point);
+	expect_not_too_large_vec(&elem->pl_normal);
 	expect_normalized(&elem->pl_normal);
 	expect_color(&elem->color);
 }
 
 void	validate_cylinder(t_element *elem)
 {
-	expect_not_too_big_or_small_vec(&elem->cy_center);
-	expect_not_too_big_or_small_vec(&elem->cy_orientation);
+	expect_not_too_large_vec(&elem->cy_center);
+	expect_not_too_large_vec(&elem->cy_orientation);
 	expect_normalized(&elem->cy_orientation);
 	expect_non_negative(elem->cy_diameter);
 	expect_not_too_big(elem->cy_diameter);

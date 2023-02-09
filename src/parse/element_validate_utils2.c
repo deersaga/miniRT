@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:52:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/10 03:07:23 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 03:31:40 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	expect_not_too_big(FLOAT val)
 		fatal_error("expect_not_too_big", "value is too big");
 }
 
-void	expect_not_too_big_or_small_vec(t_vec *v)
+void	expect_not_too_large_vec(t_vec *v)
 {
 	const FLOAT	boarder = BORDER;
 
 	if (v->x > boarder || v->y > boarder || v->z > boarder)
-		fatal_error("expect_not_too_big_or_small_vec", "value is too big");
+		fatal_error("expect_not_too_large_vec", "value is too large(positive)");
 	if (v->x < -boarder || v->y < -boarder || v->z < -boarder)
-		fatal_error("expect_not_too_big_or_small_vec", "value is too small");
+		fatal_error("expect_not_too_large_vec", "value is too large(negative)");
 }
 
 void	expect_once(t_element_type type)
