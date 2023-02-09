@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:32:53 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 00:55:19 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	translate_sphere(t_scene *scene, t_element *elem)
 	cur = cur->next;
 	cur->type = H_SPHERE;
 	cur->center = elem->sp_center;
-	cur->radius = elem->sp_diameter;
+	cur->radius = elem->sp_diameter / 2;
 	set_material_info(cur, elem->color);
 }
 
@@ -66,7 +66,7 @@ void	translate_cylinder(t_scene *scene, t_element *elem)
 	cur->type = H_CYLINDER;
 	cur->center = elem->cy_center;
 	cur->orientation = elem->cy_orientation;
-	cur->radius = elem->cy_diameter;
+	cur->radius = elem->cy_diameter / 2;
 	cur->height = elem->cy_height;
 	set_material_info(cur, elem->color);
 }
