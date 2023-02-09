@@ -6,13 +6,12 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:52:28 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:16:14 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:49:29 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "parse.h"
 #include "minirt.h"
-#include "parse.h"
+#include "element.h"
 
 t_element	*cylinder_element_alloc(t_point center, t_vec orientation,
 		t_range r_and_h, t_color color)
@@ -21,7 +20,7 @@ t_element	*cylinder_element_alloc(t_point center, t_vec orientation,
 
 	self = ft_calloc(1, sizeof(*self));
 	if (self == NULL)
-		fatal_error("parse", NULL);
+		fatal_error("cylinder_element_alloc", "calloc error");
 	self->element_type = E_CYLINDER;
 	self->cy_center = center;
 	self->cy_orientation = orientation;
@@ -37,7 +36,7 @@ t_element	*plane_element_alloc(t_point point, t_vec normal, t_color color)
 
 	self = ft_calloc(1, sizeof(*self));
 	if (self == NULL)
-		fatal_error("parse", NULL);
+		fatal_error("plane_element_alloc", "calloc error");
 	self->element_type = E_PLANE;
 	self->pl_point = point;
 	self->pl_normal = normal;
@@ -51,7 +50,7 @@ t_element	*sphere_element_alloc(t_vec center, FLOAT diameter, t_color color)
 
 	self = ft_calloc(1, sizeof(*self));
 	if (self == NULL)
-		fatal_error("parse", NULL);
+		fatal_error("sphere_element_alloc", "calloc error");
 	self->element_type = E_SPHERE;
 	self->sp_center = center;
 	self->sp_diameter = diameter;

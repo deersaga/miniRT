@@ -6,13 +6,17 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:43:37 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:32:40 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:41:37 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
-# include "minirt.h"
+//# include "minirt.h"
+# include "element.h"
+# include "libft.h"
+# include <stdbool.h>
+# include <stdlib.h>
 
 typedef struct s_token		t_token;
 

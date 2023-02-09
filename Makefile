@@ -6,16 +6,18 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/vec.c\
 			$(SRC_DIR)/vec_arith.c\
 			$(SRC_DIR)/vec_utils.c\
-			$(SRC_DIR)/element.c\
-			$(SRC_DIR)/element_alloc_ACL.c\
-			$(SRC_DIR)/element_alloc_other.c\
+			$(SRC_DIR)/parse/element.c\
+			$(SRC_DIR)/parse/element_alloc_ACL.c\
+			$(SRC_DIR)/parse/element_alloc_other.c\
+			$(SRC_DIR)/parse/element_validate.c\
+			$(SRC_DIR)/parse/element_validate_utils1.c\
+			$(SRC_DIR)/parse/element_validate_utils2.c\
 			$(SRC_DIR)/color.c\
 			$(SRC_DIR)/utils.c\
-			$(SRC_DIR)/parse.c\
-			$(SRC_DIR)/parse_ACL.c\
-			$(SRC_DIR)/parse_other.c\
-			$(SRC_DIR)/parse_expect.c\
-			$(SRC_DIR)/parse_validate_utils.c\
+			$(SRC_DIR)/parse/parse.c\
+			$(SRC_DIR)/parse/parse_ACL.c\
+			$(SRC_DIR)/parse/parse_other.c\
+			$(SRC_DIR)/parse/parse_expect_token.c\
 			$(SRC_DIR)/error.c\
 			$(SRC_DIR)/img.c\
 			$(SRC_DIR)/hooks.c\
@@ -23,17 +25,16 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/plane.c\
 			$(SRC_DIR)/cylinder.c\
 			$(SRC_DIR)/ray_trace.c\
-			$(SRC_DIR)/translate1.c\
-			$(SRC_DIR)/translate2.c\
+			$(SRC_DIR)/parse/translate1.c\
+			$(SRC_DIR)/parse/translate2.c\
 			$(SRC_DIR)/hittable.c\
 			$(SRC_DIR)/hittable_list.c\
-			$(SRC_DIR)/tokenize.c\
-			$(SRC_DIR)/tokenize_is.c\
-			$(SRC_DIR)/tokenize_consume.c\
-			$(SRC_DIR)/testcode.c\
+			$(SRC_DIR)/parse/tokenize.c\
+			$(SRC_DIR)/parse/tokenize_is.c\
+			$(SRC_DIR)/parse/tokenize_consume.c\
 
-DEBUG_SRCS	= $(SRC_DIR)/destructor.c\
-			  $(SRC_DIR)/debug.c
+DEBUG_SRCS	= $(SRC_DIR)/debug.c
+
 DEBUG_OBJS	= $(DEBUG_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 OBJ_DIR = obj
@@ -45,7 +46,7 @@ MLX		= $(MLX_DIR)/libmlx.a
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
-INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include -I $(SRC_DIR) -I libft
+INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include -I $(SRC_DIR) -I libft -I src/parse
 
 CFLAGS		= -Wall -Wextra -Werror $(INCLUDE)
 DFLAGS		= -g -fsanitize=address -Weverything

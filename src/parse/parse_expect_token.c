@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_expect.c                                     :+:      :+:    :+:   */
+/*   parse_expect_token.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 00:15:03 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:22:18 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:51:07 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "minirt.h"
-#include "tokenize.h"
+//#include "tokenize.h"
 
 void	expect_id_tok(const t_token **rest, const t_token *tok,
 		t_element_type id)

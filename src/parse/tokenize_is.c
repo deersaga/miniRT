@@ -6,11 +6,11 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:39:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:32:11 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:52:42 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+//#include "minirt.h"
 #include "tokenize.h"
 
 void	free_tok(t_token *tok)

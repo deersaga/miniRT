@@ -6,13 +6,12 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:39:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:31:53 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:52:31 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+//#include "minirt.h"
 #include "tokenize.h"
-#include <ctype.h> //isdigit
 
 // Blank
 bool	consume_blank(const char **rest, const char *buff)

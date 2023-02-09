@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_validate_utils.c                             :+:      :+:    :+:   */
+/*   element_validate_utils1.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:52:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:16:19 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:58:25 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
 #include "minirt.h"
+#include "element.h"
 #include <float.h>
-#include <unistd.h>
+#include <math.h>
 
 void	expect_ratio(FLOAT val)
 {
@@ -54,7 +54,7 @@ void	expect_normalized(t_vec *v)
 			sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON);
 		printf("normalized [%.10f,%.10f,%.10f]\n", n.x, n.y,
 			n.z);
-		fatal_error("expect_normalized\n", "vector must be normalized");
+		fatal_error("expect_normalized", "vector must be normalized");
 	}
 	*v = vec_unit(*v);
 }

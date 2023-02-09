@@ -6,13 +6,12 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:39:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 23:03:43 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 02:53:09 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "tokenize.h"
-#include <string.h> //ft_memcmp
 
 void	print_tokens(t_token *head)
 {
