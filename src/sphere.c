@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:11:58 by susami            #+#    #+#             */
-/*   Updated: 2023/02/08 20:57:55 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:20:18 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	calc_quadratic_eq(
 	const t_vec	oc = vec_sub(r->origin, self->center);
 
 	f_eq->a = vec_length_squared(r->direction);
-	f_eq->hb = vec_dot(oc, r->direction);
+	f_eq->half_b = vec_dot(oc, r->direction);
 	f_eq->c = vec_length_squared(oc) - self->radius * self->radius;
-	f_eq->discriminant = f_eq->hb * f_eq->hb - f_eq->a * f_eq->c;
+	f_eq->discriminant = f_eq->half_b * f_eq->half_b - f_eq->a * f_eq->c;
 	f_eq->root = sqrt(f_eq->discriminant);
 }
 
@@ -50,13 +50,13 @@ bool	sphere_hit(const t_sphere *self, const t_ray *r,
 	calc_quadratic_eq(&f_eq, self, r);
 	if (f_eq.discriminant > 0)
 	{
-		temp = (-f_eq.hb - f_eq.root) / f_eq.a;
+		temp = (-f_eq.half_b - f_eq.root) / f_eq.a;
 		if (temp < tr.max && temp > tr.min)
 		{
 			sphere_set_hit_record(self, rec, temp, r);
 			return (true);
 		}
-		temp = (-f_eq.hb + f_eq.root) / f_eq.a;
+		temp = (-f_eq.half_b + f_eq.root) / f_eq.a;
 		if (temp < tr.max && temp > tr.min)
 		{
 			sphere_set_hit_record(self, rec, temp, r);

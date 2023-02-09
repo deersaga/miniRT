@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:44:50 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 19:41:42 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:20:16 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ bool	plane_hit(const t_plane *self, const t_ray *r,
 
 	d = r->direction;
 	s = r->origin;
-	t = tr.min;
 	pc = self->position;
 	dndot = vec_dot(d, self->normal);
 	if (dndot != 0)

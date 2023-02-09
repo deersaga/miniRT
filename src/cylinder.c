@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 12:11:30 by susami            #+#    #+#             */
-/*   Updated: 2023/02/08 20:59:05 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:20:00 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void	calc_quadratic_eq(
 	const FLOAT	whdot = vec_dot(w, h);
 
 	f_eq->a = vec_length_squared(v) - vhdot * vhdot;
-	f_eq->hb = vec_dot(v, w) - vhdot * whdot;
+	f_eq->half_b = vec_dot(v, w) - vhdot * whdot;
 	f_eq->c = vec_length_squared(w) - whdot * whdot
 		- self->radius * self->radius;
-	f_eq->discriminant = f_eq->hb * f_eq->hb - f_eq->a * f_eq->c;
+	f_eq->discriminant = f_eq->half_b * f_eq->half_b - f_eq->a * f_eq->c;
 	f_eq->root = sqrt(f_eq->discriminant);
 }
 
@@ -59,13 +59,13 @@ bool	cylinder_hit(const t_cylinder *self, const t_ray *r,
 	calc_quadratic_eq(&f_eq, self, r);
 	if (f_eq.discriminant > 0)
 	{
-		temp = (-f_eq.hb - f_eq.root) / f_eq.a;
+		temp = (-f_eq.half_b - f_eq.root) / f_eq.a;
 		if (temp < tr.max && temp > tr.min)
 		{
 			if (cylinder_hit_internal(self, rec, temp, r))
 				return (true);
 		}
-		temp = (-f_eq.hb + f_eq.root) / f_eq.a;
+		temp = (-f_eq.half_b + f_eq.root) / f_eq.a;
 		if (temp < tr.max && temp > tr.min)
 		{
 			if (cylinder_hit_internal(self, rec, temp, r))

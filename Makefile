@@ -9,11 +9,11 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/element.c\
 			$(SRC_DIR)/element_alloc_ACL.c\
 			$(SRC_DIR)/element_alloc_other.c\
-			$(SRC_DIR)/element_new_ACL.c\
-			$(SRC_DIR)/element_new_other.c\
 			$(SRC_DIR)/color.c\
 			$(SRC_DIR)/utils.c\
 			$(SRC_DIR)/parse.c\
+			$(SRC_DIR)/parse_ACL.c\
+			$(SRC_DIR)/parse_other.c\
 			$(SRC_DIR)/parse_expect.c\
 			$(SRC_DIR)/parse_validate_utils.c\
 			$(SRC_DIR)/error.c\
