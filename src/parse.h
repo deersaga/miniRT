@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 23:49:19 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 20:20:09 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:03:05 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_element	*light_element_alloc(t_vec p, FLOAT ratio, t_color color);
 t_element	*camera_element_alloc(t_vec p, t_vec dir, FLOAT hfov);
 t_element	*ambient_element_alloc(FLOAT ratio, t_color color);
 
-t_element	*acl_elem_new(const t_token **rest, const t_token *tok);
+t_element	*parse_acl(const t_token **rest, const t_token *tok);
 t_element	*parse_ambient_light(const t_token **rest, const t_token *tok);
 t_element	*parse_camera(const t_token **rest, const t_token *tok);
 t_element	*parse_light(const t_token **rest, const t_token *tok);

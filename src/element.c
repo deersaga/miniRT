@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 23:57:58 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 20:20:04 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:02:49 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_element	*elementize(const t_token *tok)
 		if (consume_newline_token(&tok, tok))
 			continue ;
 		else if (is_acl(tok))
-			cur->next = acl_elem_new((const t_token **)&tok, tok);
+			cur->next = parse_acl((const t_token **)&tok, tok);
 		else if (tok->type == TK_ID && tok->id == E_SPHERE)
 			cur->next = parse_sphere((const t_token **)&tok, tok);
 		else if (tok->type == TK_ID && tok->id == E_PLANE)

@@ -42,21 +42,24 @@ OBJS	= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 MLX_DIR	= minilibx-linux
 MLX		= $(MLX_DIR)/libmlx.a
 
-INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include -I $(SRC_DIR)
+LIBFT_DIR	= libft
+LIBFT		= $(LIBFT_DIR)/libft.a
+
+INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include -I $(SRC_DIR) -I libft
 
 CFLAGS		= -Wall -Wextra -Werror $(INCLUDE)
 DFLAGS		= -g -fsanitize=address -Weverything
 FRAMEWORK	= -framework OpenGL -framework AppKit
-LIBPATH		=-lmlx -lX11 -lXext	-L$(MLX_DIR) -L/usr/X11R6/lib
+LIBPATH		=-lmlx -lX11 -lXext	-lft -L$(LIBFT_DIR) -L$(MLX_DIR) -L/usr/X11R6/lib
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MLX)
+$(NAME): $(OBJS) $(MLX) $(LIBFT)
 	$(CC) $(LIBPATH) $(FRAMEWORK) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@);
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(DEBUG_OBJS): $(DEBUG_SRCS)
 	@mkdir -p $(dir $@);
@@ -64,6 +67,9 @@ $(DEBUG_OBJS): $(DEBUG_SRCS)
 
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
 	$(RM) $(OBJS)

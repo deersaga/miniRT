@@ -6,13 +6,13 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:39:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 01:51:01 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:03:43 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "tokenize.h"
-#include <string.h> //memcmp
+#include <string.h> //ft_memcmp
 
 void	print_tokens(t_token *head)
 {
@@ -39,10 +39,11 @@ t_token	*identifier(const char **rest, const char *buf)
 	e_type = E_AMBIENT_LIGHTNING;
 	while (e_type < E_END)
 	{
-		if (!memcmp(buf, identifiers[e_type], strlen(identifiers[e_type])))
+		if (!ft_memcmp(buf, identifiers[e_type],
+				ft_strlen(identifiers[e_type])))
 		{
 			tok->id = e_type;
-			buf += strlen(identifiers[e_type]);
+			buf += ft_strlen(identifiers[e_type]);
 			break ;
 		}
 		e_type++;
@@ -58,7 +59,7 @@ t_token	*number(const char **rest, const char *s)
 	t_token	*tok;
 
 	tok = token_alloc(TK_NUM);
-	tok->num1 = strtof(s, (char **)rest);
+	tok->num1 = ft_strtod(s, (char **)rest);
 	return (tok);
 }
 
@@ -69,11 +70,11 @@ t_token	*vector(const char **rest, const char *buf)
 	t_token				*tok;
 
 	tok = token_alloc(TK_VEC);
-	tok->num1 = strtof(buf, (char **)&buf);
+	tok->num1 = ft_strtod(buf, (char **)&buf);
 	buf++;
-	tok->num2 = strtof(buf, (char **)&buf);
+	tok->num2 = ft_strtod(buf, (char **)&buf);
 	buf++;
-	tok->num3 = strtof(buf, (char **)&buf);
+	tok->num3 = ft_strtod(buf, (char **)&buf);
 	*rest = buf;
 	return (tok);
 }

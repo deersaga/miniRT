@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 20:20:07 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:52:00 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include "vec.h"
 # include "for_norm.h"
+# include "libft.h"
 
 typedef struct s_img			t_img;
 typedef struct s_screen			t_screen;
@@ -168,6 +169,7 @@ t_element	*parse(int argc, const char *argv[]);
 void		translate(t_scene *scene, t_element *res);
 
 //utils.c
+double		ft_strtod(const char *str, char **rest);
 t_range		range_new(FLOAT min, FLOAT max);
 FLOAT		clamp(FLOAT v, t_range vr);
 FLOAT		map(FLOAT v, t_range vr, t_range tr);

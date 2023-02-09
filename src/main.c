@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 01:36:36 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:22:20 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	draw_image(t_screen *screen, t_scene *scene)
 	t_ray	ray;
 	t_color	color;
 
-	(void)scene;
 	y = 0;
 	while (y < HEIGHT)
 	{

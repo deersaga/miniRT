@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:37:14 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 21:02:40 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:32:53 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	translate_sphere(t_scene *scene, t_element *elem)
 	cur = &scene->list;
 	while (cur->next)
 		cur = cur->next;
-	cur->next = calloc(1, sizeof(*cur));
+	cur->next = ft_calloc(1, sizeof(*cur));
 	cur = cur->next;
 	cur->type = H_SPHERE;
 	cur->center = elem->sp_center;
@@ -46,7 +46,7 @@ void	translate_plane(t_scene *scene, t_element *elem)
 	cur = &scene->list;
 	while (cur->next)
 		cur = cur->next;
-	cur->next = calloc(1, sizeof(*cur));
+	cur->next = ft_calloc(1, sizeof(*cur));
 	cur = cur->next;
 	cur->type = H_PLANE;
 	cur->position = elem->pl_point;
@@ -61,7 +61,7 @@ void	translate_cylinder(t_scene *scene, t_element *elem)
 	cur = &scene->list;
 	while (cur->next)
 		cur = cur->next;
-	cur->next = calloc(1, sizeof(*cur));
+	cur->next = ft_calloc(1, sizeof(*cur));
 	cur = cur->next;
 	cur->type = H_CYLINDER;
 	cur->center = elem->cy_center;

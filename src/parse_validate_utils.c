@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:52:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 00:26:24 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:16:19 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	expect_normalized(t_vec *v)
 	if (fabs(vec_length_squared(*v) - 1) > FLT_EPSILON)
 	{
 		n = vec_unit(*v);
-		dprintf(STDERR_FILENO, "sqrt : %.20f, epsilon: %.20f\n",
+		printf("sqrt : %.20f, epsilon: %.20f\n",
 			sqrt(fabs(vec_length_squared(*v) - 1)), FLT_EPSILON);
-		dprintf(STDERR_FILENO, "normalized [%.10f,%.10f,%.10f]\n", n.x, n.y,
+		printf("normalized [%.10f,%.10f,%.10f]\n", n.x, n.y,
 			n.z);
-		dprintf(STDERR_FILENO, "expect_normalized\n");
+		fatal_error("expect_normalized\n", "vector must be normalized");
 	}
 	*v = vec_unit(*v);
 }

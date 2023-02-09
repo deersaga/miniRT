@@ -6,13 +6,12 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:39:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 01:50:23 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:32:11 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "tokenize.h"
-#include <string.h> //memcmp
 
 void	free_tok(t_token *tok)
 {
@@ -30,7 +29,7 @@ t_token	*token_alloc(t_token_type type)
 {
 	t_token	*tok;
 
-	tok = calloc(1, sizeof(*tok));
+	tok = ft_calloc(1, sizeof(*tok));
 	tok->type = type;
 	return (tok);
 }
@@ -44,7 +43,7 @@ bool	is_identifier(const char *s)
 	i = 0;
 	while (i < E_END)
 	{
-		if (!memcmp(s, identifiers[i], strlen(identifiers[i])))
+		if (!ft_memcmp(s, identifiers[i], ft_strlen(identifiers[i])))
 			return (true);
 		i++;
 	}

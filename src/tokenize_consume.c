@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:39:04 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 01:49:43 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:31:53 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ bool	consume_number(const char **rest, const char *s)
 
 	if (*s == '+' || *s == '-')
 		s++;
-	if (isdigit(*s) || (*s == '.' && isdigit(s[1])))
+	if (ft_isdigit(*s) || (*s == '.' && ft_isdigit(s[1])))
 	{
 		seen_dot = false;
-		while (*s && (isdigit(*s) || *s == '.'))
+		while (*s && (ft_isdigit(*s) || *s == '.'))
 		{
 			if (*s == '.')
 			{

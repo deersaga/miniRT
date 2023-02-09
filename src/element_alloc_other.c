@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:52:28 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 01:45:21 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:16:14 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_element	*cylinder_element_alloc(t_point center, t_vec orientation,
 {
 	t_element	*self;
 
-	self = calloc(1, sizeof(*self));
+	self = ft_calloc(1, sizeof(*self));
 	if (self == NULL)
 		fatal_error("parse", NULL);
 	self->element_type = E_CYLINDER;
@@ -35,7 +35,7 @@ t_element	*plane_element_alloc(t_point point, t_vec normal, t_color color)
 {
 	t_element	*self;
 
-	self = calloc(1, sizeof(*self));
+	self = ft_calloc(1, sizeof(*self));
 	if (self == NULL)
 		fatal_error("parse", NULL);
 	self->element_type = E_PLANE;
@@ -49,7 +49,7 @@ t_element	*sphere_element_alloc(t_vec center, FLOAT diameter, t_color color)
 {
 	t_element	*self;
 
-	self = calloc(1, sizeof(*self));
+	self = ft_calloc(1, sizeof(*self));
 	if (self == NULL)
 		fatal_error("parse", NULL);
 	self->element_type = E_SPHERE;

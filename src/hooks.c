@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:08:08 by susami            #+#    #+#             */
-/*   Updated: 2023/02/07 12:21:59 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:17:59 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	close_window(t_screen *s)
 
 int	key_handler(int keycode, t_screen *screen)
 {
-	(void)screen;
 	printf("key pressed: %d\n", keycode);
 	if (keycode == ESCAPE)
 		close_window(screen);

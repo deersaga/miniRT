@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   element_new_ACL.c                                  :+:      :+:    :+:   */
+/*   parse_ACL.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 00:35:29 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 20:20:02 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 23:02:57 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_element	*parse_light(const t_token **rest, const t_token *tok)
 	return (elem);
 }
 
-t_element	*acl_elem_new(const t_token **rest, const t_token *tok)
+t_element	*parse_acl(const t_token **rest, const t_token *tok)
 {
 	t_element_type	id;
 

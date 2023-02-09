@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/02/09 01:21:28 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 22:59:53 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ FLOAT	vec_length_squared(t_vec v);
 FLOAT	vec_length(t_vec v);
 t_vec	vec_unit(t_vec v);
 
-t_color	color_black(void);
-t_color	color_white(void);
 int		get_mlx_color(t_color c);
 
 FLOAT	clamp(FLOAT v, t_range vr);

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:31:52 by susami            #+#    #+#             */
-/*   Updated: 2023/02/09 20:20:08 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:29:54 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,6 @@ void	expect_once(t_element_type type)
 		fatal_error("expect_once", "Unexpected type");
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	size;
-	char	*ptr;
-
-	if (!s1 || !s2)
-		return (NULL);
-	size = strlen(s1) + strlen(s2) + 1;
-	ptr = (char *)malloc(size * sizeof(char));
-	ptr[0] = '\0';
-	strcat(ptr, s1);
-	strcat(ptr, s2);
-	return (ptr);
-}
-
 static char	*read_all_content(const char *filename)
 {
 	int		fd;
@@ -73,15 +58,17 @@ static char	*read_all_content(const char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		fatal_error("parse", NULL);
-	ret = calloc(1, 1);
+		fatal_error("open file", NULL);
+	ret = ft_calloc(1, 1);
 	while (1)
 	{
-		rc = read(fd, buf, 10);
+		rc = read(fd, buf, 999);
 		if (rc == 0)
 			break ;
 		buf[rc] = '\0';
 		temp = ft_strjoin(ret, buf);
+		if (temp == NULL)
+			fatal_error("strjoin", "malloc error");
 		free(ret);
 		ret = temp;
 	}
@@ -99,8 +86,8 @@ t_element	*parse(int argc, const char *argv[])
 	errno = 0;
 	if (argc != 2)
 		fatal_error("parse", "[Usage]: ./miniRT config_file");
-	tail = strrchr(argv[1], '.');
-	if (tail == NULL || strcmp(tail, ".rt"))
+	tail = ft_strrchr(argv[1], '.');
+	if (tail == NULL || ft_strncmp(tail, ".rt", 4))
 		fatal_error("parse", "extension must be .rt");
 	content = read_all_content(argv[1]);
 	tok = tokenize(content);

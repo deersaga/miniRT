@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 10:32:18 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 12:05:28 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/09 21:22:17 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	fatal_error(const char *loc, const char *msg)
 		perror(loc);
 	else
 	{
-		write(STDERR_FILENO, loc, strlen(loc));
+		write(STDERR_FILENO, loc, ft_strlen(loc));
 		write(STDERR_FILENO, ": ", 2);
-		write(STDERR_FILENO, msg, strlen(msg));
+		write(STDERR_FILENO, msg, ft_strlen(msg));
 		write(STDERR_FILENO, "\n", 1);
 	}
 	exit(1);

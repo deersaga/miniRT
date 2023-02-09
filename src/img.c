@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: susami <susami@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:08:02 by susami            #+#    #+#             */
-/*   Updated: 2023/02/01 12:08:03 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/09 21:22:19 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*init_img(void	*mlx_ptr, int width, int height)
 {
 	t_img	*img;
 
-	img = calloc(1, sizeof(*img));
+	img = ft_calloc(1, sizeof(*img));
 	if (img == NULL)
 		fatal_error("init img", NULL);
 	img->ptr = mlx_new_image(mlx_ptr, width, height);
