@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 16:15:54 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:36:36 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,28 @@ t_point	ray_at(const t_ray *r, FLOAT t)
 
 t_ray	get_ray(t_camera *camera, int x, int y)
 {
-	const FLOAT	aspect_ratio = (FLOAT)WIDTH / (FLOAT)HEIGHT;
-	t_vec		ey;
-	t_vec		dx;
-	t_vec		dy;
-	t_vec		pm;
-	t_vec		ray_dir;
-	FLOAT		u;
-	FLOAT		v;
-	FLOAT		screen_distance;
+	FLOAT					aspect_ratio;
+	t_vec					pm;
+	t_vec					ray_dir;
+	t_display_coordinate	dc;
+	FLOAT					screen_distance;
 
-	ey = vec_new(0, 1, 0);
+	aspect_ratio = (FLOAT)WIDTH / (FLOAT)HEIGHT;
+	dc.ey = vec_new(0, 1, 0);
 	screen_distance = SCREEN_WIDTH * aspect_ratio
 		/ (2 * (FLOAT)tan(degrees_to_radians(camera->hfov) / 2));
 	camera->look_at_direction = vec_unit(camera->look_at_direction);
-	dx = vec_cross(ey, camera->look_at_direction);
-	dy = vec_cross(camera->look_at_direction, dx);
-	u = map(x, 0, WIDTH - 1, -1, 1) * aspect_ratio;
-	v = map(y, 0, HEIGHT - 1, 1, -1);
+	dc.dx = vec_cross(dc.ey, camera->look_at_direction);
+	dc.dy = vec_cross(camera->look_at_direction, dc.dx);
+	dc.u = map(x, range_new(0, WIDTH - 1), range_new(-1, 1)) * aspect_ratio;
+	dc.v = map(y, range_new(0, HEIGHT - 1), range_new(1, -1));
 	pm = vec_add(camera->eye_position,
 			vec_scalar_mul(screen_distance, camera->look_at_direction));
 	ray_dir = vec_sub(
-			vec_add(
-				pm,
-				vec_add(vec_scalar_mul(u, dx), vec_scalar_mul(v, dy))),
+			vec_add(pm,
+				vec_add(
+					vec_scalar_mul(dc.u, dc.dx),
+					vec_scalar_mul(dc.v, dc.dy))),
 			camera->eye_position);
 	ray_dir = vec_unit(ray_dir);
 	return ((t_ray){.origin = camera->eye_position, .direction = ray_dir});
@@ -83,33 +81,20 @@ void	draw_image(t_screen *screen, t_scene *scene)
 	}
 }
 
-void	print_element(t_element *head)
-{
-	while (head)
-	{
-		printf("type %d color [%f %f %f]\n", head->element_type,
-			head->color.x, head->color.y, head->color.z);
-		head = head->next;
-	}
-}
-
-int	main(int argc, const char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_screen	screen;
 	t_scene		scene;
 	t_element	*parsed_result;
 
-	if (argc != 2)
-		fatal_error("arguments", "invalid number of arguments");
-	parsed_result = parse(argc, argv);
+	parsed_result = parse(argc, (const char **)argv);
 	translate(&scene, parsed_result);
 	screen.mlx_ptr = mlx_init();
-	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, (char *)argv[1]);
+	screen.win_ptr = mlx_new_window(screen.mlx_ptr, WIDTH, HEIGHT, argv[1]);
 	screen.img = init_img(screen.mlx_ptr, WIDTH, HEIGHT);
 	draw_image(&screen, &scene);
 	mlx_put_image_to_window(screen.mlx_ptr, screen.win_ptr,
 		screen.img->ptr, 0, 0);
-	farland_test(&scene, &screen);
 	mlx_expose_hook(screen.win_ptr, expose_handler, &screen);
 	mlx_closebutton_hook(screen.win_ptr, close_window, &screen);
 	mlx_keydown_hook(screen.win_ptr, key_handler, &screen);

@@ -1,53 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   vec copy 2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 15:00:29 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 19:32:59 by katakagi         ###   ########.fr       */
+/*   Created: 2023/01/31 14:37:27 by susami            #+#    #+#             */
+/*   Updated: 2023/02/08 19:09:09 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec.h"
+#include <math.h>
 
-t_color	color_new(FLOAT x, FLOAT y, FLOAT z)
+t_vec	vec_add(t_vec a, t_vec b)
 {
-	return ((t_color){.x = x, .y = y, .z = z});
-}
-
-t_color	color_add(t_color a, t_color b)
-{
-	return ((t_color){
+	return ((t_vec){
 		.x = a.x + b.x,
 		.y = a.y + b.y,
 		.z = a.z + b.z});
 }
 
-t_color	color_sub(t_color a, t_color b)
+t_vec	vec_sub(t_vec a, t_vec b)
 {
-	return ((t_color){
+	return ((t_vec){
 		.x = a.x - b.x,
 		.y = a.y - b.y,
 		.z = a.z - b.z});
 }
 
-t_color	color_mul(t_color a, t_color b)
+t_vec	vec_mul(t_vec a, t_vec b)
 {
-	return ((t_color){
+	return ((t_vec){
 		.x = a.x * b.x,
 		.y = a.y * b.y,
 		.z = a.z * b.z});
 }
 
-int	get_mlx_color(t_color c)
+t_vec	vec_scalar_mul(FLOAT t, t_vec v)
 {
-	int	p;
+	return ((t_vec){
+		.x = v.x * t,
+		.y = v.y * t,
+		.z = v.z * t});
+}
 
-	p = 0;
-	p += (int)(clamp(c.x, range_new(0, 1)) * 255.9999) << 16;
-	p += (int)(clamp(c.y, range_new(0, 1)) * 255.9999) << 8;
-	p += (int)(clamp(c.z, range_new(0, 1)) * 255.9999);
-	return (p);
+// t must be non-zero value
+t_vec	vec_scalar_div(t_vec v, FLOAT t)
+{
+	return ((t_vec){
+		.x = v.x / t,
+		.y = v.y / t,
+		.z = v.z / t});
 }

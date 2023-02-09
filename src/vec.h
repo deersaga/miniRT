@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/02/02 11:31:37 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:21:28 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define VEC_H
 
 # define FLOAT double
+// # include "for_norm.h"
 
 typedef struct s_vec	t_vec;
 typedef struct s_vec	t_point;
 typedef struct s_vec	t_color;
+typedef struct s_range	t_range;
 
 t_vec	vec_mul(t_vec a, t_vec b);
 t_vec	vec_scalar_mul(FLOAT t, t_vec v);
@@ -29,7 +31,11 @@ struct s_vec {
 	FLOAT	z;
 };
 
-t_vec	vec_zero(void);
+struct s_range {
+	FLOAT	min;
+	FLOAT	max;
+};
+
 t_vec	vec_new(FLOAT x, FLOAT y, FLOAT z);
 t_point	point_new(FLOAT x, FLOAT y, FLOAT z);
 t_color	color_new(FLOAT x, FLOAT y, FLOAT z);
@@ -48,7 +54,8 @@ t_color	color_black(void);
 t_color	color_white(void);
 int		get_mlx_color(t_color c);
 
-FLOAT	clamp(FLOAT v, FLOAT vmin, FLOAT vmax);
-FLOAT	map(FLOAT v, FLOAT vmin, FLOAT vmax, FLOAT tmin, FLOAT tmax);
+FLOAT	clamp(FLOAT v, t_range vr);
+FLOAT	map(FLOAT v, t_range vr, t_range tr);
+t_range	range_new(FLOAT min, FLOAT max);
 
 #endif

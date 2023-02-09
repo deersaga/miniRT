@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 11:43:37 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/06 14:08:06 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:47:42 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ struct s_token {
 
 void	free_tok(t_token *tok);
 t_token	*tokenize(const char *buf);
+t_token	*token_alloc(t_token_type type);
+bool	is_identifier(const char *s);
+bool	is_number(const char *s);
+bool	is_vector(const char *s);
+bool	consume_blank(const char **rest, const char *buff);
+bool	consume_number(const char **rest, const char *s);
+bool	consume_comma(const char **rest, const char *s);
+bool	consume_newline(const char **rest, const char *buf);
 #endif
