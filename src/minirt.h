@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:52:00 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/10 03:10:33 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "vec.h"
 # include "for_norm.h"
 # include "libft.h"
+# include "element.h"
 
 typedef struct s_img			t_img;
 typedef struct s_screen			t_screen;
@@ -36,51 +37,12 @@ typedef struct s_light_source	t_light_source;
 typedef struct s_lighting		t_lighting;
 typedef struct s_ray			t_ray;
 typedef struct s_hit_record		t_hit_record;
-typedef enum e_element_type		t_element_type;
 typedef enum e_hittable_type	t_hittable_type;
-typedef struct s_element		t_element;
-
-enum e_element_type {
-	E_AMBIENT_LIGHTNING,
-	E_CAMERA,
-	E_LIGHT,
-	E_SPHERE,
-	E_PLANE,
-	E_CYLINDER,
-	E_END,
-};
-
-struct s_element {
-	t_element_type	element_type;
-	// AMBIENT_LIGHTNING
-	FLOAT			ambient_lightning_ratio;
-	// CAMERA
-	t_vec			view_point;
-	t_vec			orientation;
-	FLOAT			hfov;
-	// LIGHT
-	t_vec			light_point;
-	FLOAT			light_brightness_ratio;
-	// SPHERE
-	t_vec			sp_center;
-	FLOAT			sp_diameter;
-	//PLANE
-	t_point			pl_point;
-	t_vec			pl_normal;
-	//CYLINDER
-	t_point			cy_center;
-	t_vec			cy_orientation;
-	FLOAT			cy_diameter;
-	FLOAT			cy_height;
-	// AMBIENT_LIGHTNING / LIGHT / SPHERE
-	t_color			color;
-	t_element		*next;
-};
 
 struct s_camera {
-	t_vec	eye_position; // x,y,z coordinates of the view point
-	t_vec	look_at_direction; // 3d normalized orientation vector.
-	FLOAT	hfov; // Horizontal field of view in degrees in range [0,180]
+	t_vec	eye_position;
+	t_vec	look_at_direction;
+	FLOAT	hfov;
 };
 
 enum e_hittable_type {
@@ -111,9 +73,8 @@ struct s_hittable {
 };
 
 struct s_light_source {
-	//point light
-	t_vec		position; // x,y,z coordinates of the light point
-	t_color		intensity; // R,G,B colors in range [0-255]
+	t_vec		position;
+	t_color		intensity;
 };
 
 struct s_lighting {

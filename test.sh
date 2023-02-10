@@ -29,7 +29,7 @@ test_invalid "./miniRT memo"
 ### Invalid Parameter
 test_invalid "./miniRT rt_files/invalid_01_outrange_color.rt"
 test_invalid "./miniRT rt_files/invalid_02_outrange_A_ratio.rt"
-test_invalid "./miniRT rt_files/invalid_03_outrange_fov.rt"
+test_invalid "./miniRT rt_files/invalid_03_outrange_L_ratio.rt"
 test_invalid "./miniRT rt_files/invalid_04_non_normalized.rt"
 test_invalid "./miniRT rt_files/invalid_05_outrange_fov.rt"
 test_invalid "./miniRT rt_files/invalid_06_multiple_A.rt"
