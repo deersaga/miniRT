@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 12:11:30 by susami            #+#    #+#             */
-/*   Updated: 2023/02/09 20:20:00 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:45:23 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool	cylinder_hit_internal(const t_cylinder *self, t_hit_record *rec,
 
 	intersection = ray_at(r, t);
 	cq_len = vec_dot(vec_sub(intersection, self->center), h);
-	if (cq_len < 0 || cq_len > self->height)
+	if (cq_len < -(self->height / 2) || cq_len > (self->height / 2))
 		return (false);
 	rec->hittable_ptr = self;
 	rec->t = t;
