@@ -6,20 +6,16 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/09 21:22:20 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:41:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "vec.h"
 #include "mlx.h"
+#include "for_norm.h"
 #include <stdlib.h>
 #include <math.h>
-
-FLOAT	degrees_to_radians(FLOAT degrees)
-{
-	return (degrees * M_PI / 180);
-}
 
 t_point	ray_at(const t_ray *r, FLOAT t)
 {

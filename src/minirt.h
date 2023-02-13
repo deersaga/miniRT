@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/10 03:10:33 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:43:48 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,51 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include "vec.h"
-# include "for_norm.h"
 # include "libft.h"
 # include "element.h"
 
-typedef struct s_img			t_img;
-typedef struct s_screen			t_screen;
-typedef struct s_scene			t_scene;
-typedef struct s_camera			t_camera;
-typedef struct s_hittable		t_hittable;
-typedef struct s_hittable		t_sphere;
-typedef struct s_hittable		t_plane;
-typedef struct s_hittable		t_cylinder;
-typedef struct s_hittable		t_hittable_list;
-typedef struct s_light_source	t_light_source;
-typedef struct s_lighting		t_lighting;
-typedef struct s_ray			t_ray;
-typedef struct s_hit_record		t_hit_record;
-typedef enum e_hittable_type	t_hittable_type;
+typedef struct s_img				t_img;
+typedef struct s_screen				t_screen;
+typedef struct s_scene				t_scene;
+typedef struct s_camera				t_camera;
+typedef struct s_hittable			t_hittable;
+typedef struct s_hittable			t_sphere;
+typedef struct s_hittable			t_plane;
+typedef struct s_hittable			t_cylinder;
+typedef struct s_hittable			t_hittable_list;
+typedef struct s_light_source		t_light_source;
+typedef struct s_lighting			t_lighting;
+typedef struct s_ray				t_ray;
+typedef struct s_hit_record			t_hit_record;
+typedef enum e_hittable_type		t_hittable_type;
+typedef struct s_range				t_range;
+typedef struct s_quad_eq			t_quad_eq;
+typedef struct s_dot				t_dot;
+typedef struct s_display_coordinate	t_display_coordinate;
+
+struct s_quad_eq {
+	FLOAT	a;
+	FLOAT	b;
+	FLOAT	half_b;
+	FLOAT	c;
+	FLOAT	discriminant;
+	FLOAT	t;
+	FLOAT	root;
+};
+
+struct s_dot {
+	FLOAT	nl;
+	FLOAT	vr;
+	FLOAT	vr_pow_alpha;
+};
+
+struct s_display_coordinate {
+	t_vec	ey;
+	t_vec	dx;
+	t_vec	dy;
+	FLOAT	u;
+	FLOAT	v;
+};
 
 struct s_camera {
 	t_vec	eye_position;
@@ -119,7 +146,12 @@ struct s_screen {
 	t_img	*img;
 };
 
-// errror.c
+struct s_range {
+	FLOAT	min;
+	FLOAT	max;
+};
+
+// error.c
 void		fatal_error(const char *loc, const char *msg)
 			__attribute__((noreturn));
 
@@ -129,8 +161,13 @@ t_element	*parse(int argc, const char *argv[]);
 // translate.c
 void		translate(t_scene *scene, t_element *res);
 
-//utils.c
+// ft_strtod.c
 double		ft_strtod(const char *str, char **rest);
+
+// degrees_to_radians.c
+FLOAT		degrees_to_radians(FLOAT degrees);
+
+// range.c
 t_range		range_new(FLOAT min, FLOAT max);
 FLOAT		clamp(FLOAT v, t_range vr);
 FLOAT		map(FLOAT v, t_range vr, t_range tr);
@@ -145,6 +182,9 @@ t_color		ray_trace(const t_ray *r, t_scene *scene);
 // img.c
 void		*init_img(void	*mlx_ptr, int width, int height);
 void		put_pixel(const t_img *img, int x, int y, int mlx_color);
+
+// color.c
+int			get_mlx_color(t_color c);
 
 // hooks.c
 void		mlx_keydown_hook(void *win_ptr, int (*handler)(), void *param);
