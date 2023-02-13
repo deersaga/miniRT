@@ -31,7 +31,7 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/utils/get_mlx_color.c\
 			$(SRC_DIR)/utils/range.c\
 			$(SRC_DIR)/utils/degrees_to_radians.c\
-			$(SRC_DIR)/img.c\
+			$(SRC_DIR)/utils/img.c\
 			$(SRC_DIR)/hooks.c\
 			$(SRC_DIR)/ray_trace.c\
 			$(SRC_DIR)/ray.c\
