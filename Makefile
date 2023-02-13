@@ -19,8 +19,8 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/parse/tokenize.c\
 			$(SRC_DIR)/parse/tokenize_is.c\
 			$(SRC_DIR)/parse/tokenize_consume.c\
-			$(SRC_DIR)/parse/translate1.c\
-			$(SRC_DIR)/parse/translate2.c\
+			$(SRC_DIR)/parse/translate.c\
+			$(SRC_DIR)/parse/translate_ACL.c\
 			$(SRC_DIR)/hittable/sphere.c\
 			$(SRC_DIR)/hittable/plane.c\
 			$(SRC_DIR)/hittable/cylinder.c\
