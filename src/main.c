@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/13 13:49:29 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:08:42 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,17 @@
 
 t_ray	get_ray(t_camera *camera, int x, int y)
 {
-	FLOAT					aspect_ratio;
-	t_vec					pm;
 	t_vec					ray_dir;
 	t_display_coordinate	dc;
-	FLOAT					screen_distance;
 
-	aspect_ratio = (FLOAT)WIDTH / (FLOAT)HEIGHT;
 	dc.ey = vec_new(0, 1, 0);
-	screen_distance = SCREEN_WIDTH * aspect_ratio
-		/ (2 * (FLOAT)tan(degrees_to_radians(camera->hfov) / 2));
-	camera->look_at_direction = vec_unit(camera->look_at_direction);
 	dc.dx = vec_cross(dc.ey, camera->look_at_direction);
 	dc.dy = vec_cross(camera->look_at_direction, dc.dx);
-	dc.u = map(x, range_new(0, WIDTH - 1), range_new(-1, 1)) * aspect_ratio;
+	dc.u = map(x, range_new(0, WIDTH - 1), range_new(-1, 1))
+		* camera->aspect_ratio;
 	dc.v = map(y, range_new(0, HEIGHT - 1), range_new(1, -1));
-	pm = vec_add(camera->eye_position,
-			vec_scalar_mul(screen_distance, camera->look_at_direction));
 	ray_dir = vec_sub(
-			vec_add(pm,
+			vec_add(camera->screen_center,
 				vec_add(
 					vec_scalar_mul(dc.u, dc.dx),
 					vec_scalar_mul(dc.v, dc.dy))),

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/13 13:43:48 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:23:21 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ struct s_display_coordinate {
 struct s_camera {
 	t_vec	eye_position;
 	t_vec	look_at_direction;
+	t_vec	screen_center;
 	FLOAT	hfov;
+	FLOAT	aspect_ratio;
 };
 
 enum e_hittable_type {
