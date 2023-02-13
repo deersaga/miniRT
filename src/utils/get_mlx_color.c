@@ -1,45 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   get_mlx_color.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:00:29 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/08 19:32:59 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:26:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec.h"
-
-t_color	color_new(FLOAT x, FLOAT y, FLOAT z)
-{
-	return ((t_color){.x = x, .y = y, .z = z});
-}
-
-t_color	color_add(t_color a, t_color b)
-{
-	return ((t_color){
-		.x = a.x + b.x,
-		.y = a.y + b.y,
-		.z = a.z + b.z});
-}
-
-t_color	color_sub(t_color a, t_color b)
-{
-	return ((t_color){
-		.x = a.x - b.x,
-		.y = a.y - b.y,
-		.z = a.z - b.z});
-}
-
-t_color	color_mul(t_color a, t_color b)
-{
-	return ((t_color){
-		.x = a.x * b.x,
-		.y = a.y * b.y,
-		.z = a.z * b.z});
-}
+#include "minirt.h"
 
 int	get_mlx_color(t_color c)
 {

@@ -3,35 +3,38 @@ NAME	= miniRT
 CC		= cc
 SRC_DIR	= src
 SRCS	=	$(SRC_DIR)/main.c\
-			$(SRC_DIR)/vec.c\
-			$(SRC_DIR)/vec_arith.c\
-			$(SRC_DIR)/vec_utils.c\
+			$(SRC_DIR)/vec/vec.c\
+			$(SRC_DIR)/vec/vec_arith.c\
+			$(SRC_DIR)/vec/vec_utils.c\
 			$(SRC_DIR)/parse/element.c\
 			$(SRC_DIR)/parse/element_alloc_ACL.c\
 			$(SRC_DIR)/parse/element_alloc_other.c\
 			$(SRC_DIR)/parse/element_validate.c\
 			$(SRC_DIR)/parse/element_validate_utils1.c\
 			$(SRC_DIR)/parse/element_validate_utils2.c\
-			$(SRC_DIR)/color.c\
-			$(SRC_DIR)/utils.c\
 			$(SRC_DIR)/parse/parse.c\
 			$(SRC_DIR)/parse/parse_ACL.c\
 			$(SRC_DIR)/parse/parse_other.c\
 			$(SRC_DIR)/parse/parse_expect_token.c\
-			$(SRC_DIR)/error.c\
-			$(SRC_DIR)/img.c\
-			$(SRC_DIR)/hooks.c\
-			$(SRC_DIR)/sphere.c\
-			$(SRC_DIR)/plane.c\
-			$(SRC_DIR)/cylinder.c\
-			$(SRC_DIR)/ray_trace.c\
-			$(SRC_DIR)/parse/translate1.c\
-			$(SRC_DIR)/parse/translate2.c\
-			$(SRC_DIR)/hittable.c\
-			$(SRC_DIR)/hittable_list.c\
 			$(SRC_DIR)/parse/tokenize.c\
 			$(SRC_DIR)/parse/tokenize_is.c\
 			$(SRC_DIR)/parse/tokenize_consume.c\
+			$(SRC_DIR)/parse/translate.c\
+			$(SRC_DIR)/parse/translate_ACL.c\
+			$(SRC_DIR)/hittable/sphere.c\
+			$(SRC_DIR)/hittable/plane.c\
+			$(SRC_DIR)/hittable/cylinder.c\
+			$(SRC_DIR)/hittable/hittable.c\
+			$(SRC_DIR)/hittable/hittable_list.c\
+			$(SRC_DIR)/utils/ft_strtod.c\
+			$(SRC_DIR)/utils/error.c\
+			$(SRC_DIR)/utils/get_mlx_color.c\
+			$(SRC_DIR)/utils/range.c\
+			$(SRC_DIR)/utils/degrees_to_radians.c\
+			$(SRC_DIR)/utils/img.c\
+			$(SRC_DIR)/hooks.c\
+			$(SRC_DIR)/ray_trace.c\
+			$(SRC_DIR)/ray.c\
 
 DEBUG_SRCS	= $(SRC_DIR)/debug.c
 
@@ -46,7 +49,12 @@ MLX		= $(MLX_DIR)/libmlx.a
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
-INCLUDE		= -I $(MLX_DIR) -I /usr/X11R6/include -I $(SRC_DIR) -I libft -I src/parse
+SRC_DIRS := $(shell find $(SRC_DIR) -type d -print)
+INCLUDE		=	-I $(MLX_DIR) \
+				-I /usr/X11R6/include \
+				-I $(SRC_DIR) \
+				-I $(LIBFT_DIR) \
+				$(addprefix -I ,$(SRC_DIRS))
 
 CFLAGS		= -Wall -Wextra -Werror $(INCLUDE)
 DFLAGS		= -g -fsanitize=address -Weverything

@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:15:34 by susami            #+#    #+#             */
-/*   Updated: 2023/02/09 22:59:53 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:38:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define VEC_H
 
 # define FLOAT double
-// # include "for_norm.h"
 
 typedef struct s_vec	t_vec;
 typedef struct s_vec	t_point;
@@ -31,11 +30,6 @@ struct s_vec {
 	FLOAT	z;
 };
 
-struct s_range {
-	FLOAT	min;
-	FLOAT	max;
-};
-
 t_vec	vec_new(FLOAT x, FLOAT y, FLOAT z);
 t_point	point_new(FLOAT x, FLOAT y, FLOAT z);
 t_color	color_new(FLOAT x, FLOAT y, FLOAT z);
@@ -49,11 +43,5 @@ t_vec	vec_cross(t_vec a, t_vec b);
 FLOAT	vec_length_squared(t_vec v);
 FLOAT	vec_length(t_vec v);
 t_vec	vec_unit(t_vec v);
-
-int		get_mlx_color(t_color c);
-
-FLOAT	clamp(FLOAT v, t_range vr);
-FLOAT	map(FLOAT v, t_range vr, t_range tr);
-t_range	range_new(FLOAT min, FLOAT max);
 
 #endif
