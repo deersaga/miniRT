@@ -6,12 +6,11 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:00:29 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/13 12:19:34 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:26:37 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "vec.h"
 
 int	get_mlx_color(t_color c)
 {
