@@ -6,24 +6,15 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/13 13:41:37 by susami           ###   ########.fr       */
+/*   Updated: 2023/02/13 13:49:29 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "vec.h"
 #include "mlx.h"
-#include "for_norm.h"
 #include <stdlib.h>
 #include <math.h>
-
-t_point	ray_at(const t_ray *r, FLOAT t)
-{
-	t_point	p;
-
-	p = vec_add(r->origin, vec_scalar_mul(t, r->direction));
-	return (p);
-}
 
 t_ray	get_ray(t_camera *camera, int x, int y)
 {

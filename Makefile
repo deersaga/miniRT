@@ -34,6 +34,7 @@ SRCS	=	$(SRC_DIR)/main.c\
 			$(SRC_DIR)/img.c\
 			$(SRC_DIR)/hooks.c\
 			$(SRC_DIR)/ray_trace.c\
+			$(SRC_DIR)/ray.c\
 
 DEBUG_SRCS	= $(SRC_DIR)/debug.c
 
