@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/13 14:23:21 by susami           ###   ########.fr       */
+/*   Updated: 2023/03/20 22:26:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,19 @@ enum e_hittable_type {
 };
 
 struct s_hittable {
-	// ALL
 	t_hittable_type	type;
 	t_hittable		*next;
-	// H_SPHERE
+
 	t_vec			center;
 	FLOAT			radius;
 	FLOAT			shineness;
-	//H_PLANE
+
 	t_point			position;
 	t_vec			normal;
-	//CYLINDER
+
 	FLOAT			height;
 	t_vec			orientation;
-	//COMON
+
 	t_color			ambient_factor;
 	t_color			diffuse_factor;
 	t_color			specular_factor;
