@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/02/13 14:27:07 by susami           ###   ########.fr       */
+/*   Updated: 2023/03/21 16:59:36 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_ray	get_ray(t_camera *camera, int x, int y)
 
 	dc.ey = vec_new(0, 1, 0);
 	dc.dx = vec_cross(dc.ey, camera->look_at_direction);
+	if (vec_length(dc.dx) == 0)
+		dc.dx = vec_cross(vec_new(1, 0, 0), camera->look_at_direction);
 	dc.dy = vec_cross(camera->look_at_direction, dc.dx);
 	dc.u = map(x, range_new(0, WIDTH - 1), range_new(-1, 1))
 		* camera->aspect_ratio;

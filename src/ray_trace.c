@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:43:37 by susami            #+#    #+#             */
-/*   Updated: 2023/02/09 21:30:17 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:00:10 by katakagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ bool	is_shadow(const t_hit_record *rec, const t_lighting *l,
 
 t_color	ray_trace(const t_ray *r, t_scene *scene)
 {
-	t_vec			unit_direction;
-	FLOAT			t;
 	t_hit_record	rec;
 	t_color			ret_color;
 	t_lighting		lighting;
@@ -93,9 +91,5 @@ t_color	ray_trace(const t_ray *r, t_scene *scene)
 		ret_color = vec_add(ret_color, specular_light(r, &rec, &lighting));
 		return (ret_color);
 	}
-	unit_direction = vec_unit(r->direction);
-	t = 0.5 * (unit_direction.y + 1.0);
-	return (vec_add(
-			vec_scalar_mul((1.0 - t), color_new(1.0, 1.0, 1.0)),
-			vec_scalar_mul(t, color_new(0.5, 0.7, 1.0))));
+	return (vec_new(0, 0, 0));
 }
