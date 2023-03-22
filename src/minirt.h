@@ -6,7 +6,7 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:26:35 by katakagi          #+#    #+#             */
-/*   Updated: 2023/03/21 17:01:24 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:51:26 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ struct s_dot {
 };
 
 struct s_display_coordinate {
-	t_vec	ey;
 	t_vec	dx;
 	t_vec	dy;
 	FLOAT	u;

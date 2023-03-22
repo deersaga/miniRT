@@ -6,24 +6,33 @@
 /*   By: katakagi <katakagi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:25:21 by katakagi          #+#    #+#             */
-/*   Updated: 2023/03/21 16:59:36 by katakagi         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:51:44 by susami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "mlx.h"
 #include <stdlib.h>
+#include <float.h>
 
+// screen's left top:
+//   (x, y) = (0, 0)
+//   (u, v) = (-1, 1)
+//
+// screen's right bottom:
+//   (x, y) = (WIDTH-1, HEIGHT-1)
+//   (u, v) = (1, -1)
+//
+// right-handed system
 t_ray	get_ray(t_camera *camera, int x, int y)
 {
 	t_vec					ray_dir;
 	t_display_coordinate	dc;
 
-	dc.ey = vec_new(0, 1, 0);
-	dc.dx = vec_cross(dc.ey, camera->look_at_direction);
-	if (vec_length(dc.dx) == 0)
-		dc.dx = vec_cross(vec_new(1, 0, 0), camera->look_at_direction);
-	dc.dy = vec_cross(camera->look_at_direction, dc.dx);
+	dc.dx = vec_cross(camera->look_at_direction, vec_new(0, 1, 0));
+	if (vec_length(dc.dx) < FLT_EPSILON)
+		dc.dx = vec_cross(camera->look_at_direction, vec_new(1, 0, 0));
+	dc.dy = vec_cross(dc.dx, camera->look_at_direction);
 	dc.u = map(x, range_new(0, WIDTH - 1), range_new(-1, 1))
 		* camera->aspect_ratio;
 	dc.v = map(y, range_new(0, HEIGHT - 1), range_new(1, -1));

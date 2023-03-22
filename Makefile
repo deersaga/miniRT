@@ -93,8 +93,10 @@ re: fclean all
 norm:
 	norminette $(SRC_DIR) | grep -E -v "WRONG_SCOPE_COMMENT|TOO_MANY_FUNCS|TOO_MANY_LINES|TOO_MANY_VARS_FUNC|TOO_MANY_ARGS"
 
-test: SRCS += $(DEBUG_SRCS)
-test: fclean $(DEBUG_OBJS) all $(OBJS)
+debug: SRCS += $(DEBUG_SRCS)
+debug: fclean $(DEBUG_OBJS) all $(OBJS)
+
+test: debug
 	./test.sh
 
 .PHONY: all clean fcelan re norm test
